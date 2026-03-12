@@ -1,5 +1,3 @@
-import QuizModal from "../frontend/PopupQuiz";
-
 // Color constants
 const BLUE   = "#001EDF";
 const ORANGE = "#FF9925";
@@ -233,7 +231,6 @@ function TestimonialsSection() {
 export default function HomePage() {
   return (
     <>
-      <QuizModal />
       <main className="min-h-screen">
         <HeroSection />
         <MeetMentorsSection />
