@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../frontend/header";
 import Footer from "../frontend/footer";
+import QuizModal from "../frontend/PopupQuiz";
 import Script from "next/script";
 
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
+        <QuizModal />
         {children}
         <Footer />
       </body>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Question {
   id: number;
@@ -62,10 +62,30 @@ const questions: Question[] = [
 ];
 
 export default function QuizModal() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Check if quiz has been completed or if it's been shown
+    const quizCompleted = sessionStorage.getItem("quizCompleted");
+    const quizShown = sessionStorage.getItem("quizShown");
+
+    if (!quizCompleted && !quizShown) {
+      // Show quiz on first visit
+      setIsOpen(true);
+      sessionStorage.setItem("quizShown", "true");
+    }
+
+    // Cleanup timeout on unmount
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
@@ -75,11 +95,24 @@ export default function QuizModal() {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResult(true);
+      // Mark quiz as completed in session storage
+      sessionStorage.setItem("quizCompleted", "true");
     }
   };
 
   const closeModal = () => {
     setIsOpen(false);
+
+    // If quiz wasn't completed, set timer to reopen after 10 minutes
+    const quizCompleted = sessionStorage.getItem("quizCompleted");
+    if (!quizCompleted) {
+      timeoutRef.current = setTimeout(() => {
+        setIsOpen(true);
+        setCurrentQuestion(0);
+        setAnswers([]);
+        setShowResult(false);
+      }, 10 * 60 * 1000); // 10 minutes in milliseconds
+    }
   };
 
   if (!isOpen) return null;
