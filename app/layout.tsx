@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../frontend/header";
 import Footer from "../frontend/footer";
 import QuizModal from "../frontend/PopupQuiz";
 import Script from "next/script";
 
+import { Plus_Jakarta_Sans, Space_Grotesk, DM_Sans } from 'next/font/google'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-heading',
+  display: 'swap',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500'],
+  variable: '--font-accent',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['500'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,7 +44,7 @@ export default function RootLayout({
         src="https://t.contentsquare.net/uxa/586d1bfbb5898.js"
       />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} ${dmSans.variable}`}
       >
         <Navbar />
         <QuizModal />

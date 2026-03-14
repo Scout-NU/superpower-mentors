@@ -1,0 +1,445 @@
+.page {
+    background: var(--color-bg);
+  }
+  
+  .hero {
+    padding: 120px 24px 96px;
+  }
+  
+  .inner {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    margin: 0 0 72px;
+    text-align: center;
+    font-family: var(--font-heading-family), sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-black);
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    align-items: stretch;
+  }
+  
+  .card {
+    background: #d9d9d9;
+    border-radius: 28px;
+    padding: 40px 32px;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px #FFC92A;
+  }
+  
+  .imageWrap {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #b5b5b5;
+    margin-bottom: 32px;
+    flex-shrink: 0;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .content {
+    width: 100%;
+    max-width: 260px;
+  }
+  
+  .name {
+    margin: 0 0 18px;
+    font-family: var(--font-heading-family), sans-serif;
+    font-size: clamp(1.75rem, 2vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-purple-dark);
+  }
+  
+  .text {
+    margin: 0;
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.55;
+    color: var(--color-black);
+  }
+  
+  @media (max-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 56px 20px 72px;
+    }
+  
+    .title {
+      margin-bottom: 48px;
+    }
+  
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  
+    .card {
+      min-height: auto;
+      padding: 32px 24px;
+    }
+  
+    .content {
+      max-width: 100%;
+    }
+  }
+
+  .programsSection {
+    padding: 48px 24px 110px;
+  }
+  
+  .programsTitle {
+    margin: 0 0 56px;
+    font-family: var(--font-heading-family), sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4.25rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-black);
+  }
+  
+  .programsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    align-items: stretch;
+  }
+  
+  .programCard {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .programImageWrap {
+    width: 100%;
+    height: 190px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #d9d9d9;
+    margin-bottom: 28px;
+  }
+  
+  .programImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .programName {
+    margin: 0 0 12px;
+    font-family: var(--font-accent-family), sans-serif;
+    font-size: clamp(1.9rem, 2.3vw, 2.4rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-black);
+  }
+  
+  .programDescription {
+    margin: 0 0 28px;
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--color-black);
+    max-width: 95%;
+  }
+
+  .programsLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 24px;
+  }
+  
+  .programCard {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .circleDivider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding-top: 110px;
+  }
+  
+  .circleDivider span {
+    border-radius: 50%;
+    background: linear-gradient(
+    145deg,
+    rgba(87,19,119,0.12),
+    rgba(47,107,255,0.08)
+    );
+    backdrop-filter: blur(2px);
+  }
+
+  .circle1 {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .circle2 {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .circle3 {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .circle4 {
+    width: 58px;
+    height: 58px;
+  }
+  
+  .circle5 {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .circle6 {
+    width: 46px;
+    height: 46px;
+  }
+  
+  .circle7 {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .circle8 {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .accordionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  
+  .accordionItem {
+    border-radius: 22px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  .accordionItemOpen {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .accordionTrigger {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 18px 18px 18px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-black);
+  }
+  
+  .accordionIcon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.22s ease;
+  }
+  
+  .accordionIcon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+  
+  .accordionIconOpen {
+    transform: rotate(180deg);
+  }
+  
+  .accordionContent {
+    padding: 0 18px 18px 18px;
+  }
+  
+  .accordionContent p {
+    margin: 0;
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.55;
+    color: rgba(0, 0, 0, 0.82);
+  }
+  
+  .programButton {
+    margin-top: 28px;
+    align-self: center;
+    border: 0;
+    border-radius: 20px;
+    background: var(--color-purple-dark);
+    color: var(--color-white);
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 18px 34px;
+    cursor: pointer;
+    transition: transform 0.22s ease, background 0.22s ease;
+  }
+  
+  .programButton:hover {
+    transform: translateY(-4px);
+    background: var(--color-purple-light);
+  }
+  
+  @media (max-width: 1100px) {
+    .programsGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .programsLayout {
+      grid-template-columns: 1fr;
+      row-gap: 36px;
+    }
+  
+    .circleDivider {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .programsSection {
+      padding: 32px 20px 72px;
+    }
+  
+    .programsTitle {
+      margin-bottom: 36px;
+    }
+  
+    .programsGrid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  
+    .programCard {
+      min-height: auto;
+    }
+  
+    .programImageWrap {
+      height: 180px;
+    }
+  }
+
+  .ctaSection {
+    padding: 120px 24px 140px;
+  }
+  
+  .ctaInner {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  
+  .ctaCard {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ctaBg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .ctaOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+  }
+  
+  .ctaContent {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  
+  .ctaTitle {
+    margin: 0 0 24px;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.8rem, 4vw, 3.6rem);
+    font-weight: 500;
+    color: white;
+    letter-spacing: -0.04em;
+  }
+  
+  .ctaButton {
+    border: none;
+    border-radius: 20px;
+    padding: 18px 36px;
+    background: var(--color-purple-dark);
+    color: white;
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+  
+  .ctaButton:hover {
+    transform: translateY(-4px);
+    background: var(--color-purple-light);
+  }
