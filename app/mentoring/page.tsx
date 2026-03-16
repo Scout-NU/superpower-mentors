@@ -28,23 +28,23 @@ type Program = {
 const mentors: Mentor[] = [
   {
     id: 1,
-    name: 'Lorem Ipsum',
+    name: 'Christiana W',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Los Angeles, USA. Dyslexic. Art Director, Advertising, Social Media Influencer, Semi-Professional Athlete',
     image: '/mentors/mentor-1.jpg',
   },
   {
     id: 2,
-    name: 'Lorem Ipsum',
+    name: 'Jeff S',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Bronx, NY. ADHD. Aerospace Research Engineer @ NASA. Marathon Athlete, Musician, Scientific Tech Developer',
     image: '/mentors/mentor-2.jpg',
   },
   {
     id: 3,
-    name: 'Lorem Ipsum',
+    name: 'Dylann C',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Massachusetts, USA. ADHD, Educator, Writer, Artist, Blogger, Health Enthusiast, Entrepreneur.',
     image: '/mentors/mentor-3.jpg',
   },
 ]
@@ -120,9 +120,9 @@ const programs: Program[] = [
 
 export default function MentoringPage() {
   const [openItems, setOpenItems] = useState<Record<number, number | null>>({
-    1: 2,
-    2: 2,
-    3: 2,
+    1: null,
+    2: null,
+    3: null,
   })
 
   const toggleItem = (programId: number, itemId: number) => {

@@ -1,8 +1,9 @@
 .page {
-    background: var(--color-bg);
+    background: transparent;
   }
   
   .hero {
+    background: var(--color-purple-dark);
     padding: 120px 24px 96px;
   }
   
@@ -19,7 +20,7 @@
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: var(--color-black);
+    color: var(--color-white);
   }
   
   .grid {
@@ -30,7 +31,7 @@
   }
   
   .card {
-    background: #d9d9d9;
+    background: var(--color-white);
     border-radius: 28px;
     padding: 40px 32px;
     min-height: 560px;
@@ -38,13 +39,12 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-  
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-
+  
   .card:hover {
     transform: translateY(-12px);
-    box-shadow: 0 20px 40px #FFC92A;
+    box-shadow: 0 20px 40px #e9daaf;
   }
   
   .imageWrap {
@@ -67,6 +67,7 @@
   .content {
     width: 100%;
     max-width: 260px;
+    text-align: center;
   }
   
   .name {
@@ -76,7 +77,8 @@
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: var(--color-purple-dark);
+    color: var(--color-black);
+    text-align: center;
   }
   
   .text {
@@ -86,57 +88,29 @@
     font-weight: 500;
     line-height: 1.55;
     color: var(--color-black);
+    text-align: center;
   }
   
-  @media (max-width: 1100px) {
-    .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .hero {
-      padding: 56px 20px 72px;
-    }
-  
-    .title {
-      margin-bottom: 48px;
-    }
-  
-    .grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-  
-    .card {
-      min-height: auto;
-      padding: 32px 24px;
-    }
-  
-    .content {
-      max-width: 100%;
-    }
-  }
-
   .programsSection {
     padding: 48px 24px 110px;
+    background: var(--color-white);
   }
   
   .programsTitle {
-    margin: 0 0 56px;
+    margin: 50 0 100px;
     font-family: var(--font-heading-family), sans-serif;
     font-size: clamp(2.4rem, 5vw, 4.25rem);
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: var(--color-black);
+    color: var(--color-purple-dark);
   }
   
-  .programsGrid {
+  .programsLayout {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 48px;
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 24px;
   }
   
   .programCard {
@@ -179,18 +153,6 @@
     color: var(--color-black);
     max-width: 95%;
   }
-
-  .programsLayout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
-    align-items: start;
-    column-gap: 24px;
-  }
-  
-  .programCard {
-    display: flex;
-    flex-direction: column;
-  }
   
   .circleDivider {
     display: flex;
@@ -201,15 +163,16 @@
   }
   
   .circleDivider span {
+    display: block;
     border-radius: 50%;
     background: linear-gradient(
-    145deg,
-    rgba(87,19,119,0.12),
-    rgba(47,107,255,0.08)
+      145deg,
+      rgba(87, 19, 119, 0.12),
+      rgba(47, 107, 255, 0.08)
     );
     backdrop-filter: blur(2px);
   }
-
+  
   .circle1 {
     width: 20px;
     height: 20px;
@@ -272,7 +235,7 @@
     width: 100%;
     border: 0;
     background: transparent;
-    padding: 18px 18px 18px 18px;
+    padding: 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -323,7 +286,7 @@
     align-self: center;
     border: 0;
     border-radius: 20px;
-    background: var(--color-purple-dark);
+    background: var(--color-blue);
     color: var(--color-white);
     font-family: var(--font-body-family), sans-serif;
     font-size: 1rem;
@@ -338,47 +301,8 @@
     background: var(--color-purple-light);
   }
   
-  @media (max-width: 1100px) {
-    .programsGrid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (max-width: 1100px) {
-    .programsLayout {
-      grid-template-columns: 1fr;
-      row-gap: 36px;
-    }
-  
-    .circleDivider {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .programsSection {
-      padding: 32px 20px 72px;
-    }
-  
-    .programsTitle {
-      margin-bottom: 36px;
-    }
-  
-    .programsGrid {
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
-  
-    .programCard {
-      min-height: auto;
-    }
-  
-    .programImageWrap {
-      height: 180px;
-    }
-  }
-
   .ctaSection {
+    background: var(--color-purple-dark);
     padding: 120px 24px 140px;
   }
   
@@ -391,7 +315,7 @@
     position: relative;
     border-radius: 32px;
     overflow: hidden;
-    min-height: 420px;
+    min-height: 520px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -408,7 +332,7 @@
   .ctaOverlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.25);
   }
   
   .ctaContent {
@@ -419,10 +343,10 @@
   
   .ctaTitle {
     margin: 0 0 24px;
-    font-family: var(--font-heading-family);
+    font-family: var(--font-heading-family), sans-serif;
     font-size: clamp(2.8rem, 4vw, 3.6rem);
     font-weight: 500;
-    color: white;
+    color: var(--color-white);
     letter-spacing: -0.04em;
   }
   
@@ -430,9 +354,9 @@
     border: none;
     border-radius: 20px;
     padding: 18px 36px;
-    background: var(--color-purple-dark);
-    color: white;
-    font-family: var(--font-body-family);
+    background: var(--color-blue);
+    color: var(--color-white);
+    font-family: var(--font-body-family), sans-serif;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
@@ -442,4 +366,55 @@
   .ctaButton:hover {
     transform: translateY(-4px);
     background: var(--color-purple-light);
+  }
+  
+  @media (max-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  
+    .programsLayout {
+      grid-template-columns: 1fr;
+      row-gap: 36px;
+    }
+  
+    .circleDivider {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 56px 20px 72px;
+    }
+  
+    .title {
+      margin-bottom: 48px;
+    }
+  
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  
+    .card {
+      min-height: auto;
+      padding: 32px 24px;
+    }
+  
+    .content {
+      max-width: 100%;
+    }
+  
+    .programsSection {
+      padding: 32px 20px 72px;
+    }
+  
+    .programsTitle {
+      margin-bottom: 36px;
+    }
+  
+    .programImageWrap {
+      height: 180px;
+    }
   }
