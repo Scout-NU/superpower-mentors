@@ -40,7 +40,7 @@ function TagPill({
   return (
     <button
       onClick={onClick}
-      className="rounded-full px-3 py-1 text-xs font-semibold border-2 border-black transition-colors whitespace-nowrap"
+      className="rounded-full px-3 py-1 text-[10px] font-semibold border-2 border-black transition-colors whitespace-nowrap"
       style={{
         backgroundColor: active ? "#000" : "transparent",
         color: active ? "#fff" : "#000",
@@ -83,21 +83,24 @@ export default function BlogPage() {
           Insights &amp; Stories
         </h1>
 
-        <div className="grid grid-cols-2 gap-12 items-start mb-6">
-          <h2 className="font-light text-black leading-snug" style={{ fontSize: "clamp(28px, 4vw, 52px)" }}>
+        <div className="grid grid-cols-2 gap-8 items-start mb-6">
+          <h2
+            className="font-light text-black leading-snug"
+            style={{ fontSize: "clamp(28px, 4vw, 52px)" }}
+          >
             {FEATURED.title}
           </h2>
-          <div>
-            <p className="text-sm text-zinc-500 leading-relaxed mb-4">
+
+          <div className="w-full">
+            <p className="w-full text-sm text-zinc-500 leading-relaxed mb-4">
               {FEATURED.excerpt}
             </p>
-            <div className="flex gap-2 flex-wrap items-center">
+
+            <div className="flex gap-2 flex-wrap items-center w-full">
               {FEATURED.tags.map((t) => (
                 <TagPill key={t} label={t} />
               ))}
-              <button
-                className="ml-auto bg-zinc-400 text-white text-xs font-bold px-5 py-2 rounded-md hover:opacity-90 transition-opacity"
-              >
+              <button className="ml-auto bg-zinc-400 text-white text-xs font-bold px-5 py-2 rounded-md hover:opacity-90 transition-opacity">
                 Read More
               </button>
             </div>
@@ -108,8 +111,8 @@ export default function BlogPage() {
       </section>
 
       {/* Category Filter Bar */}
-      <section className="px-6 py-3 max-w-7xl mx-auto flex gap-3 items-center flex-wrap">
-        <span className="text-sm font-bold text-black mr-auto">Categories</span>
+      <section className="px-6 py-3 max-w-7xl mx-auto font-size-2 flex gap-3 items-center flex-wrap">
+        <span className="text-lg font-bold text-black mr-auto">Categories</span>
         {CATEGORIES.map((c) => (
           <TagPill
             key={c}
