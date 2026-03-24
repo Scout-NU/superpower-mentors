@@ -21,8 +21,13 @@ type Program = {
   title: string
   description: string
   image: string
-  buttonText: string
   items: ProgramItem[]
+}
+
+type RootLogo = {
+  id: number
+  name: string
+  image: string
 }
 
 const mentors: Mentor[] = [
@@ -31,22 +36,34 @@ const mentors: Mentor[] = [
     name: 'Christiana W',
     description:
       'Los Angeles, USA. Dyslexic. Art Director, Advertising, Social Media Influencer, Semi-Professional Athlete',
-    image: '/mentors/mentor-1.jpg',
+    image: '/mentor_christiana.jpg',
   },
   {
     id: 2,
     name: 'Jeff S',
     description:
       'Bronx, NY. ADHD. Aerospace Research Engineer @ NASA. Marathon Athlete, Musician, Scientific Tech Developer',
-    image: '/mentors/mentor-2.jpg',
+    image: '/mentor_jeff.jpg',
   },
   {
     id: 3,
     name: 'Dylann C',
     description:
       'Massachusetts, USA. ADHD, Educator, Writer, Artist, Blogger, Health Enthusiast, Entrepreneur.',
-    image: '/mentors/mentor-3.jpg',
+    image: '/mentor_dylann.jpg',
   },
+]
+
+const roots: RootLogo[] = [
+  { id: 1, name: 'Apple', image: '/mentor_apple_logo.png' },
+  { id: 2, name: 'Northeastern University', image: '/mentor_northeastern_logo.jpg' },
+  { id: 3, name: 'Harvard University', image: '/mentor_harvard_logo.png' },
+  { id: 4, name: 'Hubspot', image: '/mentor_hubspot_logo.png' },
+  { id: 5, name: 'NASA', image: '/mentor_nasa_logo.png' },
+  { id: 6, name: 'Spotify', image: '/mentor_spotify_logo.png' },
+  { id: 7, name: 'United Nations', image: '/mentor_un_logo.png' },
+  { id: 8, name: 'US Figure Skating', image: '/mentor_skating_logo.png' },
+  { id: 9, name: 'Duke University', image: '/mentor_duke_logo.png' },
 ]
 
 const programs: Program[] = [
@@ -55,8 +72,7 @@ const programs: Program[] = [
     title: 'Kids & Teens',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/programs/program-1.jpg',
-    buttonText: 'Find Your Mentor',
+    image: '/mentor_kids.jpg',
     items: [
       {
         id: 1,
@@ -76,9 +92,8 @@ const programs: Program[] = [
     id: 2,
     title: 'High School & College',
     description:
-      'In the United States, 40% of college students drop out each year and 30% of those students are Freshman. Our mission is to lower this percentage significantly.',
-    image: '/programs/program-2.jpg',
-    buttonText: 'Find Your Mentor',
+      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
+    image: '/mentor_hs.jpg',
     items: [
       {
         id: 1,
@@ -96,11 +111,10 @@ const programs: Program[] = [
   },
   {
     id: 3,
-    title: 'Graduation & the Workplace',
+    title: 'Graduation & Work',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/programs/program-3.jpg',
-    buttonText: 'Find Your Mentor',
+    image: '/mentor_college.jpg',
     items: [
       {
         id: 1,
@@ -119,17 +133,25 @@ const programs: Program[] = [
 ]
 
 export default function MentoringPage() {
-  const [openItems, setOpenItems] = useState<Record<number, number | null>>({
-    1: null,
-    2: null,
-    3: null,
+  const [openItems, setOpenItems] = useState<Record<number, number[]>>({
+    1: [],
+    2: [],
+    3: [],
   })
 
   const toggleItem = (programId: number, itemId: number) => {
-    setOpenItems((prev) => ({
-      ...prev,
-      [programId]: prev[programId] === itemId ? null : itemId,
-    }))
+    setOpenItems((prev) => {
+      const current = prev[programId]
+  
+      const isOpen = current.includes(itemId)
+  
+      return {
+        ...prev,
+        [programId]: isOpen
+          ? current.filter((id) => id !== itemId)
+          : [...current, itemId],
+      }
+    })
   }
 
   return (
@@ -156,6 +178,24 @@ export default function MentoringPage() {
               </article>
             ))}
           </div>
+
+          <div className={styles.rootsSection}>
+            <p className={styles.rootsLabel}>OUR MENTOR’S ROOTS</p>
+
+            <div className={styles.logoCarousel}>
+              <div className={styles.logoTrack}>
+                {[...roots, ...roots].map((logo, index) => (
+                  <div key={`${logo.id}-${index}`} className={styles.logoItem}>
+                    <img
+                      src={logo.image}
+                      alt={logo.name}
+                      className={styles.logoImage}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -178,7 +218,7 @@ export default function MentoringPage() {
 
               <div className={styles.accordionGroup}>
                 {programs[0].items.map((item) => {
-                  const isOpen = openItems[programs[0].id] === item.id
+                  const isOpen = openItems[programs[0].id].includes(item.id)
 
                   return (
                     <div
@@ -221,10 +261,6 @@ export default function MentoringPage() {
                   )
                 })}
               </div>
-
-              <button type="button" className={styles.programButton}>
-                {programs[0].buttonText}
-              </button>
             </article>
 
             <div className={styles.circleDivider} aria-hidden="true">
@@ -252,7 +288,7 @@ export default function MentoringPage() {
 
               <div className={styles.accordionGroup}>
                 {programs[1].items.map((item) => {
-                  const isOpen = openItems[programs[1].id] === item.id
+                  const isOpen = openItems[programs[1].id].includes(item.id)
 
                   return (
                     <div
@@ -295,10 +331,6 @@ export default function MentoringPage() {
                   )
                 })}
               </div>
-
-              <button type="button" className={styles.programButton}>
-                {programs[1].buttonText}
-              </button>
             </article>
 
             <div className={styles.circleDivider} aria-hidden="true">
@@ -326,7 +358,7 @@ export default function MentoringPage() {
 
               <div className={styles.accordionGroup}>
                 {programs[2].items.map((item) => {
-                  const isOpen = openItems[programs[2].id] === item.id
+                  const isOpen = openItems[programs[2].id].includes(item.id)
 
                   return (
                     <div
@@ -369,11 +401,13 @@ export default function MentoringPage() {
                   )
                 })}
               </div>
-
-              <button type="button" className={styles.programButton}>
-                {programs[2].buttonText}
-              </button>
             </article>
+          </div>
+
+          <div className={styles.programsCta}>
+            <button type="button" className={styles.programButton}>
+              Find Your Mentor
+            </button>
           </div>
         </div>
       </section>
@@ -383,7 +417,7 @@ export default function MentoringPage() {
           <div className={styles.ctaCard}>
             <div
               className={styles.ctaBg}
-              style={{ backgroundImage: "url('/cta-bg.jpg')" }}
+              style={{ backgroundImage: "url('/mentor_cta.jpg')" }}
             />
             <div className={styles.ctaOverlay} />
 
