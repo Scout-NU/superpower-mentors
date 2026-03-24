@@ -1,3 +1,5 @@
+import "./page.css";
+
 // Color constants
 const BLUE   = "#001EDF";
 const ORANGE = "#FF9925";
@@ -28,11 +30,34 @@ function HeroSection() {
             Autism, and other learning differences.
           </p>
           <div className="mt-6 flex gap-4 flex-wrap">
-            <button style={{ backgroundColor: BLUE }} className="hover:opacity-90 text-white font-semibold px-6 py-3 rounded-md transition-opacity">
+            {/* <button style={{ backgroundColor: BLUE }} className="hover:opacity-90 text-white font-semibold px-6 py-3 rounded-md transition-opacity">
+              Start Your Journey
+            </button> */}
+            <button
+              style={{ backgroundColor: BLUE }}
+              className="
+                text-white font-semibold px-6 py-3 rounded-md
+                transition-all duration-300 ease-out
+                transform
+                hover:scale-110
+                hover:-translate-y-1
+                hover:rotate-1
+                active:scale-95
+              "
+            >
               Start Your Journey
             </button>
-            <button className="border-2 border-black text-black hover:bg-blue-50 font-semibold px-6 py-3 rounded-md transition-colors">
+            {/* <button className="border-2 border-black text-black hover:bg-blue-50 font-semibold px-6 py-3 rounded-md transition-colors">
               Become a Mentor
+            </button> */}
+            <button className="glow-btn text-white font-semibold px-6 py-3 rounded-md">
+              Become a Mentor
+            </button>
+             <button className="slide-btn text-white font-semibold px-6 py-3 rounded-md">
+              Become a Mentor
+            </button>
+            <button className="slide-oval-btn">
+              <span className="label">Start Your Journey</span>
             </button>
           </div>
         </div>
