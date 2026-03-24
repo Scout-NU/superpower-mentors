@@ -1,4 +1,9 @@
 import React from 'react';
+import "./page.css";
+
+// Color constants
+const BLUE   = "#001EDF";
+const ORANGE = "#FF9925";
 
 const PURPLE = "#571377";
 const ORANGE = "#FFC92A";

@@ -1,0 +1,145 @@
+.glow-btn {
+  position: relative;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+  
+  background: linear-gradient(270deg, #4f46e5, #06b6d4, #9333ea, #4f46e5);
+  background-size: 600% 600%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* animated gradient */
+.glow-btn:hover {
+  animation: gradientMove 3s ease infinite;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.5);
+}
+
+/* glowing border effect */
+.glow-btn::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(270deg, #06b6d4, #9333ea, #4f46e5);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-btn:hover::before {
+  opacity: 1;
+  animation: gradientMove 3s ease infinite;
+}
+
+/* keyframes */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* click feedback */
+.glow-btn:active {
+  transform: scale(0.95);
+}
+
+.slide-oval-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  background-color: #4f46e5; /* your BLUE */
+  border: none;
+  cursor: pointer;
+}
+
+/* text stays above */
+.slide-oval-btn .label {
+  position: relative;
+  z-index: 2;
+}
+
+/* oval sliding layer */
+.slide-oval-btn::before {
+  content: "";
+  position: absolute;
+
+  width: 200%;
+  height: 200%;
+
+  bottom: -100%;   /* start BELOW */
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: linear-gradient(120deg, #06b6d4, #9333ea);
+
+  border-radius: 50%; /* 👈 makes it oval/circle */
+
+  transition: bottom 0.5s ease;
+  z-index: 1;
+}
+
+.slide-oval-btn:hover::before {
+  bottom: 0%;
+}
+
+/* optional playful motion */
+.slide-oval-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.slide-oval-btn:active {
+  transform: scale(0.95);
+}
+
+.slide-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  background-color: #4f46e5; /* your BLUE */
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+/* sliding layer */
+.slide-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #06b6d4, #9333ea);
+  
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+
+/* hover effect */
+.slide-btn:hover::before {
+  transform: translateX(0);
+}
+
+.slide-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+}
+
+/* click feedback */
+.slide-btn:active {
+  transform: scale(0.95);
+}
