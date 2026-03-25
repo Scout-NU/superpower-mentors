@@ -10,22 +10,16 @@ export default function Navbar() {
         
         <div className="flex items-center gap-8">
           <Link 
-            href="/" 
-            className="text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors"
+            href="/about-us" 
+            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
-            Home
+            About Us
           </Link>
           <Link 
             href="/mentoring" 
             className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
             Mentoring
-          </Link>
-          <Link 
-            href="/about-us" 
-            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
-          >
-            About Us
           </Link>
           <Link 
             href="/community" 

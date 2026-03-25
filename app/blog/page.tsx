@@ -151,7 +151,7 @@ export default function BlogPage() {
       <section className="px-6 py-16" style={{ background: "#571377" }}>
         <div className="max-w-7xl mx-auto">
           <h1
-            className="font-bold text-white leading-none text-center"
+            className="font-medium text-white leading-none text-center"
             style={{ fontSize: "clamp(64px, 10vw, 120px)" }}
           >
             Insights &amp; Stories

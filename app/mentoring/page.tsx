@@ -69,20 +69,20 @@ const roots: RootLogo[] = [
 const programs: Program[] = [
   {
     id: 1,
-    title: 'Kids & Teens',
+    title: 'Neurodiversity',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
     image: '/mentor_kids.jpg',
     items: [
       {
         id: 1,
-        title: 'Ages 7-10 Mentorship',
+        title: 'Value 1',
         content:
           'This program helps younger students build confidence, communication, and healthy routines while learning how to understand their strengths.',
       },
       {
         id: 2,
-        title: 'Ages 11-14 Mentorship',
+        title: 'Value 2',
         content:
           'The most common age in our program is 11-14 year olds. In this bracket, your child will dive into deeper concepts, learn how to embrace their Superpower, and work through challenges like bullying, communication, and emotional expression.',
       },
@@ -90,20 +90,20 @@ const programs: Program[] = [
   },
   {
     id: 2,
-    title: 'High School & College',
+    title: 'Direction & Transitions',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
     image: '/mentor_hs.jpg',
     items: [
       {
         id: 1,
-        title: 'High School Mentorship',
+        title: 'Value 1',
         content:
           'Students get support with identity, academic pressure, confidence, goal setting, and preparing for the transition into college or work.',
       },
       {
         id: 2,
-        title: 'College Mentorship',
+        title: 'Value 2',
         content:
           'College students get guidance on independence, time management, burnout, belonging, and staying on track through the hardest transition years.',
       },
@@ -111,20 +111,20 @@ const programs: Program[] = [
   },
   {
     id: 3,
-    title: 'Graduation & Work',
+    title: 'Confidence',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
     image: '/mentor_college.jpg',
     items: [
       {
         id: 1,
-        title: 'Graduation Mentorship',
+        title: 'Value 1',
         content:
           'This track helps students move from school into adult life with more clarity, confidence, and a practical plan for what comes next.',
       },
       {
         id: 2,
-        title: 'Workplace Mentorship',
+        title: 'Value 2',
         content:
           'Young professionals get support with communication, workplace confidence, leadership habits, boundaries, and career growth.',
       },
