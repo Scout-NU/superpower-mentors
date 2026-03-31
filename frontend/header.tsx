@@ -22,10 +22,10 @@ export default function Navbar() {
             Mentoring
           </Link>
           <Link 
-            href="/community" 
+            href="/partnership" 
             className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
-            Community
+            Partnerships
           </Link>
           <Link 
             href="/quality" 
