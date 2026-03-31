@@ -1,9 +1,11 @@
+"use client";
 import React from 'react';
+import AnimatedSection from "@/frontend/AnimatedSection";
 import "./page.css";
+import { motion } from "framer-motion";
 
 // Color constants
-const BLUE   = "#001EDF";
-const ORANGE = "#FF9925";
+const BLACK  = "#000000";
 
 const PURPLE = "#571377";
 const ORANGE = "#FFC92A";
@@ -372,12 +374,24 @@ function FAQSection() {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <HeroSection />
-      <MeetMentorsSection />
-      <RealImpactSection />
-      <HowItWorksSection />
-      <TestimonialsSection />
-      <FAQSection />
+      <AnimatedSection>
+        <HeroSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <MeetMentorsSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <RealImpactSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <HowItWorksSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <TestimonialsSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <FAQSection />
+      </AnimatedSection>
     </main>
   );
 }
