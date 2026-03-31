@@ -1,8 +1,12 @@
+"use client";
+import AnimatedSection from "@/frontend/AnimatedSection";
 import "./page.css";
+import { motion } from "framer-motion";
 
 // Color constants
 const BLUE   = "#001EDF";
 const ORANGE = "#FF9925";
+const BLACK  = "#000000";
 
 // Placeholder image block
 function ImgPlaceholder({ className = "" }: { className?: string }) {
@@ -30,34 +34,11 @@ function HeroSection() {
             Autism, and other learning differences.
           </p>
           <div className="mt-6 flex gap-4 flex-wrap">
-            {/* <button style={{ backgroundColor: BLUE }} className="hover:opacity-90 text-white font-semibold px-6 py-3 rounded-md transition-opacity">
-              Start Your Journey
-            </button> */}
-            <button
-              style={{ backgroundColor: BLUE }}
-              className="
-                text-white font-semibold px-6 py-3 rounded-md
-                transition-all duration-300 ease-out
-                transform
-                hover:scale-110
-                hover:-translate-y-1
-                hover:rotate-1
-                active:scale-95
-              "
-            >
+            <button style={{ backgroundColor: BLUE }} className="glow-btn text-white font-semibold px-6 py-3 rounded-md transition-opacity">
               Start Your Journey
             </button>
-            {/* <button className="border-2 border-black text-black hover:bg-blue-50 font-semibold px-6 py-3 rounded-md transition-colors">
+            <button style={{ backgroundColor: BLACK }} className="glow-btn text-white font-semibold px-6 py-3 rounded-md transition-opacity">
               Become a Mentor
-            </button> */}
-            <button className="glow-btn text-white font-semibold px-6 py-3 rounded-md">
-              Become a Mentor
-            </button>
-             <button className="slide-btn text-white font-semibold px-6 py-3 rounded-md">
-              Become a Mentor
-            </button>
-            <button className="slide-oval-btn">
-              <span className="label">Start Your Journey</span>
             </button>
           </div>
         </div>
@@ -113,12 +94,12 @@ function MeetMentorsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 items-stretch">
           {MENTORS.map((m) => (
             <div key={m.name} className="border-2 border-black bg-white rounded-2xl p-8 pb-4 flex flex-col items-start gap-3 w-65 h-full">
-            <div className="w-full flex justify-center">
-              <ImgPlaceholder className="w-24 h-24" />
+              <div className="w-full flex justify-center">
+                <ImgPlaceholder className="w-24 h-24" />
+              </div>
+              <p className="font-bold text-black text-sm">{m.name}</p>
+              <p className="text-zinc-500 text-xs leading-relaxed">{m.bio}</p>
             </div>
-            <p className="font-bold text-black text-sm">{m.name}</p>
-            <p className="text-zinc-500 text-xs leading-relaxed">{m.bio}</p>
-          </div>
           ))}
         </div>
         <div className="mt-8 flex text-black">
@@ -258,10 +239,18 @@ export default function HomePage() {
     <>
       <main className="min-h-screen">
         <HeroSection />
-        <MeetMentorsSection />
-        <SuperpowersSection />
-        <HowItWorksSection />
-        <TestimonialsSection />
+        <AnimatedSection>
+          <MeetMentorsSection />
+        </AnimatedSection>
+        <AnimatedSection>
+          <SuperpowersSection />
+        </AnimatedSection>
+        <AnimatedSection>
+          <HowItWorksSection />
+        </AnimatedSection>
+        <AnimatedSection>
+          <TestimonialsSection />
+        </AnimatedSection>
       </main>
     </>
   );
