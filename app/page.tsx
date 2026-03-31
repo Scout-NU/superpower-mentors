@@ -41,13 +41,13 @@ function HeroSection() {
             <div className="flex gap-4 flex-shrink-0">
               <button 
                 style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }} 
-                className="text-white font-semibold rounded-full"
+                className="glow-btn text-white font-semibold rounded-full"
               >
                 Start Your Journey
               </button>
               <button 
-                style={{ fontFamily: 'DM Sans', width: '234px', height: '67px' }}
-                className="bg-black text-white font-semibold rounded-full"
+                style={{ backgroundColor: BLACK, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
+                className="glow-btn text-white font-semibold rounded-full"
               >
                 Become a Mentor
               </button>
