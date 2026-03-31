@@ -2,6 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import React from 'react';
+import AnimatedSection from "@/frontend/AnimatedSection";
+import "./page.css";
+import { motion } from "framer-motion";
+
+// Color constants
+const BLACK  = "#000000";
 
 const PURPLE = "#571377";
 const ORANGE = "#FFC92A";
@@ -32,16 +39,18 @@ function HeroSection() {
               Trusted online mentorship to launch youth with ADHD, Dyslexia, Autism, and other learning differences.
             </p>
             <div className="flex gap-4 flex-shrink-0">
-              <Link href="/mentoring">
-                <button style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }} className="text-white font-semibold rounded-full cursor-pointer">
-                  Start Your Journey
-                </button>
-              </Link>
-              <Link href="/mentoring">
-                <button style={{ fontFamily: 'DM Sans', width: '234px', height: '67px' }} className="bg-black text-white font-semibold rounded-full cursor-pointer">
-                  Become a Mentor
-                </button>
-              </Link>
+              <button 
+                style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }} 
+                className="glow-btn text-white font-semibold rounded-full"
+              >
+                Start Your Journey
+              </button>
+              <button 
+                style={{ backgroundColor: BLACK, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
+                className="glow-btn text-white font-semibold rounded-full"
+              >
+                Become a Mentor
+              </button>
             </div>
           </div>
         </div>
@@ -454,12 +463,24 @@ function FAQSection() {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <HeroSection />
-      <MeetMentorsSection />
-      <RealImpactSection />
-      <HowItWorksSection />
-      <TestimonialsSection />
-      <FAQSection />
+      <AnimatedSection>
+        <HeroSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <MeetMentorsSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <RealImpactSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <HowItWorksSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <TestimonialsSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <FAQSection />
+      </AnimatedSection>
     </main>
   );
 }
