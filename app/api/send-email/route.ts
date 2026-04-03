@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Sends a POST request to the Zapier Webhook
- * @param request the request to send: must contain an 'email' key in the request's body.
+ * @param request the request to send: must contain an 'email' and 'quizAnswers' key in the request's body.
  * @returns a NextResponse object containing the webhook's response, or an error if it fails.
  */
 export async function POST(request: NextRequest) {
