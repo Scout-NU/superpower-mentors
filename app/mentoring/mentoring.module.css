@@ -366,12 +366,7 @@
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: transform 0.25s ease, background 0.25s ease;
-  }
-  
-  .ctaButton:hover {
-    transform: translateY(-4px);
-    background: var(--color-purple-light);
+    transition: transform 0.25s ease;
   }
 
   .rootsSection {
