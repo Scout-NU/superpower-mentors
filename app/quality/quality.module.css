@@ -1,0 +1,987 @@
+.faqs_span {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.faqs {
+  align-self: stretch;
+}
+
+.privacypolicy_span {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.privacy-policy {
+  align-self: stretch;
+}
+
+.termsandconditions_span {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.terms-and-conditions {
+  align-self: stretch;
+}
+
+.career_span {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.career {
+  align-self: stretch;
+}
+
+.contactus_span {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.contact-us {
+  align-self: stretch;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  left: 4px;
+  top: 4px;
+  position: absolute;
+  outline: 4px white solid;
+  outline-offset: -2px;
+}
+
+.icon_01 {
+  width: 15.83px;
+  height: 7.29px;
+  left: 11.08px;
+  top: 14.58px;
+  position: absolute;
+  background: white;
+}
+
+.icon_02 {
+  width: 40px;
+  height: 32px;
+  left: 4px;
+  top: 8px;
+  position: absolute;
+  outline: 4px white solid;
+  outline-offset: -2px;
+}
+
+.calltoll-free800403-2377_span {
+  color: white;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  text-decoration: underline;
+  line-height: 24px;
+  letter-spacing: 0.50px;
+  word-wrap: break-word;
+}
+
+.call-toll-free-800-403-2377 {
+  left: 84px;
+  top: 58px;
+  position: absolute;
+  text-align: center;
+}
+
+.logo_01_span {
+  color: black;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.logo_01 {
+  left: 27px;
+  top: 21px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_span {
+  color: var(--Text-Default-Default, #1E1E1E);
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.title {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_01_span {
+  color: var(--Text-Brand-On-Brand-Secondary, #1E1E1E);
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.title_01 {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_02_span {
+  color: black;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.title_02 {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_03_span {
+  color: #B959F1;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.title_03 {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_04_span {
+  color: var(--Text-Default-Default, #1E1E1E);
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.title_04 {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_05_span {
+  color: var(--Text-Default-Default, #1E1E1E);
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.title_05 {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.label_span {
+  color: var(--Schemes-On-Primary, white);
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.10px;
+  word-wrap: break-word;
+}
+
+.label {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.rectangle-83 {
+  width: 100%;
+  height: 630px;
+  /* left: 0px;
+  top: 115px; */
+  /* position: absolute; */
+  background: #571377;
+}
+
+.safetyqualityassurance_span {
+  color: white;
+  /* font-size: 88px; */
+  font-size: clamp(2.4rem, 5vw, 6rem);
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 110px;
+  word-wrap: break-word;
+}
+
+.safety-quality-assurance {
+  width: 1609px;
+  left: 75px;
+  top: -16px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.rectangle-84 {
+  width: 1512px;
+  height: 618px;
+  left: 0px;
+  top: 1809px;
+  position: absolute;
+  background: #571377;
+}
+
+.threestep3rdpartybackgroundcheck_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.three-step-3rd-party-background-check {
+  left: 115px;
+  top: 2043px;
+  position: absolute;
+  text-align: center;
+}
+
+.ourcommitment_span {
+  color: black;
+  font-size: 64px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 76.80px;
+  word-wrap: break-word;
+}
+
+.our-commitment {
+  width: 884px;
+  height: 113px;
+  left: 90px;
+  top: 1446px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.safetyandmentorvetting_span {
+  color: white;
+  font-size: 64px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 76.80px;
+  word-wrap: break-word;
+}
+
+.safety-and-mentor-vetting {
+  width: 1037px;
+  height: 113px;
+  left: 90px;
+  top: 1873px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.thementorsofsuperpowermentorsareyoungadultsaged20-30whohavepersonalexperienceovercomingadversitywithadhddyslexiaautismandorotherlearningchallengesweunderstandtheimportanceofworkingwithqualifiedandtrustworthymentorswhocaneffectivelysupporttheuniqueneedsofstudentswithdyslexiaadhdandautismthatswhyweveimplementedarigoroussix-stepvettingandqualityassuranceprocessforourmentorsthepurposeofthissix-stepprocessistoscreeneveryangleofthementorfrombothourperspectiveandtheclientsperspectivethroughthisprocessweareabletogainacompletepictureandunderstandingofthementorsbackgroundpersonalityrelatabilitymentoringeffectivenessandresponsibility_span {
+  color: black;
+  font-size: 20px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.the-mentors-of-superpower-mentors-are-young-adults-aged-20-30-who-have-personal-experience-overcoming-adversity-with-adhd-dyslexia-autism-andor-other-learning-challenges-we-understand-the-importance-of-working-with-qualified-and-trustworthy-mentors-who-can-effectively-support-the-unique-needs-of-students-with-dyslexia-adhd-and-autism-thats-why-weve-implemented-a-rigorous-six-step-vetting-and-quality-assurance-process-for-our-mentors-the-purpose-of-this-six-step-process-is-to-screen-every-angle-of-the-mentor-from-both-our-perspective-and-the-clients-perspective-through-this-process-we-are-able-to-gain-a-complete-picture-and-understanding-of-the-mentors-background-personality-relatability-mentoring-effectiveness-and-responsibility {
+  width: 1155px;
+  left: 155px;
+  top: 1559px;
+  position: absolute;
+}
+
+.threestep3rdpartybackgroundcheck_01_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.three-step-3rd-party-background-check_01 {
+  left: 115px;
+  top: 2043px;
+  position: absolute;
+  text-align: center;
+}
+
+.rectangle-78 {
+  width: 1331px;
+  height: 711px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #571377;
+  border-radius: 20px;
+}
+
+.oursafestructuredapproachtomentorship_span {
+  color: white;
+  font-size: 36px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  line-height: 43.20px;
+  word-wrap: break-word;
+}
+
+.our-safe-structured-approach-to-mentorship {
+  left: 48px;
+  top: 302px;
+  position: absolute;
+}
+
+.rectangle-79 {
+  width: 662px;
+  height: 522px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #350B49;
+  border-radius: 20px;
+}
+
+.step5_span {
+  color: white;
+  font-size: 20px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.10px;
+  word-wrap: break-word;
+}
+
+.step-5 {
+  left: 46px;
+  top: 422px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.line-93 {
+  width: 569px;
+  height: 0px;
+  left: 46px;
+  top: 476px;
+  position: absolute;
+  outline: 1px #B959F1 solid;
+  outline-offset: -0.50px;
+}
+
+.step4_span {
+  color: white;
+  font-size: 20px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.10px;
+  word-wrap: break-word;
+}
+
+.step-4 {
+  left: 46px;
+  top: 334px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.line-92 {
+  width: 569px;
+  height: 0px;
+  left: 46px;
+  top: 388px;
+  position: absolute;
+  outline: 1px #B959F1 solid;
+  outline-offset: -0.50px;
+}
+
+.icon_01_01 {
+  width: 15.83px;
+  height: 7.29px;
+  left: 11.08px;
+  top: 14.58px;
+  position: absolute;
+  background: white;
+}
+
+.step3_span {
+  color: white;
+  font-size: 20px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.10px;
+  word-wrap: break-word;
+}
+
+.step-3 {
+  width: 445px;
+  left: 46px;
+  top: 240px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.line-91 {
+  width: 569px;
+  height: 0px;
+  left: 46px;
+  top: 300px;
+  position: absolute;
+  outline: 1px #B959F1 solid;
+  outline-offset: -0.50px;
+}
+
+.icon_02_01 {
+  width: 15.83px;
+  height: 7.29px;
+  left: 11.08px;
+  top: 14.58px;
+  position: absolute;
+  background: white;
+}
+
+.step1_span {
+  color: white;
+  font-size: 20px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.10px;
+  word-wrap: break-word;
+}
+
+.step-1 {
+  left: 46px;
+  top: 54px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.line-89 {
+  width: 569px;
+  height: 0px;
+  left: 46px;
+  top: 108px;
+  position: absolute;
+  outline: 1px #B959F1 solid;
+  outline-offset: -0.50px;
+}
+
+.icon_03 {
+  width: 15.83px;
+  height: 7.29px;
+  left: 11.08px;
+  top: 14.58px;
+  position: absolute;
+  background: white;
+}
+
+.step2_span {
+  color: white;
+  font-size: 20px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.10px;
+  word-wrap: break-word;
+}
+
+.step-2 {
+  left: 46px;
+  top: 142px;
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.line-90 {
+  width: 569px;
+  height: 0px;
+  left: 46px;
+  top: 196px;
+  position: absolute;
+  outline: 1px #B959F1 solid;
+  outline-offset: -0.50px;
+}
+
+.icon_04 {
+  width: 15.83px;
+  height: 7.29px;
+  left: 11.08px;
+  top: 14.58px;
+  position: absolute;
+  background: white;
+}
+
+.highlyselectiveinterviewprocess_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.highly-selective-interview-process {
+  left: 120px;
+  top: 2103px;
+  position: absolute;
+  text-align: center;
+}
+
+.text_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.text {
+  left: 405px;
+  top: 2103px;
+  position: absolute;
+  text-align: center;
+}
+
+.fhourcertificationcourse_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.text-3-hour-certification-course {
+  left: 120px;
+  top: 2168px;
+  position: absolute;
+  text-align: center;
+}
+
+.mentorsmeetwithteamleaderbi-weekly_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.mentors-meet-with-team-leader-bi-weekly {
+  left: 842px;
+  top: 2048px;
+  position: absolute;
+  text-align: center;
+}
+
+.meetyourmentorpriortoagreement_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.meet-your-mentor-prior-to-agreement {
+  left: 842px;
+  top: 2104px;
+  position: absolute;
+  text-align: center;
+}
+
+.mentorsessionrecaps_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.mentor-session-recaps {
+  left: 843px;
+  top: 2164px;
+  position: absolute;
+  text-align: center;
+}
+
+.includedcheckincallswithmentorteamleaderandparentlegalguardianonceamonth_span {
+  color: white;
+  font-size: 30px;
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.included-check-in-calls-with-mentor-team-leader-and-parentlegal-guardian-once-a-month {
+  left: 119px;
+  top: 2245px;
+  position: absolute;
+  text-align: center;
+}
+
+.image-39 {
+  width: 50vw;
+  height: 60vw;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 307px;
+  position: absolute;
+}
+
+.list {
+  width: 165px;
+  left: 1003px;
+  top: 60px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 14px;
+  display: inline-flex;
+}
+
+.list_01 {
+  width: 159px;
+  left: 1257px;
+  top: 60px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.logo {
+  width: 91px;
+  height: 58px;
+  position: relative;
+  background: #D7D7D7;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.navigation-pill {
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.navigationpill_01 {
+  padding: 8px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.navigationpill_02 {
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.navigationpill_03 {
+  padding: 8px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.navigationpill_04 {
+  padding: 8px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.navigationpill_05 {
+  padding: 8px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.state-layer {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+}
+
+.frame-1000001138 {
+  width: 1524px;
+  height: 748px;
+  left: 28px;
+  top: 222px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.instagram {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.facebook {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mail {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.arrow_drop_up {
+  width: 38px;
+  height: 35px;
+  left: 615px;
+  top: 457px;
+  position: absolute;
+  transform: rotate(180deg);
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.arrow_drop_up_01 {
+  width: 38px;
+  height: 35px;
+  left: 615px;
+  top: 369px;
+  position: absolute;
+  transform: rotate(180deg);
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.arrow_drop_up_02 {
+  width: 38px;
+  height: 35px;
+  left: 615px;
+  top: 257px;
+  position: absolute;
+  transform: rotate(180deg);
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.arrow_drop_up_03 {
+  width: 38px;
+  height: 35px;
+  left: 615px;
+  top: 81px;
+  position: absolute;
+  transform: rotate(180deg);
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.arrow_drop_up_04 {
+  width: 38px;
+  height: 35px;
+  left: 615px;
+  top: 169px;
+  position: absolute;
+  transform: rotate(180deg);
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.navigation-pill-list {
+  width: 644px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.content {
+  background: #B959F1;
+  overflow: hidden;
+  border-radius: 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
+.contact-platforms {
+  left: 84px;
+  top: 97px;
+  position: absolute;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  display: inline-flex;
+}
+
+.frame-1000001136 {
+  width: 662px;
+  height: 522px;
+  left: 620px;
+  top: 90px;
+  position: absolute;
+}
+
+.button {
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.bottom-bar {
+  width: 1512px;
+  height: 204px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #571377;
+  overflow: hidden;
+}
+
+.frame-1000001137 {
+  width: 1331px;
+  height: 711px;
+  left: 102px;
+  top: 2508px;
+  position: absolute;
+}
+
+.frame-1 {
+  width: 1061px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 200px;
+  display: flex;
+}
+
+.frame-2 {
+  width: 1512px;
+  height: 204px;
+  left: 0px;
+  top: 3301px;
+  position: absolute;
+  background: #571377;
+  overflow: hidden;
+}
+
+.top-bar {
+  left: 66px;
+  top: 27px;
+  position: absolute;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 228px;
+  display: inline-flex;
+}
+
+.nav-bar {
+  width: 1495px;
+  height: 112px;
+  left: 20px;
+  top: 3px;
+  position: absolute;
+  background: white;
+  overflow: hidden;
+}
+
+.safety {
+  width: 100%;
+  height: 3505px;
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
