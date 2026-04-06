@@ -7,6 +7,7 @@ type Mentor = {
   id: number
   name: string
   description: string
+  quote: string
   image: string
 }
 
@@ -33,24 +34,30 @@ type RootLogo = {
 const mentors: Mentor[] = [
   {
     id: 1,
-    name: 'Christiana W',
+    name: 'Meet Tyler',
     description:
-      'Los Angeles, USA. Dyslexic. Art Director, Advertising, Social Media Influencer, Semi-Professional Athlete',
-    image: '/mentor_christiana.jpg',
+      'Professional music artist and sound engineer with millions of Spotify streams, as well as an OCD advocate and podcast host.',
+    quote:
+      '“Your differences can become your edge once you learn how to work with them instead of against them.”',
+    image: '/mentor_tyler.png',
   },
   {
     id: 2,
-    name: 'Jeff S',
+    name: 'Meet Eden',
     description:
-      'Bronx, NY. ADHD. Aerospace Research Engineer @ NASA. Marathon Athlete, Musician, Scientific Tech Developer',
-    image: '/mentor_jeff.jpg',
+      'Marketing agency CEO w/ ADHD partnering with brands such as Dove, Samsung, and Amazon.',
+    quote:
+      '“Confidence grows when you stop trying to fit a mold that was never built for you.”',
+    image: '/mentor_eden.png',
   },
   {
     id: 3,
-    name: 'Dylann C',
+    name: 'Meet Franck',
     description:
-      'Massachusetts, USA. ADHD, Educator, Writer, Artist, Blogger, Health Enthusiast, Entrepreneur.',
-    image: '/mentor_dylann.jpg',
+      'Growth strategist, educator, advocate, and technologist with ADHD.',
+    quote:
+      '“The right direction starts with understanding how your mind works, then building from there.”',
+    image: '/mentor_franck.png',
   },
 ]
 
@@ -69,20 +76,20 @@ const roots: RootLogo[] = [
 const programs: Program[] = [
   {
     id: 1,
-    title: 'Neurodiversity',
+    title: 'Neurodiversity & Confidence',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
     image: '/mentor_kids.jpg',
     items: [
       {
         id: 1,
-        title: 'Value 1',
+        title: 'Neurodiversity',
         content:
           'This program helps younger students build confidence, communication, and healthy routines while learning how to understand their strengths.',
       },
       {
         id: 2,
-        title: 'Value 2',
+        title: 'Confidence',
         content:
           'The most common age in our program is 11-14 year olds. In this bracket, your child will dive into deeper concepts, learn how to embrace their Superpower, and work through challenges like bullying, communication, and emotional expression.',
       },
@@ -90,61 +97,53 @@ const programs: Program[] = [
   },
   {
     id: 2,
-    title: 'Direction & Transitions',
+    title: 'Transition & Direction',
     description:
       'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
     image: '/mentor_hs.jpg',
     items: [
       {
         id: 1,
-        title: 'Value 1',
+        title: 'Transitions',
         content:
           'Students get support with identity, academic pressure, confidence, goal setting, and preparing for the transition into college or work.',
       },
       {
         id: 2,
-        title: 'Value 2',
+        title: 'Direction',
         content:
           'College students get guidance on independence, time management, burnout, belonging, and staying on track through the hardest transition years.',
       },
     ],
   },
-  {
-    id: 3,
-    title: 'Confidence',
-    description:
-      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/mentor_college.jpg',
-    items: [
-      {
-        id: 1,
-        title: 'Value 1',
-        content:
-          'This track helps students move from school into adult life with more clarity, confidence, and a practical plan for what comes next.',
-      },
-      {
-        id: 2,
-        title: 'Value 2',
-        content:
-          'Young professionals get support with communication, workplace confidence, leadership habits, boundaries, and career growth.',
-      },
-    ],
-  },
 ]
+
+function CircleDivider() {
+  return (
+    <div className={styles.circleDivider} aria-hidden="true">
+      <span className={styles.circle1}></span>
+      <span className={styles.circle2}></span>
+      <span className={styles.circle3}></span>
+      <span className={styles.circle4}></span>
+      <span className={styles.circle5}></span>
+      <span className={styles.circle6}></span>
+      <span className={styles.circle7}></span>
+      <span className={styles.circle8}></span>
+    </div>
+  )
+}
 
 export default function MentoringPage() {
   const [openItems, setOpenItems] = useState<Record<number, number[]>>({
     1: [],
     2: [],
-    3: [],
   })
 
   const toggleItem = (programId: number, itemId: number) => {
     setOpenItems((prev) => {
-      const current = prev[programId]
-  
+      const current = prev[programId] || []
       const isOpen = current.includes(itemId)
-  
+
       return {
         ...prev,
         [programId]: isOpen
@@ -153,6 +152,10 @@ export default function MentoringPage() {
       }
     })
   }
+
+  const midpoint = Math.ceil(roots.length / 2)
+  const topRowRoots = roots.slice(0, midpoint)
+  const bottomRowRoots = roots.slice(midpoint)
 
   return (
     <main className={styles.page}>
@@ -174,36 +177,21 @@ export default function MentoringPage() {
                 <div className={styles.content}>
                   <h2 className={styles.name}>{mentor.name}</h2>
                   <p className={styles.text}>{mentor.description}</p>
+                  <p className={styles.quote}>{mentor.quote}</p>
                 </div>
               </article>
             ))}
-          </div>
-
-          <div className={styles.rootsSection}>
-            <p className={styles.rootsLabel}>OUR MENTOR’S ROOTS</p>
-
-            <div className={styles.logoCarousel}>
-              <div className={styles.logoTrack}>
-                {[...roots, ...roots].map((logo, index) => (
-                  <div key={`${logo.id}-${index}`} className={styles.logoItem}>
-                    <img
-                      src={logo.image}
-                      alt={logo.name}
-                      className={styles.logoImage}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       <section className={styles.programsSection}>
         <div className={styles.inner}>
-          <h2 className={styles.programsTitle}>Our Programs</h2>
+          <h2 className={styles.programsTitle}>Our Value Programs</h2>
 
           <div className={styles.programsLayout}>
+            <CircleDivider />
+
             <article className={styles.programCard}>
               <div className={styles.programImageWrap}>
                 <img
@@ -214,7 +202,9 @@ export default function MentoringPage() {
               </div>
 
               <h3 className={styles.programName}>{programs[0].title}</h3>
-              <p className={styles.programDescription}>{programs[0].description}</p>
+              <p className={styles.programDescription}>
+                {programs[0].description}
+              </p>
 
               <div className={styles.accordionGroup}>
                 {programs[0].items.map((item) => {
@@ -223,7 +213,9 @@ export default function MentoringPage() {
                   return (
                     <div
                       key={item.id}
-                      className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ''}`}
+                      className={`${styles.accordionItem} ${
+                        isOpen ? styles.accordionItemOpen : ''
+                      }`}
                     >
                       <button
                         type="button"
@@ -233,7 +225,9 @@ export default function MentoringPage() {
                       >
                         <span>{item.title}</span>
                         <span
-                          className={`${styles.accordionIcon} ${isOpen ? styles.accordionIconOpen : ''}`}
+                          className={`${styles.accordionIcon} ${
+                            isOpen ? styles.accordionIconOpen : ''
+                          }`}
                           aria-hidden="true"
                         >
                           <svg
@@ -263,16 +257,7 @@ export default function MentoringPage() {
               </div>
             </article>
 
-            <div className={styles.circleDivider} aria-hidden="true">
-              <span className={styles.circle1}></span>
-              <span className={styles.circle2}></span>
-              <span className={styles.circle3}></span>
-              <span className={styles.circle4}></span>
-              <span className={styles.circle5}></span>
-              <span className={styles.circle6}></span>
-              <span className={styles.circle7}></span>
-              <span className={styles.circle8}></span>
-            </div>
+            <CircleDivider />
 
             <article className={styles.programCard}>
               <div className={styles.programImageWrap}>
@@ -284,7 +269,9 @@ export default function MentoringPage() {
               </div>
 
               <h3 className={styles.programName}>{programs[1].title}</h3>
-              <p className={styles.programDescription}>{programs[1].description}</p>
+              <p className={styles.programDescription}>
+                {programs[1].description}
+              </p>
 
               <div className={styles.accordionGroup}>
                 {programs[1].items.map((item) => {
@@ -293,7 +280,9 @@ export default function MentoringPage() {
                   return (
                     <div
                       key={item.id}
-                      className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ''}`}
+                      className={`${styles.accordionItem} ${
+                        isOpen ? styles.accordionItemOpen : ''
+                      }`}
                     >
                       <button
                         type="button"
@@ -303,7 +292,9 @@ export default function MentoringPage() {
                       >
                         <span>{item.title}</span>
                         <span
-                          className={`${styles.accordionIcon} ${isOpen ? styles.accordionIconOpen : ''}`}
+                          className={`${styles.accordionIcon} ${
+                            isOpen ? styles.accordionIconOpen : ''
+                          }`}
                           aria-hidden="true"
                         >
                           <svg
@@ -333,99 +324,282 @@ export default function MentoringPage() {
               </div>
             </article>
 
-            <div className={styles.circleDivider} aria-hidden="true">
-              <span className={styles.circle1}></span>
-              <span className={styles.circle2}></span>
-              <span className={styles.circle3}></span>
-              <span className={styles.circle4}></span>
-              <span className={styles.circle5}></span>
-              <span className={styles.circle6}></span>
-              <span className={styles.circle7}></span>
-              <span className={styles.circle8}></span>
-            </div>
-
-            <article className={styles.programCard}>
-              <div className={styles.programImageWrap}>
-                <img
-                  src={programs[2].image}
-                  alt={programs[2].title}
-                  className={styles.programImage}
-                />
-              </div>
-
-              <h3 className={styles.programName}>{programs[2].title}</h3>
-              <p className={styles.programDescription}>{programs[2].description}</p>
-
-              <div className={styles.accordionGroup}>
-                {programs[2].items.map((item) => {
-                  const isOpen = openItems[programs[2].id].includes(item.id)
-
-                  return (
-                    <div
-                      key={item.id}
-                      className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className={styles.accordionTrigger}
-                        onClick={() => toggleItem(programs[2].id, item.id)}
-                        aria-expanded={isOpen}
-                      >
-                        <span>{item.title}</span>
-                        <span
-                          className={`${styles.accordionIcon} ${isOpen ? styles.accordionIconOpen : ''}`}
-                          aria-hidden="true"
-                        >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6 9L12 15L18 9"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-
-                      {isOpen && (
-                        <div className={styles.accordionContent}>
-                          <p>{item.content}</p>
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </article>
+            <CircleDivider />
           </div>
 
           <div className={styles.programsCta}>
-            <button type="button" className={`${styles.programButton} glow-btn glow-btn--alt`}>
-              Find Your Mentor
-            </button>
+          <a
+            href="#strategy-call-form"
+            className={`${styles.programButton} glow-btn glow-btn--alt`}
+          >
+            Find Your Mentor
+          </a>
+          </div>
+
+          <div className={styles.rootsSectionWhite}>
+            <p className={styles.rootsLabelWhite}>OUR MENTOR’S ROOTS</p>
+
+            <div className={styles.logoCarouselStack}>
+              <div className={styles.logoCarouselRow}>
+                <div className={styles.logoTrackLeft}>
+                  {[...topRowRoots, ...topRowRoots].map((logo, index) => (
+                    <div
+                      key={`top-${logo.id}-${index}`}
+                      className={styles.logoItemWhite}
+                    >
+                      <img
+                        src={logo.image}
+                        alt={logo.name}
+                        className={styles.logoImageWhite}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.logoCarouselRow}>
+                <div className={styles.logoTrackRight}>
+                  {[...bottomRowRoots, ...bottomRowRoots].map((logo, index) => (
+                    <div
+                      key={`bottom-${logo.id}-${index}`}
+                      className={styles.logoItemWhite}
+                    >
+                      <img
+                        src={logo.image}
+                        alt={logo.name}
+                        className={styles.logoImageWhite}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.ctaSection}>
-        <div className={styles.ctaInner}>
-          <div className={styles.ctaCard}>
-            <div
-              className={styles.ctaBg}
-              style={{ backgroundImage: "url('/mentor_cta.jpg')" }}
-            />
-            <div className={styles.ctaOverlay} />
+      <section className={styles.howItWorksSection}>
+        <div className={styles.inner}>
+          <h2 className={styles.howItWorksTitle}>How It Works</h2>
+          <div className={styles.timeline}>
+            <div className={styles.timelineRail} aria-hidden="true" />
 
-            <div className={styles.ctaContent}>
-              <h2 className={styles.ctaTitle}>Get Matched Today</h2>
-              <button className={`${styles.ctaButton} glow-btn glow-btn--alt`}>Find Your Mentor</button>
+            <div className={styles.timelineRow}>
+              <div className={styles.timelineNumber}>1</div>
+              <div className={styles.timelineCard}>
+                <h3 className={styles.timelineCardTitle}>Strategy Call</h3>
+                <p className={styles.timelineCardText}>
+                  Book a call with our founder, Jake Sussman, where we’ll learn more
+                  about your family to discover your unique needs and answer your
+                  questions.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineRow}>
+              <div className={styles.timelineNumber}>2</div>
+              <div className={styles.timelineCard}>
+                <h3 className={styles.timelineCardTitle}>Mentor Matching</h3>
+                <p className={styles.timelineCardText}>
+                  We work diligently to match your child with a mentor that works for
+                  them. Finding the perfect match can take time.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineRow}>
+              <div className={styles.timelineNumber}>3</div>
+              <div className={styles.timelineCard}>
+                <h3 className={styles.timelineCardTitle}>A Match Made</h3>
+                <p className={styles.timelineCardText}>
+                  You will meet your child’s mentor, accompanied by our Program
+                  Success Manager, to explore the mentor fit.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineRow}>
+              <div className={styles.timelineNumber}>4</div>
+              <div className={styles.timelineCard}>
+                <h3 className={styles.timelineCardTitle}>Your Child’s First Meeting</h3>
+                <p className={styles.timelineCardText}>
+                  Fully virtual, mentor to mentee. Our mentors are expert
+                  communicators and will ease first-session stressors to help your
+                  child become more confident with each session.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineRow}>
+              <div className={styles.timelineNumber}>5</div>
+              <div className={styles.timelineCard}>
+                <h3 className={styles.timelineCardTitle}>Family Matters Meeting</h3>
+                <p className={styles.timelineCardText}>
+                  Parents meet with mentors monthly. We discuss progress, goals and
+                  how your child could best be supported at home, school and in their
+                  social lives. Next month, repeat steps 4 and 5.
+                </p>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.videoCtaSection}>
+        <div className={styles.inner}>
+          <h2 className={styles.videoCtaTitle}>
+            Unlock Your Child&apos;s Full Potential
+          </h2>
+          <p className={styles.videoCtaSubtitle}>
+            Watch “Dear Younger Self,” our message to those struggling with learning
+            differences.
+          </p>
+
+          <div className={styles.videoCtaGrid}>
+            <div className={styles.videoFrame}>
+              <iframe
+                src="https://www.youtube.com/embed/RiwiAOCSVJY"
+                title="Dear Younger Self"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className={styles.videoEmbed}
+              />
+            </div>
+
+            <div className={styles.videoCtaContent}>
+              <p className={styles.videoCtaText}>
+                Every mentor on our team, including our founder Jake Sussman, truly
+                understands the challenges of being misunderstood, as they have all
+                navigated their own learning differences.
+              </p>
+
+              <a
+                href="#strategy-call-form"
+                className={`${styles.programButton} glow-btn glow-btn--alt`}
+              >
+                Find Your Mentor
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy-call-form" className={styles.formSection}>
+        <div className={styles.formInner}>
+          <h2 className={styles.formTitle}>Book Your Free Strategy Call Today!</h2>
+          <p className={styles.formSubtitle}>
+            Meet with Founder and Program Director of Superpower Mentors, Jake
+            Sussman, by filling out this form!
+          </p>
+
+          <form className={styles.strategyForm}>
+            <div className={styles.formGrid}>
+              <div className={styles.fieldGroup}>
+                <label htmlFor="firstName" className={styles.formLabel}>
+                  First Name
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  className={styles.formInput}
+                />
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label htmlFor="lastName" className={styles.formLabel}>
+                  Last Name
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  className={styles.formInput}
+                />
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label htmlFor="phoneNumber" className={styles.formLabel}>
+                  Phone Number
+                </label>
+                <input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  className={styles.formInput}
+                />
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label htmlFor="email" className={styles.formLabel}>
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className={styles.formInput}
+                />
+              </div>
+            </div>
+
+            <div className={styles.fieldGroupFull}>
+              <label htmlFor="descriptionType" className={styles.formLabel}>
+                What most closely describes you?
+              </label>
+              <div className={styles.selectWrap}>
+                <select
+                  id="descriptionType"
+                  name="descriptionType"
+                  className={styles.formSelect}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  <option value="parent">Parent</option>
+                  <option value="student">Student</option>
+                  <option value="guardian">Guardian</option>
+                  <option value="educator">Educator</option>
+                  <option value="other">Other</option>
+                </select>
+
+                <span className={styles.selectIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.formButtonWrap}>
+              <button type="submit" className={styles.submitButton}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className={styles.formCornerLeft} aria-hidden="true">
+          <span className={styles.formCircleSmallTop}></span>
+          <span className={styles.formCircleLarge}></span>
+          <span className={styles.formCircleSmallBottom}></span>
+        </div>
+
+        <div className={styles.formCornerRight} aria-hidden="true">
+          <span className={styles.formCircleSmallTop}></span>
+          <span className={styles.formCircleLarge}></span>
+          <span className={styles.formCircleSmallBottom}></span>
         </div>
       </section>
     </main>

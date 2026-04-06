@@ -164,15 +164,17 @@ export default function PartnershipsPage() {
     <main className="min-h-screen bg-white">
       {/* Hero */}
       <section className="px-6 py-44" style={{ background: "#571377" }}>
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-2 items-center">
           <div>
-            <h1
-              className="font-bold text-white leading-none mb-6"
-              style={{ fontSize: "clamp(40px, 6vw, 72px)" }}
-            >
+          <h1
+            className="text-white leading-[1.05] mb-6 max-w-[700px]"
+            style={{ fontSize: "clamp(48px, 6vw, 90px)" }}
+          >
               The Impact Speaks for Itself.
             </h1>
-            <p className="text-white text-lg leading-relaxed opacity-90">
+            <p className="text-white text-lg leading-relaxed opacity-90"
+               style={{ fontSize: "clamp(18px, 1.6vw, 22px)" }}
+            >
               We offer a full-service mentorship solution for your organization
               designed to be customized, implemented, and managed by Superpower
               Mentors

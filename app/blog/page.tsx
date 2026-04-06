@@ -2,6 +2,15 @@
 
 
 import { useState } from "react";
+import { Space_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 
 const CATEGORIES = ["ADHD", "Autism", "Mentoring", "Students"];
@@ -177,16 +186,16 @@ export default function BlogPage() {
 
 
  return (
-   <main className="min-h-screen pt-24 bg-white">
+  <main className={`${spaceGrotesk.className} min-h-screen pt-24 bg-white`}>
      {/* Hero */}
      <section className="px-6 py-16" style={{ background: "#571377" }}>
        <div className="max-w-7xl mx-auto">
-         <h1
-           className="font-bold text-white leading-none text-center"
-           style={{ fontSize: "clamp(64px, 10vw, 120px)" }}
-         >
-           Insights &amp; Stories
-         </h1>
+       <h1
+        className={`${jakarta.className} text-white leading-none text-center`}
+        style={{ fontSize: "clamp(64px, 10vw, 120px)", fontWeight: 500 }}
+      >
+        Insights & Stories
+      </h1>
        </div>
      </section>
 
