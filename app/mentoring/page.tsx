@@ -405,7 +405,7 @@ export default function MentoringPage() {
           </div>
 
           <div className={styles.programsCta}>
-            <button type="button" className={styles.programButton}>
+            <button type="button" className={`${styles.programButton} glow-btn glow-btn--alt`}>
               Find Your Mentor
             </button>
           </div>
@@ -423,7 +423,7 @@ export default function MentoringPage() {
 
             <div className={styles.ctaContent}>
               <h2 className={styles.ctaTitle}>Get Matched Today</h2>
-              <button className={styles.ctaButton}>Find Your Mentor</button>
+              <button className={`${styles.ctaButton} glow-btn glow-btn--alt`}>Find Your Mentor</button>
             </div>
           </div>
         </div>

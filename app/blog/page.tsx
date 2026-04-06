@@ -212,7 +212,7 @@ export default function BlogPage() {
              {FEATURED.tags.map((t) => (
                <TagPill key={t} label={t} />
              ))}
-             <button className="ml-auto bg-blue-600 text-white text-xs font-bold px-5 py-2 rounded-md hover:bg-blue-700 transition-colors">
+             <button className="glow-btn glow-btn--alt ml-auto bg-blue-600 text-white text-xs font-bold px-5 py-2 rounded-md hover:bg-blue-700 transition-colors">
                Read More
              </button>
            </div>
