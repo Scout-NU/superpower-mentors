@@ -92,18 +92,25 @@ export default function QuizModal() {
     message: string;
     nextQuestionId: number;
   }) => {
+    console.log("answer", answer);
     const newAnswers = [...answers, answer.message];
     setAnswers(newAnswers);
 
     // set next question
-    setCurrentQuestion(QUIZ_QUESTIONS[answer.nextQuestionId]);
+    const nextQuestion = QUIZ_QUESTIONS.find(
+      (q) => q.id === answer.nextQuestionId,
+    ) as QuizEnd | QuizQuestion;
+    if (!nextQuestion) {
+      console.error(`next question with id ${answer.nextQuestionId} not found`);
+    }
+
+    setCurrentQuestion(nextQuestion);
 
     // if quiz end, show results
-    if ('nextQuestionId' !in currentQuestion) {
+    if (!("answers" in nextQuestion)) {
       setShowResult(true);
+      sessionStorage.setItem("quizCompleted", "true");
     }
-    // Mark quiz as completed in session storage
-    sessionStorage.setItem("quizCompleted", "true");
   };
 
   const closeModal = () => {
@@ -149,7 +156,7 @@ export default function QuizModal() {
           </svg>
         </button>
 
-        {!showResult ? (
+        {!showResult && "answers" in currentQuestion ? (
           <div>
             <div className="mb-6">
               <div className="flex justify-between text-sm text-zinc-500 dark:text-zinc-400 mb-2">
@@ -165,22 +172,27 @@ export default function QuizModal() {
             </div>
 
             <h2 className="text-2xl font-semibold text-black dark:text-white mb-6">
-              {currentQuestion.question}
+              {(currentQuestion as QuizQuestion).question}
             </h2>
 
             <div className="space-y-3">
-              {currentQuestion.answers.map((answer, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(answer)}
-                  className="w-full text-left p-4 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all text-zinc-700 dark:text-zinc-300"
-                >
-                  {answer}
-                </button>
-              ))}
+              {(currentQuestion as QuizQuestion).answers.map(
+                (
+                  answer: { message: string; nextQuestionId: number },
+                  index: number,
+                ) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(answer)}
+                    className="w-full text-left p-4 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all text-zinc-700 dark:text-zinc-300"
+                  >
+                    {answer.message}
+                  </button>
+                ),
+              )}
             </div>
           </div>
-        ) : (
+        ) : showResult || !("answers" in currentQuestion) ? (
           <div className="text-center py-8">
             <div className="mx-auto w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
               <svg
@@ -199,20 +211,23 @@ export default function QuizModal() {
             </div>
 
             <h2 className="text-3xl font-bold text-black dark:text-white mb-4">
-              Superpower Mentors Is For You! 🚀
+              {(currentQuestion as QuizEnd).title}
             </h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-              We specialize in supporting youth with ADHD, Dyslexia, Autism, and
+              {/* We specialize in supporting youth with ADHD, Dyslexia, Autism, and
               other learning differences. Our mentors understand your unique
-              strengths and challenges because they've been there too.
+              strengths and challenges because they've been there too. */}
+              {(currentQuestion as QuizEnd).message}
             </p>
 
             <div className="space-y-3">
               <button
-                onClick={closeModal}
+                onClick={() =>
+                  (currentQuestion as QuizEnd).onButtonClick || setIsOpen(false)
+                }
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
               >
-                Connect With a Mentor
+                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
               </button>
               <button
                 onClick={closeModal}
@@ -222,7 +237,7 @@ export default function QuizModal() {
               </button>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
