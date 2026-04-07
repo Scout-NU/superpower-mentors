@@ -1,27 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import styles from "./partnership.module.css";
 
 const TESTIMONIALS = [
   {
     id: 0,
-    logo: "/images/jm-logo.png",
-    tagline: "Empowering Students with Dyslexia",
     image: "partnerships_morelli.jpg",
-    quote:
-      '"We are proud to say that while nationally the college dropout rate between freshman and sophomore years is 30%, the dropout rate is ZERO for students who have had a Morelli Foundation (Superpower) Mentor!"',
+    avatar: "partnerships_barbara.png",
+    quote: "...",
     author: "Barbara Wirostko Morelli",
     authorTitle: "Co-Founder of Joseph James Morelli Foundation",
   },
   {
     id: 1,
-    logo: null,
-    name: "",
-    subtitle: "",
-    tagline: "",
     image: null,
     quote:
-      '"I\'m shouting from the rooftops because what you have created has changed my son\'s life, and I cannot thank you enough."',
+      "\"I'm shouting from the rooftops because what you have created has changed my son's life, and I cannot thank you enough.\"",
     author: "SPM parent",
     authorTitle: "",
   },
@@ -30,55 +25,49 @@ const TESTIMONIALS = [
 const PARTNERS = [
   { name: "Redwood Schools", logo: "partnerships_redwood.png" },
   { name: "ALDS - Association of LD Schools", logo: "partnerships_alds.png" },
-  {
-    name: "Freudigman & Billings LLC",
-    logo: "partnerships_freudigman.png",
-  },
+  { name: "Freudigman & Billings LLC", logo: "partnerships_freudigman.png" },
+  { name: "YMCA", logo: "partnerships_ymca.png" },
+  { name: "Landmark", logo: "partnerships_landmark.jpg" },
+  { name: "Bridge", logo: "partnerships_bridge_logo.png" },
+  { name: "Crimson", logo: "partnerships_crimson.png" },
+  { name: "Aspen", logo: "partnerships_aspen.png" },
+  { name: "Rhone", logo: "partnerships_rhone.png" },
+  { name: "Sasco", logo: "partnerships_sasco.png" },
 ];
 
 const BENEFITS = [
   {
-    icon: "/partnerships_transition.png",
+    id: 1,
     title: "Transition Program",
     description:
-      "Helping to ensure successful transitions at every educational stage, and beyond the walls of the school.",
+      "Placeholder text for the Transition Program. Add the real copy here later.",
   },
   {
-    icon: "/partnerships_intervention.png",
+    id: 2,
     title: "Intervention Program",
     description:
-      "Providing support to students who need it most. Offering a custom-matched mentor for struggling students.",
+      "Placeholder text for the Intervention Program. Add the real copy here later.",
   },
   {
-    icon: "/partnerships_alumni.png",
+    id: 3,
     title: "Alumni Engagement",
     description:
-      "Activate your alumni and community to pay it forward. Guiding and mentoring the next generation.",
+      "Placeholder text for Alumni Engagement. Add the real copy here later.",
   },
   {
-    icon: "/partnerships_workshops.png",
-    title: "Live Workshops",
+    id: 4,
+    title: "Live Workshops/Webinars",
     description:
-      "SPM Provides in-depth customized workshops for parents and teachers to support at-risk students.",
+      "Placeholder text for Live Workshops and Webinars. Add the real copy here later.",
   },
 ];
 
-const PARTNER_QUOTE = {
-  heading: "What partners have to say:",
-  quote:
-    '"I\'ve seen students beaming from the impact of Superpower Mentors gaining confidence in relationships, clarity around careers, and the support they need to navigate the real layers of adulting. This was the missing piece."',
-  author: "APRIL MILLER",
-  authorTitle: "FOUNDER\nLD COLLEGE CONSULTANTS",
-  logo: "LD College Expert, LLC",
-};
-
-function ImgPlaceholder({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <div className={`bg-zinc-200 flex items-center justify-center ${className}`} style={style}>
-      <span className="text-zinc-400 text-xs">IMG</span>
-    </div>
-  );
-}
+const STATS = [
+  { id: 1, value: 93, display: "93%", label: "Improvement in well-being" },
+  { id: 2, value: 100, display: "100%", label: "College Retention" },
+  { id: 3, value: 91, display: "91%", label: "Parent Satisfaction" },
+  { id: 4, value: 100, display: "16k", label: "Sessions Complete" },
+];
 
 function TestimonialCard({
   testimonial,
@@ -86,37 +75,37 @@ function TestimonialCard({
   testimonial: (typeof TESTIMONIALS)[number];
 }) {
   return (
-    <div className="bg-white rounded-lg p-5 flex flex-col gap-3 shadow-sm" style={{ minWidth: "280px", maxWidth: "320px", minHeight: "480px" }}>
+    <div
+      className={`${styles.testimonialCard} bg-white rounded-[28px] p-5 flex flex-col gap-3`}
+      style={{
+        minWidth: "280px",
+        maxWidth: "320px",
+        minHeight: "480px",
+      }}
+    >
       {testimonial.image ? (
         <img
           src={testimonial.image}
-          alt={testimonial.name}
+          alt={testimonial.author}
           className="w-full h-40 object-cover rounded"
         />
-      ) : testimonial.logo ? (
-        <ImgPlaceholder className="w-full h-32 rounded" />
       ) : (
-        <ImgPlaceholder className="w-full h-32 rounded" />
-      )}
-
-      {testimonial.name && (
-        <div className="text-center">
-          <p className="font-extrabold text-sm text-black leading-tight">
-            {testimonial.name}
-          </p>
-          <p className="text-[10px] font-bold text-purple-700 uppercase tracking-wide">
-            {testimonial.subtitle}
-          </p>
-          <p className="text-[9px] text-zinc-500 italic">{testimonial.tagline}</p>
+        <div className="w-full h-32 rounded bg-zinc-200 flex items-center justify-center">
+          <span className="text-zinc-400 text-xs">IMG</span>
         </div>
       )}
 
       <p className="text-lg text-black leading-relaxed">{testimonial.quote}</p>
 
       <div className="mt-auto flex items-center gap-2">
-        {testimonial.authorTitle && (
-          <div className="w-6 h-6 rounded-full bg-zinc-300 flex-shrink-0" />
+        {testimonial.avatar && (
+          <img
+            src={testimonial.avatar}
+            alt={testimonial.author}
+            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+          />
         )}
+
         <div>
           <p className="text-xs font-bold text-black">{testimonial.author}</p>
           {testimonial.authorTitle && (
@@ -128,66 +117,161 @@ function TestimonialCard({
   );
 }
 
-function BenefitCard({ benefit }: { benefit: (typeof BENEFITS)[number] }) {
-  return (
-    <div className="bg-white rounded-2xl p-6 flex flex-col gap-3">
-      <img src={benefit.icon} alt={benefit.title} className="w-16 h-16 object-contain" />
-      <p className="font-extrabold text-lg text-black">{benefit.title}</p>
-      <p className="text-sm text-zinc-600 leading-relaxed">
-        {benefit.description}
-      </p>
-    </div>
-  );
-}
+function StatCircle({
+  value,
+  display,
+  label,
+  animate,
+}: {
+  value: number;
+  display: string;
+  label: string;
+  animate: boolean;
+}) {
+  const radius = 72;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference * (1 - value / 100);
 
-function PartnerQuoteCard() {
   return (
-    <div
-      className="rounded-2xl p-8 flex flex-col gap-4 text-center justify-center"
-      style={{
-        background: "#571377",
-        border: "3px solid rgba(255,255,255,0.4)",
-      }}
-    >
-      <p className="text-white font-bold italic text-lg">{PARTNER_QUOTE.heading}</p>
-      <p className="text-white text-base leading-relaxed">{PARTNER_QUOTE.quote}</p>
-      <div className="flex justify-between items-end mt-2">
-        <img src="partnerships_ld_logo.png" alt="LD College Expert, LLC" className="h-15 object-contain" />
-        <img src="partnerships_april_miller.png" alt="April Miller, Founder, LD College Consultants" className="h-9 object-contain" />
+    <div className={styles.statCard}>
+      <div className={styles.statCircleWrap}>
+        <svg
+          className={styles.statSvg}
+          width="170"
+          height="170"
+          viewBox="0 0 170 170"
+          aria-hidden="true"
+        >
+          <circle
+            className={styles.statTrack}
+            cx="85"
+            cy="85"
+            r={radius}
+          />
+          <circle
+            className={styles.statProgress}
+            cx="85"
+            cy="85"
+            r={radius}
+            style={{
+              strokeDasharray: circumference,
+              strokeDashoffset: animate ? offset : circumference,
+            }}
+          />
+        </svg>
+
+        <div className={styles.statValue}>{display}</div>
       </div>
+
+      <p className={styles.statLabel}>{label}</p>
     </div>
   );
 }
 
 export default function PartnershipsPage() {
+  const [openBenefitIds, setOpenBenefitIds] = useState<number[]>([]);
+  const [visibleSections, setVisibleSections] = useState<string[]>([]);
+  const [statsVisible, setStatsVisible] = useState(false);
+
+  const heroRef = useRef<HTMLElement | null>(null);
+  const gameRef = useRef<HTMLElement | null>(null);
+  const partnersRef = useRef<HTMLElement | null>(null);
+  const benefitsRef = useRef<HTMLElement | null>(null);
+  const statsRef = useRef<HTMLElement | null>(null);
+
+  const toggleBenefit = (id: number) => {
+    setOpenBenefitIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  useEffect(() => {
+    const refs = [
+      { key: "hero", ref: heroRef },
+      { key: "game", ref: gameRef },
+      { key: "partners", ref: partnersRef },
+      { key: "benefits", ref: benefitsRef },
+      { key: "stats", ref: statsRef },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const key = entry.target.getAttribute("data-section");
+          if (entry.isIntersecting && key) {
+            setVisibleSections((prev) =>
+              prev.includes(key) ? prev : [...prev, key]
+            );
+
+            if (key === "stats") {
+              setStatsVisible(true);
+            }
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    refs.forEach(({ key, ref }) => {
+      if (ref.current) {
+        ref.current.setAttribute("data-section", key);
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const isVisible = (key: string) =>
+    `${styles.revealSection} ${
+      visibleSections.includes(key) ? styles.revealSectionVisible : ""
+    }`;
+
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="px-6 py-44" style={{ background: "#571377" }}>
+    <main className="min-h-screen bg-white font-['Plus_Jakarta_Sans']">
+      <section
+        ref={heroRef}
+        className={`${isVisible("hero")} px-6 py-44`}
+        style={{ background: "#571377" }}
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-2 gap-2 items-center">
           <div>
-          <h1
-            className="text-white leading-[1.05] mb-6 max-w-[700px]"
-            style={{ fontSize: "clamp(48px, 6vw, 90px)" }}
-          >
+            <h1
+              className="text-white leading-[1.05] mb-6 max-w-[700px]"
+              style={{ fontSize: "clamp(48px, 6vw, 90px)" }}
+            >
               The Impact Speaks for Itself.
             </h1>
-            <p className="text-white text-lg leading-relaxed opacity-90"
-               style={{ fontSize: "clamp(18px, 1.6vw, 22px)" }}
+
+            <p
+              className="text-white text-lg leading-relaxed opacity-90"
+              style={{ fontSize: "clamp(18px, 1.6vw, 22px)" }}
             >
               We offer a full-service mentorship solution for your organization
               designed to be customized, implemented, and managed by Superpower
               Mentors
             </p>
           </div>
-          <img src="partnerships_impact.jpg" alt="Impact" className="w-3/4 ml-auto rounded-lg object-cover" style={{ aspectRatio: "1 / 1" }} />
+
+          <img
+            src="partnerships_impact.jpg"
+            alt="Impact"
+            className="w-3/4 ml-auto rounded-lg object-cover"
+            style={{ aspectRatio: "1 / 1" }}
+          />
         </div>
       </section>
 
-      {/* How We're Changing the Game */}
-      <section className="px-6 py-20 max-w-7xl mx-auto">
+      <section
+        ref={gameRef}
+        className={`${isVisible("game")} px-6 py-20 max-w-7xl mx-auto`}
+      >
         <div className="grid grid-cols-3 gap-8 items-start">
-          {/* Left: Heading */}
           <div>
             <h2
               className="font-bold text-black leading-tight"
@@ -203,60 +287,157 @@ export default function PartnershipsPage() {
             </h2>
           </div>
 
-          {/* Center & Right: Testimonial Cards */}
-          {TESTIMONIALS.map((t) => (
-            <TestimonialCard key={t.id} testimonial={t} />
+          {TESTIMONIALS.map((testimonial) => (
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
         </div>
 
-        {/* Dot Image Placeholder */}
         <div className="flex justify-center mt-16 mb-2">
-          <img src="partnerships_dots.png" />
+          <div className="flex items-center justify-center gap-8 mt-8">
+            <span className="w-8 h-8 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+            <span className="w-12 h-12 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+            <span className="w-16 h-16 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+            <span className="w-24 h-24 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+            <span className="w-16 h-16 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+            <span className="w-12 h-12 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+            <span className="w-8 h-8 rounded-full bg-[linear-gradient(145deg,#ffe941,#ffc92a)] circle-glow" />
+          </div>
         </div>
       </section>
 
-      {/* Our Partners */}
-      <section className="px-6 pt-4 pb-12 max-w-7xl mx-auto text-center">
+      <section
+        ref={partnersRef}
+        className={`${isVisible("partners")} px-6 pt-4 pb-12 max-w-7xl mx-auto text-center`}
+      >
         <h2
           className="font-bold text-black mb-10"
           style={{ fontSize: "clamp(28px, 4vw, 48px)" }}
         >
           Our Partners
         </h2>
-        <div className="flex justify-center items-center gap-16 flex-wrap">
-          {PARTNERS.map((p) => (
-            <div key={p.name} className="flex flex-col items-center gap-2">
-              <img src={p.logo} alt={p.name} className="w-48 h-16 object-contain" />
-            </div>
-          ))}
+
+        <div className={styles.partnerCarouselRow}>
+          <div className={styles.partnerTrack}>
+            {[...PARTNERS, ...PARTNERS].map((partner, index) => (
+              <div
+                key={`${partner.name}-${index}`}
+                className={styles.partnerItem}
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className={styles.partnerLogo}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* How Our Partners Benefit */}
-      <section className="px-6 py-20 mt-8" style={{ background: "#571377" }}>
-        <div className="max-w-7xl mx-auto">
-          <h2
-            className="font-bold text-white text-center mb-12"
-            style={{ fontSize: "clamp(28px, 4vw, 52px)" }}
-          >
-            How Our Partners Benefit
-          </h2>
-          <div className="grid grid-cols-3 gap-6">
-            {/* Left column */}
-            <div className="flex flex-col gap-6">
-              <BenefitCard benefit={BENEFITS[0]} />
-              <BenefitCard benefit={BENEFITS[2]} />
+      <section
+        ref={benefitsRef}
+        className={`${styles.benefitsSection} ${isVisible("benefits")}`}
+      >
+        <div className={styles.benefitsInner}>
+          <h2 className={styles.benefitsTitle}>How Our Partners Benefit</h2>
+
+          <div className={styles.benefitsLayout}>
+            <div className={styles.benefitsImageWrap}>
+              <img
+                src="/partnerships_symbols.png"
+                alt="Programs and support illustration"
+                className={styles.benefitsImage}
+              />
             </div>
 
-            {/* Center: Partner Quote */}
-            <div className="flex items-center">
-              <PartnerQuoteCard />
-            </div>
+            <div className={styles.benefitsAccordion}>
+              {BENEFITS.map((benefit) => {
+                const isOpen = openBenefitIds.includes(benefit.id);
 
-            {/* Right column */}
-            <div className="flex flex-col gap-6">
-              <BenefitCard benefit={BENEFITS[1]} />
-              <BenefitCard benefit={BENEFITS[3]} />
+                return (
+                  <div key={benefit.id} className={styles.benefitItem}>
+                    <button
+                      type="button"
+                      className={styles.benefitTrigger}
+                      onClick={() => toggleBenefit(benefit.id)}
+                      aria-expanded={isOpen}
+                    >
+                      <span>{benefit.title}</span>
+
+                      <span
+                        className={`${styles.benefitIcon} ${
+                          isOpen ? styles.benefitIconOpen : ""
+                        }`}
+                        aria-hidden="true"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6 9L12 15L18 9"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+
+                    <div
+                      className={`${styles.benefitContent} ${
+                        isOpen ? styles.benefitContentOpen : ""
+                      }`}
+                    >
+                      <p>{benefit.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        ref={statsRef}
+        className={`${styles.partnerStatsSection} ${isVisible("stats")}`}
+      >
+        <div className={styles.partnerStatsInner}>
+          <div className={styles.partnerStatsLeft}>
+            <div className={styles.partnerStatsQuoteMark}>“</div>
+
+            <h2 className={styles.partnerStatsHeading}>
+              What partners have to say:
+            </h2>
+
+            <p className={styles.partnerStatsQuote}>
+              I’ve seen students beaming from the impact of Superpower Mentors
+              gaining confidence in relationships, clarity around careers, and the
+              support they need to navigate the real layers of adulting. This was the
+              missing piece.
+            </p>
+
+            <div className={styles.partnerStatsAuthorBlock}>
+              <p className={styles.partnerStatsAuthor}>April Miller</p>
+              <p className={styles.partnerStatsRole}>Founder</p>
+              <p className={styles.partnerStatsCompany}>LD College Consultants</p>
+            </div>
+          </div>
+
+          <div className={styles.partnerStatsRight}>
+            <div className={styles.statsGrid}>
+              {STATS.map((stat) => (
+                <StatCircle
+                  key={stat.id}
+                  value={stat.value}
+                  display={stat.display}
+                  label={stat.label}
+                  animate={statsVisible}
+                />
+              ))}
             </div>
           </div>
         </div>

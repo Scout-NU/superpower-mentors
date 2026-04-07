@@ -1,6 +1,17 @@
 import styles from "./quality.module.css";
 import { DropdownSection } from "../../frontend/DropdownSection";
 
+import { Space_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
+
+
 export default function QualityPage() {
     return (
       <main>

@@ -517,6 +517,10 @@ hr.rule {
   transform: scale(0.95);
 }
 
+.testimonial-card:hover {
+  box-shadow: 0 20px 40px #e9daaf;
+}
+
 /* different gradient order for blue button */
 .glow-btn--alt {
   --g1: #571377;
