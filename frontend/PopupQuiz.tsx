@@ -35,14 +35,20 @@ export default function QuizModal() {
     setAnswers(newAnswers);
 
     // set next question
-    setCurrentQuestion(QUIZ_QUESTIONS[answer.nextQuestionId]);
-
-    if (!("nextQuestionId" in currentQuestion)) {
-      setShowResult(true);
+    const nextQuestion = QUIZ_QUESTIONS.find(
+      (q) => q.id === answer.nextQuestionId,
+    ) as QuizEnd | QuizQuestion;
+    if (!nextQuestion) {
+      console.error(`next question with id ${answer.nextQuestionId} not found`);
     }
 
-    // Mark quiz as completed in session storage
-    sessionStorage.setItem("quizCompleted", "true");
+    setCurrentQuestion(nextQuestion);
+
+    // if quiz end, show results
+    if (!("answers" in nextQuestion)) {
+      setShowResult(true);
+      sessionStorage.setItem("quizCompleted", "true");
+    }
   };
 
   const closeModal = () => {
@@ -105,7 +111,7 @@ export default function QuizModal() {
           ✕
         </button>
 
-        {!showResult ? (
+        {!showResult && "answers" in currentQuestion ? (
           <div>
             <h1
               style={{
@@ -217,9 +223,9 @@ export default function QuizModal() {
                 marginBottom: "16px",
               }}
             >
-              Superpower Mentors Is For You! 🚀
+              {(currentQuestion as QuizEnd).title}
             </h2>
-            <p
+            {/* <p
               style={{
                 fontFamily: "DM Sans",
                 fontSize: "18px",
@@ -231,7 +237,7 @@ export default function QuizModal() {
               We specialize in supporting youth with ADHD, Dyslexia, Autism, and other learning
               differences. Our mentors understand your unique strengths and challenges because
               they've been there too.
-            </p>
+            </p> */}
 
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <button
@@ -249,7 +255,7 @@ export default function QuizModal() {
                   cursor: "pointer",
                 }}
               >
-                Connect With a Mentor
+                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
               </button>
               <button
                 onClick={closeModal}

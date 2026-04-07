@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export interface QuizQuestion {
   id: number;
   question: string;
@@ -9,8 +11,17 @@ export interface QuizQuestion {
 
 export interface QuizEnd {
   id: number;
+  title: string;
   message: string;
+  buttonMessage?: string,
+  onButtonClick?: () => void;
 };
+
+
+const mentorRedirect = () => {
+    redirect('/mentoring');
+}
+
 
 const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
@@ -23,7 +34,7 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
       },
       {
         message: "I'm just exploring",
-        nextQuestionId: -1,
+        nextQuestionId: -3,
       },
       {
         message: "Support and mentorship",
@@ -107,14 +118,29 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   // Quiz Closing messages
   {
     id: 10,
+    title: "Superpower Mentors is for You! 🚀",
     message:
       "Good news! Based on your answers, we believe you will be a good fit for one of our mentors. Click the buttons below to continue exploring our mentorship options or book a call with us.",
+    buttonMessage: "Connect with a Mentor",
+    onButtonClick: mentorRedirect
+    },
+  {
+    id: -1,
+    title: "Mentorship Application",
+    message:
+    "We're excited for you to join the SPM team!"
   },
   {
     id: -2,
+    title: "We're sorry...",
     message:
       "Unfortunately, we do not have dedicated mentorship programs for the circumstances you've described. Feel free to book a call with us in case there are other ways we can support you.",
   },
+  {
+    id: -3,
+    title: "",
+    message: "Happy searching!",
+  }
 ];
 
 export default QUIZ_QUESTIONS;
