@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { ARTICLES } from "@/data/articles";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -20,102 +21,6 @@ const FEATURED = {
     '"We are proud to say that while nationally the college dropout rate between freshman and sophomore years is 30%, the dropout rate is ZERO for students who have had a Morelli Foundation (Superpower) Mentor!"',
   tags: ["Mentoring", "Students"],
 };
-
-const ARTICLES = [
-  {
-    id: 0,
-    slug: "why-some-people-with-adhd-focus-better-at-night",
-    date: "Date",
-    tags: ["ADHD"],
-    title: "Why Some People with ADHD Focus Better at Night",
-    image: "/images/ADHD1.jpg",
-    excerpt:
-      "If you're someone with ADHD who suddenly comes alive at 10 p.m. — tidying your whole room, starting a creative project, or finally getting through that long list of things you've been meaning to do — you're not alone.",
-  },
-  {
-    id: 1,
-    slug: "how-adhd-is-a-superpower",
-    date: "Date",
-    tags: ["ADHD"],
-    title: "How ADHD is a Superpower",
-    image: "/images/ADHD2.jpg",
-    excerpt:
-      "Let's get something straight from the beginning: ADHD is not a flaw. It's not a lack. The truth is, ADHD isn't about not trying hard enough. It's about having a brain that works differently, and in a lot of ways, that difference is a strength.",
-  },
-  {
-    id: 2,
-    slug: "is-adhd-overdiagnosed",
-    date: "Date",
-    tags: ["ADHD"],
-    title: "Is ADHD Overdiagnosed? Unpacking the Truth with Compassion and Clarity",
-    image: "/images/ADHD3.jpg",
-    excerpt:
-      "Is ADHD over or under-diagnosed? What impact does over or under-diagnosis have on families, communities, and students?",
-  },
-  {
-    id: 3,
-    slug: "adhd-in-adulthood-late-diagnosis",
-    date: "Date",
-    tags: ["ADHD"],
-    title: "ADHD in Adulthood: Thoughts and Strategies on Late Diagnosed ADHD",
-    image: "/images/ADHD4.jpg",
-    excerpt:
-      "Whether you've lived with ADHD your whole life or discovered it recently, you deserve support, tools, and a way forward that honors your brain's unique design.",
-  },
-  {
-    id: 4,
-    slug: "are-adhd-and-autism-linked",
-    date: "Date",
-    tags: ["ADHD", "Autism"],
-    title: "Are ADHD and Autism Linked? Understanding the Overlap",
-    image: "/images/ADHD5.jpg",
-    excerpt:
-      "ADHD and ASD have links and overlaps. The more we learn, the more we realize just how complex, nuanced, and intertwined these conditions can be.",
-  },
-  {
-    id: 5,
-    slug: "top-summer-recommendations-for-mentees",
-    date: "Date",
-    tags: ["Mentoring"],
-    title: "Top Summer Recommendations for Superpower Mentor Mentees",
-    image: "/images/Mentor1.jpg",
-    excerpt:
-      "Superpower Mentors tips and tricks for a successful summer for the whole family!",
-  },
-  {
-    id: 6,
-    slug: "new-school-transitions-for-learning-diverse-students",
-    date: "Date",
-    tags: ["Students"],
-    title: "New School Transitions for Learning Diverse Students",
-    image: "/images/Students1.jpg",
-    excerpt:
-      "For some, the end of another school year and especially a graduation brings not just excitement for what's to come but also fear of what's to come...",
-  },
-  {
-    id: 7,
-    slug: "autism-spectrum-disorder-superpower-mentors-stories",
-    date: "Date",
-    tags: ["Autism"],
-    title: "Autism Spectrum Disorder Superpower Mentors Stories",
-    image: "/images/Autism1.jpg",
-    excerpt:
-      "In honor of Autism Acceptance Month and celebrating and acknowledging those in our lives who have Autism Spectrum Disorder (ASD), some of our wonderful ASD Superpower Mentors have shared something about themselves with you.",
-  },
-  {
-    id: 8,
-    slug: "unlock-the-power-of-mentorship",
-    date: "Date",
-    tags: ["Mentoring"],
-    title: "Unlock the Power of Mentorship",
-    image: "/images/Mentor2.jpg",
-    excerpt:
-      "The constant negative reinforcement felt by those with ADHD, Dyslexia, and other learning challenges...",
-  },
-];
-
-
-export { ARTICLES };
 
 function TagPill({
   label,
@@ -151,7 +56,11 @@ function ImgPlaceholder({ className = "" }: { className?: string }) {
   );
 }
 
-function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
+function ArticleCard({
+  article,
+}: {
+  article: (typeof ARTICLES)[number];
+}) {
   return (
     <Link
       href={`/blog/${article.slug}`}
@@ -189,20 +98,27 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
 }
 
 export default function BlogPage() {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(
+    null
+  );
 
   const filtered = activeCategory
     ? ARTICLES.filter((a) => a.tags.includes(activeCategory))
     : ARTICLES;
 
   return (
-    <main className={`${spaceGrotesk.className} min-h-screen pt-24 bg-white`}>
+    <main
+      className={`${spaceGrotesk.className} min-h-screen pt-24 bg-white`}
+    >
       {/* Hero */}
       <section className="px-6 py-16" style={{ background: "#571377" }}>
         <div className="max-w-7xl mx-auto">
           <h1
             className={`${jakarta.className} text-white leading-none text-center`}
-            style={{ fontSize: "clamp(64px, 10vw, 120px)", fontWeight: 500 }}
+            style={{
+              fontSize: "clamp(64px, 10vw, 120px)",
+              fontWeight: 500,
+            }}
           >
             Insights & Stories
           </h1>

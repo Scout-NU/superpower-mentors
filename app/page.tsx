@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import React from 'react';
 import AnimatedSection from "@/frontend/AnimatedSection";
-import "./page.css";
 import { motion } from "framer-motion";
 
 // Color constants
@@ -40,7 +39,7 @@ function HeroSection() {
             <div className="flex gap-4 flex-shrink-0">
               <button 
                 style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }} 
-                className="glow-btn text-white font-semibold rounded-full"
+                className="glow-btn glow-btn--alt text-white font-semibold rounded-full"
               >
                 Start Your Journey
               </button>
@@ -248,6 +247,16 @@ function RealImpactSection() {
               </h3>
             </div>
           </div>
+        {/* Find Your Mentor CTA */}
+        <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '48px' }}>
+          <Link href="/mentoring">
+            <button 
+              type="button" 
+              style={{ border: 0, borderRadius: '20px', background: BLUE, color: '#fff', fontFamily: 'DM Sans', fontSize: '1rem', fontWeight: 700, padding: '18px 34px', cursor: 'pointer' }}
+              className="glow-btn glow-btn--alt">
+              Find Your Mentor
+            </button>
+          </Link>
         </div>
 
         {/* Our Programs Button */}
@@ -456,7 +465,7 @@ function FAQSection() {
               <h2 className="text-black mb-8" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '48px', fontWeight: 700 }}>
                 Frequently Asked Questions
               </h2>
-              <button className="bg-black text-white px-8 py-3 rounded-full cursor-pointer" style={{ fontFamily: 'DM Sans', fontWeight: 600 }}>
+              <button className="glow-btn bg-black text-white px-8 py-3 rounded-full cursor-pointer" style={{ fontFamily: 'DM Sans', fontWeight: 600 }}>
                 Read Full FAQs
               </button>
             </div>

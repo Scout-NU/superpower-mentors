@@ -48,7 +48,7 @@ export default function Navbar() {
 
         <Link 
           href="/get-started"
-          className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 !text-white font-medium rounded-lg transition-colors"
+          className="glow-btn glow-btn--alt px-6 py-2.5 bg-blue-600 hover:bg-blue-700 !text-white font-medium rounded-lg transition-colors"
         >
           Get Started
         </Link>
