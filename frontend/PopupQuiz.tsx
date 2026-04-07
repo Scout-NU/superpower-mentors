@@ -62,8 +62,6 @@ export default function QuizModal() {
       setShowResult(true);
       sessionStorage.setItem("quizCompleted", "true");
     }
-    // Mark quiz as completed in session storage
-    sessionStorage.setItem("quizCompleted", "true");
   };
 
   const onSubmitAnswers = async (

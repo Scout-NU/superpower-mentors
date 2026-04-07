@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export interface QuizQuestion {
   id: number;
   question: string;
@@ -14,6 +16,12 @@ export interface QuizEnd {
   buttonMessage?: string;
   href?: string; // for end-of-quiz flows that require external link access (for example, mentorship applications)
 }
+
+
+const mentorRedirect = () => {
+    redirect('/mentoring');
+}
+
 
 const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
