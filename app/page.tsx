@@ -120,7 +120,7 @@ function MeetMentorsSection() {
           {mentors.map((m, i) => (
             <div
               key={i}
-              className="border-2 border-black bg-white rounded-3xl overflow-hidden flex flex-col"
+              className="border-0 border-black bg-white rounded-3xl overflow-hidden flex flex-col"
               style={{ width: "380px", height: "417px" }}
             >
               <div style={{ width: "380px", height: "206px" }}>
@@ -156,26 +156,6 @@ function MeetMentorsSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-20 text-center">
-          <p
-            className="text-xs text-white opacity-60 uppercase tracking-widest mb-6"
-            style={{ fontFamily: "DM Sans", letterSpacing: "0.15em" }}
-          >
-            DISCOVER OUR PARTNERS
-          </p>
-
-          <div className="flex flex-wrap gap-8 items-center justify-center">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-20 h-12 bg-white bg-opacity-20 rounded flex items-center justify-center"
-              >
-                <span className="text-white text-xs opacity-50">Logo</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -683,13 +663,6 @@ function FAQSection() {
               >
                 Frequently Asked Questions
               </h2>
-
-              <button
-                className="glow-btn bg-black text-white px-8 py-3 rounded-full cursor-pointer"
-                style={{ fontFamily: "DM Sans", fontWeight: 600 }}
-              >
-                Read Full FAQs
-              </button>
             </div>
 
             <div
