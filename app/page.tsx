@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import AnimatedSection from "@/frontend/AnimatedSection";
+import Image from "next/image";
 
 // Color constants
 const BLACK = "#000000";
@@ -21,7 +22,7 @@ function ImgPlaceholder({ className = "" }: { className?: string }) {
 
 function HeroSection() {
   return (
-    <section className="bg-white pt-32 pb-16 px-8">
+    <section className="bg-white pt-32 pb-0 px-8">
       <div className="max-w-7xl mx-auto relative">
         <div className="max-w-full">
           <h1
@@ -77,7 +78,7 @@ function HeroSection() {
         </div>
 
         <div
-          className="mt-16 rounded-3xl overflow-hidden relative z-20 mx-auto mb-[-400px]"
+          className="mt-16 rounded-3xl overflow-hidden relative z-20 mx-auto mb-[0]"
           style={{ width: "1373px", height: "771px", maxWidth: "100%" }}
         >
           <ImgPlaceholder className="w-full h-full" />
@@ -91,18 +92,21 @@ function MeetMentorsSection() {
   const mentors = [
     {
       name: "Christiana W.",
-      bio: "Los Angeles, USA. ADHD. Creative Art Director, Advertising, Social Media & Semi-Professional Athlete.",
+      bio: "Los Angeles, USA. Dyslexic. Art Director, Advertising, Social Media Influencer, Semi-Professional Athlete",
       tags: ["Los Angeles, USA", "Dyslexia"],
+      image: "/home_christiana.png",
     },
     {
       name: "Jeff S.",
       bio: "Bronx, NY. ADHD, Aerospace Research Engineer @ NASA, Blockchain Affiliate Marketer.",
       tags: ["Bronx, NY", "Dyslexia"],
+      image: "/home_jeff.png",
     },
     {
       name: "Dylann C.",
       bio: "Philadelphia, USA. WS, ADHD, Educator, Writer, Artist, Blogger, Neurodivergent, Entrepreneur.",
       tags: ["Los Angeles, USA", "Dyslexia"],
+      image: "/home_dylann.png",
     },
   ];
 
@@ -116,16 +120,24 @@ function MeetMentorsSection() {
           MEET OUR MENTORS
         </h2>
 
-        <div className="flex gap-6 justify-center">
+        <div className="flex gap-6 justify-center pt-4">
           {mentors.map((m, i) => (
             <div
               key={i}
-              className="border-0 border-black bg-white rounded-3xl overflow-hidden flex flex-col"
-              style={{ width: "380px", height: "417px" }}
+              className="border-0 border-black bg-white rounded-3xl flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(255,201,42,0.6)]"
+              style={{
+                width: "380px",
+                height: "417px",
+              }}
             >
-              <div style={{ width: "380px", height: "206px" }}>
-                <ImgPlaceholder className="w-full h-full" />
-              </div>
+              <div style={{ width: "380px", height: "206px" }} className="rounded-t-3xl overflow-hidden relative">
+              <Image
+                src={m.image || "/placeholder.jpg"}
+                alt={m.name}
+                fill
+                className="object-cover"
+              />
+            </div>
 
               <div className="p-6 flex flex-col flex-1">
                 <p
