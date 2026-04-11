@@ -569,7 +569,7 @@
     font-size: 1.15rem;
     font-weight: 500;
     line-height: 1.35;
-    color: #111111;
+    color: #ffffff;
     max-width: 980px;
   }
   
@@ -630,9 +630,9 @@
   }
   
   .videoCtaText {
-    margin: 0 0 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1.25rem, 2vw, 1.9rem);
+    margin: 0 0 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.25rem, 1.8vw, 1.9rem);
     font-weight: 500;
     line-height: 1.35;
     color: var(--color-white);
@@ -734,7 +734,7 @@
   .formInput,
   .formSelect {
     width: 100%;
-    height: 90px;
+    height: 70px;
     border: 3px solid #6a1b9a;
     border-radius: 26px;
     background: transparent;
@@ -875,6 +875,171 @@
   .formCornerRight .formCircleSmallBottom {
     right: 94px;
     bottom: 6px;
+  }
+
+  .purpleTimeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    margin-top: 4rem;
+    padding: 2rem 0;
+  }
+  
+  .purpleTimelineRail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      180deg,
+      rgba(128, 90, 213, 0.25) 0%,
+      rgba(128, 90, 213, 0.7) 20%,
+      rgba(128, 90, 213, 0.7) 80%,
+      rgba(128, 90, 213, 0.25) 100%
+    );
+    border-radius: 999px;
+  }
+  
+  .purpleTimelineRow {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 90px minmax(0, 1fr);
+    align-items: center;
+    min-height: 170px;
+  }
+  
+  .purpleTimelineTitleWrap {
+    justify-self: end;
+    max-width: 420px;
+    padding-right: 2rem;
+    opacity: 0.32;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  
+  .purpleTimelineTitleWrapActive {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  
+  .purpleTimelineTitleWrapPast {
+    opacity: 0.5;
+  }
+  
+  .purpleTimelineTitle {
+    margin: 0;
+    font: inherit;
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-align: right;
+  }
+  
+  .purpleTimelineCenter {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .purpleTimelineDot {
+    position: relative;
+    z-index: 2;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 6px solid rgba(128, 90, 213, 0.7);
+    box-shadow: 0 0 0 10px rgba(128, 90, 213, 0.08);
+    opacity: 0.38;
+    transform: scale(0.92);
+    transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+  
+  .purpleTimelineDotActive {
+    opacity: 1;
+    transform: scale(1.12);
+    border-color: #805ad5;
+    box-shadow: 0 0 0 14px rgba(128, 90, 213, 0.18);
+  }
+  
+  .purpleTimelineDotPast {
+    opacity: 0.52;
+    transform: scale(0.98);
+    box-shadow: 0 0 0 8px rgba(128, 90, 213, 0.1);
+  }
+  
+  .purpleTimelineDescriptionWrap {
+    max-width: 430px;
+    padding-left: 2rem;
+    opacity: 0.32;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  
+  .purpleTimelineDescriptionWrapActive {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  
+  .purpleTimelineDescriptionWrapPast {
+    opacity: 0.5;
+  }
+  
+  .purpleTimelineDescription {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: #ffffff;
+  }
+
+  @media (max-width: 900px) {
+    .purpleTimeline {
+      gap: 2.5rem;
+    }
+  
+    .purpleTimelineRail {
+      left: 24px;
+      transform: none;
+    }
+  
+    .purpleTimelineRow {
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 0 1.25rem;
+      align-items: start;
+      min-height: auto;
+    }
+  
+    .purpleTimelineCenter {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 0.5rem;
+    }
+  
+    .purpleTimelineTitleWrap {
+      grid-column: 2;
+      justify-self: start;
+      max-width: 100%;
+      padding-right: 0;
+      margin-bottom: 0.75rem;
+    }
+  
+    .purpleTimelineDescriptionWrap {
+      grid-column: 2;
+      padding-left: 0;
+      max-width: 100%;
+    }
+  
+    .purpleTimelineTitle {
+      text-align: left;
+      font-size: clamp(1.7rem, 7vw, 2.75rem);
+    }
   }
   
   @media (max-width: 1100px) {
