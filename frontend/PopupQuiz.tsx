@@ -2,6 +2,7 @@
 import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
 import * as emailService from "../backend/utils/emailService";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 export default function QuizModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -176,24 +177,26 @@ export default function QuizModal() {
               {(currentQuestion as QuizEnd).title}
             </h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-              {/* We specialize in supporting youth with ADHD, Dyslexia, Autism, and
-              other learning differences. Our mentors understand your unique
-              strengths and challenges because they've been there too. */}
               {(currentQuestion as QuizEnd).message}
             </p>
 
             <div className="space-y-3">
-              <button
-                onClick={() => {
-                  if ((currentQuestion as QuizEnd).onButtonClick) {
-                    (currentQuestion as QuizEnd).onButtonClick!();
+              <Link
+                passHref={(currentQuestion as QuizEnd).href !== undefined}
+                href={(currentQuestion as QuizEnd).href ?? ""}
+                onClick={(e) => {
+                  // if no href, simply close modal, else redirect to provided link
+                  if (!(currentQuestion as QuizEnd).href) {
+                    e.preventDefault();
                   }
                   closeModal();
                 }}
-                className="w-fit bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
               >
-                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
-              </button>
+                <button className="w-fit bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                  {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
+                </button>
+              </Link>
+              <br />
               <button
                 onClick={closeModal}
                 hidden={
@@ -204,25 +207,6 @@ export default function QuizModal() {
                 Back to Page
               </button>
             </div>
-            {/*<hr className="text-purple-600 my-3" />
-            <div className="p-2 mt-3 flex gap-5 mb-0">
-              <span className="float-start text-left text-zinc-600 dark:text-zinc-400">
-                {" "}
-                Add your email here to send us your answers!{" "}
-              </span>
-              <input
-                type="text"
-                className="border-2 p-2 rounded-xl float-end border-blue-400 focus:border-blue-600 size-fit"
-                placeholder={"superpower@gmail..."}
-                onChange={(e) => setEmail(e.target.value)}
-              ></input>
-            </div>
-            <button
-              className="w-fit float-end p-2 me-5 rounded-2 glow-btn rounded-2xl"
-              onClick={() => onSubmitAnswers(email, answers)}
-            >
-              Send
-            </button>*/}
           </div>
         )}
       </div>

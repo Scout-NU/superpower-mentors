@@ -11,9 +11,10 @@ export const sendQuizAnswers = async (email: string, quizAnswers: object[]) => {
     await axios
       .post("/api/send-email", {
         email: email,
-        quizAnswers: quizAnswers
+        quizAnswers: quizAnswers,
+        requestType: "send-email"
       });
   } catch (e) {
-    console.log("Error sending request:", e);
+    console.log("Error sending request to internal API:", e);
   }
 };

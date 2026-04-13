@@ -7,24 +7,15 @@ export interface QuizQuestion {
     message: string;
     nextQuestionId: number; // -1 for direct close
   }[];
-};
+}
 
 export interface QuizEnd {
   id: number;
   title: string;
   message: string;
-  buttonMessage?: string,
-  onButtonClick?: () => void;
-};
-
-const bookACallRedirect = () => {
-    redirect('/mentoring'); // replace with book a call flow, when done
+  buttonMessage?: string;
+  href?: string; // for end-of-quiz flows that require external link access (for example, mentorship applications)
 }
-
-const mentorAppRedirect = () => {
-    redirect(process.env.TYPEFORM_APPLICATION_URL as string) // replace with typeform application when provided.
-}
-
 
 const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
@@ -91,7 +82,7 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
     id: 5,
     question: "Which of our services are you interested in?",
-    answers: [{ message: "insert services here", nextQuestionId: 10 }],
+    answers: [],
   },
   {
     id: 6,
@@ -106,17 +97,30 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
     id: 7,
     question: "How old is your child/student?",
-    answers: [{ message: "insert age ranges here", nextQuestionId: 11 }],
+    answers: [
+      { message: "12 and under", nextQuestionId: 11 },
+      { message: "13 to 18", nextQuestionId: 11 },
+      { message: "Older than 18", nextQuestionId: 11 }
+    ],
   },
   {
     id: 8,
-    question: "What type of mentor support would be most helpful?",
-    answers: [{ message: "insert mentorship types here", nextQuestionId: 10 }],
+    question: "What type of mentor support do you think would be most helpful? ",
+    answers: [
+      { message: "Neurodiversity Mentorship", nextQuestionId: 10 },
+      { message: "Confidence Mentorship", nextQuestionId: 10 },
+      { message: "Transition Mentorship", nextQuestionId: 10 },
+      { message: "Direction Mentorship", nextQuestionId: 10 },
+    ],
   },
   {
     id: 11,
     question: "Is your child/student neurodiverse?",
-    answers: [{message: "Yes", nextQuestionId: 3}, {message: "No", nextQuestionId: 3}, {message: "Not sure", nextQuestionId: 3}]
+    answers: [
+      { message: "Yes", nextQuestionId: 3 },
+      { message: "No", nextQuestionId: 3 },
+      { message: "Not sure", nextQuestionId: 3 },
+    ],
   },
   // Quiz Closing messages
   {
@@ -125,15 +129,14 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
     message:
       "Good news! Based on your answers, we believe our services can be a good fit for you. Feel free to continue exploring our mentorship options or book a call with us.",
     buttonMessage: "Book a Call",
-    onButtonClick: bookACallRedirect
-    },
+    href: "/mentoring/#strategy-call-form",
+  },
   {
     id: -1,
     title: "Mentorship Application",
-    message:
-    "We're excited for you to join the SPM team!",
+    message: "We're excited for you to join the SPM team!",
     buttonMessage: "Continue to Application",
-    onButtonClick: mentorAppRedirect
+    href: "/mentor-app",
   },
   {
     id: -2,
@@ -145,7 +148,7 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
     id: -3,
     title: "",
     message: "Happy searching!",
-  }
+  },
 ];
 
 export default QUIZ_QUESTIONS;

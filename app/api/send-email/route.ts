@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Sends a POST request to the Zapier Webhook
- * @param request the request to send: must contain an 'email' and 'quizAnswers' key in the request's body.
+ * @param request the request to send
  * @returns a NextResponse object containing the webhook's response, or an error if it fails.
  */
 export async function POST(request: NextRequest) {
@@ -10,6 +10,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const email = body.email;
     const quizAnswers = body.quizAnswers;
+    const type = body.requestType;
 
     // validation
     if (!email) {
@@ -25,10 +26,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({error: "'Answers' field not found."}, {status: 400});
     }
 
+    if (!type || !(type in ["send-email", "strategy-call"])) {
+      return NextResponse.json({error: "Request type not identified"}, {status: 400});
+    }
+
     // send req
     const response = await fetch(process.env.ZAPIER_WEBHOOK_URL as string, {
       method: "POST",      
-      body: JSON.stringify({ email, answers: quizAnswers }),
+      body: JSON.stringify({ email, answers: quizAnswers, requestType: type }),
     });
 
     if (!response.ok) {
