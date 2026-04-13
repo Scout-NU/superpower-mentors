@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import AnimatedSection from "@/frontend/AnimatedSection";
 import Image from "next/image";
+import styles from "./homepage.module.css";
 
 // Color constants
 const BLACK = "#000000";
@@ -117,7 +118,7 @@ function MeetMentorsSection() {
           className="text-5xl font-bold text-white uppercase mb-12"
           style={{ fontFamily: "Plus Jakarta Sans" }}
         >
-          MEET OUR MENTORS
+          Meet our mentors
         </h2>
 
         <div className="flex gap-6 justify-center pt-4">
@@ -225,7 +226,7 @@ function RealImpactSection() {
     <section className="bg-white py-20 px-8">
       <div className="max-w-7xl mx-auto">
         <h2
-          className="text-5xl font-bold text-black uppercase mb-16"
+          className="text-5xl font-bold text-black mb-16"
           style={{ fontFamily: "Plus Jakarta Sans" }}
         >
           HOW WE CAN HELP
@@ -282,25 +283,6 @@ function RealImpactSection() {
             marginBottom: "48px",
           }}
         >
-          <Link href="/mentoring">
-            <button
-              type="button"
-              style={{
-                border: 0,
-                borderRadius: "20px",
-                background: BLUE,
-                color: "#fff",
-                fontFamily: "DM Sans",
-                fontSize: "1rem",
-                fontWeight: 700,
-                padding: "18px 34px",
-                cursor: "pointer",
-              }}
-              className="glow-btn glow-btn--alt"
-            >
-              Our Programs
-            </button>
-          </Link>
         </div>
 
         <p
@@ -389,82 +371,133 @@ function RealImpactSection() {
 }
 
 function HowItWorksSection() {
-  const steps = [
+  const [activeStep, setActiveStep] = useState(1)
+  const timelineItemRefs = React.useRef<(HTMLDivElement | null)[]>([])
+
+  const timelineSteps = [
     {
-      n: 1,
+      id: 1,
       title: "Get Matched",
-      body: "During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them.",
+      description:
+        "During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them.",
     },
     {
-      n: 2,
+      id: 2,
       title: "Meet Your Mentor",
-      body: "Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if the match is the right fit.",
+      description:
+        "Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if this match is the right fit.",
     },
     {
-      n: 3,
+      id: 3,
       title: "In the Session",
-      body: "We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee's specific interests and age.",
+      description:
+        "We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee's specific interests and age.",
     },
     {
-      n: 4,
+      id: 4,
       title: "Family Matters",
-      body: "Each month you and your child's mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!",
+      description:
+        "Each month you and your child's mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!",
     },
     {
-      n: 5,
+      id: 5,
       title: "For the Parents",
-      body: "The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!",
+      description:
+        "The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!",
     },
-  ];
+  ]
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    timelineItemRefs.current.forEach((item, index) => {
+      if (!item) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveStep(index + 1)
+          }
+        },
+        {
+          threshold: 0.55,
+          rootMargin: "-10% 0px -35% 0px",
+        }
+      )
+
+      observer.observe(item)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [])
 
   return (
-    <section style={{ backgroundColor: PURPLE }} className="py-20 px-8">
-      <div className="max-w-5xl mx-auto">
-        <h2
-          className="text-5xl font-bold text-white uppercase mb-16"
-          style={{ fontFamily: "Plus Jakarta Sans" }}
-        >
-          HOW IT WORKS
-        </h2>
+    <section className={styles.howItWorksSection}>
+      <div className={styles.howItWorksInner}>
+        <h2 className={styles.howItWorksTitle}>How It Works</h2>
 
-        <div className="relative">
-          <div
-            className="absolute left-7 top-0 w-px bg-white opacity-40"
-            style={{ height: "calc(100% - 80px)" }}
-          ></div>
+        <div className={styles.purpleTimeline}>
+          <div className={styles.purpleTimelineRail} aria-hidden="true" />
 
-          <div className="space-y-6">
-            {steps.map((s) => (
-              <div key={s.n} className="relative flex gap-6 items-start">
+          {timelineSteps.map((step, index) => {
+            const isActive = activeStep === step.id
+            const isPast = activeStep > step.id
+
+            return (
+              <div
+                key={step.id}
+                ref={(el) => {
+                  timelineItemRefs.current[index] = el
+                }}
+                className={styles.purpleTimelineRow}
+              >
                 <div
-                  className="w-14 h-14 rounded-full bg-white border-2 border-black flex items-center justify-center flex-shrink-0 relative z-10 font-bold text-2xl"
-                  style={{ fontFamily: "Plus Jakarta Sans" }}
+                  className={`${styles.purpleTimelineTitleWrap} ${
+                    isActive
+                      ? styles.purpleTimelineTitleWrapActive
+                      : isPast
+                      ? styles.purpleTimelineTitleWrapPast
+                      : ""
+                  }`}
                 >
-                  {s.n}
+                  <h3 className={styles.purpleTimelineTitle}>{step.title}</h3>
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 flex-1">
-                  <p
-                    className="font-bold text-black text-lg mb-2"
-                    style={{ fontFamily: "Plus Jakarta Sans" }}
-                  >
-                    {s.title}
-                  </p>
+                <div className={styles.purpleTimelineCenter}>
+                  <span
+                    className={`${styles.purpleTimelineDot} ${
+                      isActive
+                        ? styles.purpleTimelineDotActive
+                        : isPast
+                        ? styles.purpleTimelineDotPast
+                        : ""
+                    }`}
+                  />
+                </div>
 
-                  <p
-                    className="text-zinc-700 text-sm leading-relaxed"
-                    style={{ fontFamily: "DM Sans" }}
-                  >
-                    {s.body}
+                <div
+                  className={`${styles.purpleTimelineDescriptionWrap} ${
+                    isActive
+                      ? styles.purpleTimelineDescriptionWrapActive
+                      : isPast
+                      ? styles.purpleTimelineDescriptionWrapPast
+                      : ""
+                  }`}
+                >
+                  <p className={styles.purpleTimelineDescription}>
+                    {step.description}
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
+            )
+          })}
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 function TestimonialsSection() {

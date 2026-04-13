@@ -18,7 +18,7 @@
   font-size: clamp(4rem, 8vw, 8.5rem);
   font-weight: 600;
   line-height: 0.95;
-  letter-spacing: -0.06em;
+  letter-spacing: 0em;
   color: var(--color-white);
 }
 
@@ -261,7 +261,7 @@
 }
 
 .letterButton:hover {
-  transform: translateY(-6px);
+  transform: translateY(-10px);
 }
 
 .letterButton:hover .letterImage {

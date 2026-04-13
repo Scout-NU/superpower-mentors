@@ -171,16 +171,15 @@ function ValuesSection() {
         <h2
           style={{
             fontFamily: 'Plus Jakarta Sans',
-            fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            color: vars('--purple-dark'),
-            marginBottom: '4rem',
-            marginTop: '4rem',
-            justifyContent: 'center',
+            fontSize: 'clamp(2.5rem, 5vw, 7rem)',
+            fontWeight: 600,
+            color: '#000000',
+            margin: '4rem 0',
+            textAlign: 'center',
+            width: '100%',
           }}
         >
-          Our Value Programs
+          How We Can Help
         </h2>
 
         <div
@@ -311,28 +310,10 @@ function ValuesSection() {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
+            marginTop: '2rem',
           }}
         >
-          <Link href="/mentoring">
-            <button
-              type="button"
-              className="glow-btn glow-btn--alt"
-              style={{
-                border: 0,
-                borderRadius: '20px',
-                background: BLUE,
-                color: '#ffffff',
-                fontFamily: 'DM Sans',
-                fontSize: '1rem',
-                fontWeight: 700,
-                padding: '18px 34px',
-                cursor: 'pointer',
-              }}
-            >
-              Our Programs
-            </button>
-          </Link>
         </div>
       </div>
     </section>
@@ -400,46 +381,6 @@ export default function MentoringPage() {
                 </div>
               </article>
             ))}
-          </div>
-
-          <div className={styles.rootsSectionWhite}>
-            <p className={styles.rootsLabelWhite}>OUR MENTOR’S ROOTS</p>
-
-            <div className={styles.logoCarouselStack}>
-              <div className={styles.logoCarouselRow}>
-                <div className={styles.logoTrackLeft}>
-                  {[...topRowRoots, ...topRowRoots].map((logo, index) => (
-                    <div
-                      key={`top-${logo.id}-${index}`}
-                      className={styles.logoItemWhite}
-                    >
-                      <img
-                        src={logo.image}
-                        alt={logo.name}
-                        className={styles.logoImageWhite}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className={styles.logoCarouselRow}>
-                <div className={styles.logoTrackRight}>
-                  {[...bottomRowRoots, ...bottomRowRoots].map((logo, index) => (
-                    <div
-                      key={`bottom-${logo.id}-${index}`}
-                      className={styles.logoItemWhite}
-                    >
-                      <img
-                        src={logo.image}
-                        alt={logo.name}
-                        className={styles.logoImageWhite}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
