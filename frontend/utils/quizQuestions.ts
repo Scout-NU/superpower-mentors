@@ -17,16 +17,19 @@ export interface QuizEnd {
   onButtonClick?: () => void;
 };
 
+const bookACallRedirect = () => {
+    redirect('/mentoring'); // replace with book a call flow, when done
+}
 
-const mentorRedirect = () => {
-    redirect('/mentoring');
+const mentorAppRedirect = () => {
+    redirect(process.env.TYPEFORM_APPLICATION_URL as string) // replace with typeform application when provided.
 }
 
 
 const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
     id: 0,
-    question: "Welcome to Superpower Mentors! How can we help?",
+    question: "Welcome to Superpower Mentors! 🚀 How can we help?",
     answers: [
       {
         message: "I'm a mentee/want to apply",
@@ -68,7 +71,7 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
     question: "What's your biggest challenge right now?",
     answers: [
       { message: "Building confidence", nextQuestionId: 6 },
-      { message: "Academic organizationand study skills", nextQuestionId: 6 },
+      { message: "Academic organization and study skills", nextQuestionId: 6 },
       { message: "Social connections and communication", nextQuestionId: 6 },
       { message: "Planning for college and/or my career", nextQuestionId: 6 },
     ],
@@ -118,17 +121,19 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   // Quiz Closing messages
   {
     id: 10,
-    title: "Superpower Mentors is for You! 🚀",
+    title: "SPM is for You! 🚀",
     message:
-      "Good news! Based on your answers, we believe you will be a good fit for one of our mentors. Click the buttons below to continue exploring our mentorship options or book a call with us.",
-    buttonMessage: "Connect with a Mentor",
-    onButtonClick: mentorRedirect
+      "Good news! Based on your answers, we believe our services can be a good fit for you. Feel free to continue exploring our mentorship options or book a call with us.",
+    buttonMessage: "Book a Call",
+    onButtonClick: bookACallRedirect
     },
   {
     id: -1,
     title: "Mentorship Application",
     message:
-    "We're excited for you to join the SPM team!"
+    "We're excited for you to join the SPM team!",
+    buttonMessage: "Continue to Application",
+    onButtonClick: mentorAppRedirect
   },
   {
     id: -2,
