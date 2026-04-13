@@ -1,72 +1,16 @@
 "use client";
 import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
-
+import * as emailService from "../backend/utils/emailService";
 import { useState, useEffect, useRef } from "react";
-
-// interface Question {
-//   id: number;
-//   question: string;
-//   options: string[];
-// }
-
-// const questions: Question[] = [
-//   {
-//     id: 1,
-//     question: "Who are you looking for support for?",
-//     options: [
-//       "My child/teen",
-//       "Myself",
-//       "A student I work with",
-//       "Just exploring options"
-//     ]
-//   },
-//   {
-//     id: 2,
-//     question: "What learning difference best describes your situation?",
-//     options: [
-//       "ADHD",
-//       "Dyslexia",
-//       "Autism/ASD",
-//       "Multiple or other learning differences"
-//     ]
-//   },
-//   {
-//     id: 3,
-//     question: "What's your biggest challenge right now?",
-//     options: [
-//       "Building confidence and self-advocacy",
-//       "Academic organization and study skills",
-//       "Social connections and communication",
-//       "Planning for college or career"
-//     ]
-//   },
-//   {
-//     id: 4,
-//     question: "What type of mentor support would be most helpful?",
-//     options: [
-//       "Someone who understands neurodivergence firsthand",
-//       "Help with executive function and time management",
-//       "Guidance on navigating school systems",
-//       "Career and future planning advice"
-//     ]
-//   },
-//   {
-//     id: 5,
-//     question: "What would success look like for you?",
-//     options: [
-//       "Increased independence and confidence",
-//       "Better grades and academic performance",
-//       "Stronger self-understanding and acceptance",
-//       "Clear goals and a path forward"
-//     ]
-//   }
-// ];
 
 export default function QuizModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(QUIZ_QUESTIONS[0]);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<
+    { question: string; answer: string }[]
+  >([]);
   const [showResult, setShowResult] = useState(false);
+  const [email, setEmail] = useState<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -92,8 +36,13 @@ export default function QuizModal() {
     message: string;
     nextQuestionId: number;
   }) => {
-    console.log("answer", answer);
-    const newAnswers = [...answers, answer.message];
+    const newAnswers = [
+      ...answers,
+      {
+        question: (currentQuestion as QuizQuestion).question,
+        answer: answer.message,
+      },
+    ];
     setAnswers(newAnswers);
 
     // set next question
@@ -110,6 +59,17 @@ export default function QuizModal() {
     if (!("answers" in nextQuestion)) {
       setShowResult(true);
       sessionStorage.setItem("quizCompleted", "true");
+    }
+  };
+
+  const onSubmitAnswers = async (
+    email: string,
+    answers: { question: string; answer: string }[],
+  ) => {
+    try {
+      await emailService.sendQuizAnswers(email, answers);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -157,6 +117,7 @@ export default function QuizModal() {
         </button>
 
         {!showResult && "answers" in currentQuestion ? (
+          /** if not done with quiz and currently in a question*/
           <div>
             <div className="mb-6">
               <div className="flex justify-between text-sm text-zinc-500 dark:text-zinc-400 mb-2">
@@ -192,7 +153,8 @@ export default function QuizModal() {
               )}
             </div>
           </div>
-        ) : showResult || !("answers" in currentQuestion) ? (
+        ) : (
+          /** If end of quiz reached*/
           <div className="text-center py-8">
             <div className="mx-auto w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
               <svg
@@ -222,22 +184,47 @@ export default function QuizModal() {
 
             <div className="space-y-3">
               <button
-                onClick={() =>
-                  (currentQuestion as QuizEnd).onButtonClick || setIsOpen(false)
-                }
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                onClick={() => {
+                  if ((currentQuestion as QuizEnd).onButtonClick) {
+                    (currentQuestion as QuizEnd).onButtonClick!();
+                  }
+                  closeModal();
+                }}
+                className="w-fit bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
               >
                 {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
               </button>
               <button
                 onClick={closeModal}
-                className="w-full text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white font-medium py-3 transition-colors"
+                hidden={
+                  (currentQuestion as QuizEnd).buttonMessage === undefined
+                }
+                className="w-fit text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white font-medium py-3 transition-colors"
               >
-                Learn More First
+                Back to Page
               </button>
             </div>
+            {/*<hr className="text-purple-600 my-3" />
+            <div className="p-2 mt-3 flex gap-5 mb-0">
+              <span className="float-start text-left text-zinc-600 dark:text-zinc-400">
+                {" "}
+                Add your email here to send us your answers!{" "}
+              </span>
+              <input
+                type="text"
+                className="border-2 p-2 rounded-xl float-end border-blue-400 focus:border-blue-600 size-fit"
+                placeholder={"superpower@gmail..."}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+            </div>
+            <button
+              className="w-fit float-end p-2 me-5 rounded-2 glow-btn rounded-2xl"
+              onClick={() => onSubmitAnswers(email, answers)}
+            >
+              Send
+            </button>*/}
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );
