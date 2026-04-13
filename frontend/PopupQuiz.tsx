@@ -304,6 +304,25 @@ export default function QuizModal() {
                 Back to Page
               </button>
             </div>
+            {/*<hr className="text-purple-600 my-3" />
+            <div className="p-2 mt-3 flex gap-5 mb-0">
+              <span className="float-start text-left text-zinc-600 dark:text-zinc-400">
+                {" "}
+                Add your email here to send us your answers!{" "}
+              </span>
+              <input
+                type="text"
+                className="border-2 p-2 rounded-xl float-end border-blue-400 focus:border-blue-600 size-fit"
+                placeholder={"superpower@gmail..."}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+            </div>
+            <button
+              className="w-fit float-end p-2 me-5 rounded-2 glow-btn rounded-2xl"
+              onClick={() => onSubmitAnswers(email, answers)}
+            >
+              Send
+            </button>*/}
           </div>
         )}
       </div>

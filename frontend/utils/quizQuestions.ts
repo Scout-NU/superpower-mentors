@@ -17,9 +17,12 @@ export interface QuizEnd {
   href?: string; // for end-of-quiz flows that require external link access (for example, mentorship applications)
 }
 
+const bookACallRedirect = () => {
+    redirect('/mentoring'); // replace with book a call flow, when done
+}
 
-const mentorRedirect = () => {
-    redirect('/mentoring');
+const mentorAppRedirect = () => {
+    redirect(process.env.TYPEFORM_APPLICATION_URL as string) // replace with typeform application when provided.
 }
 
 
