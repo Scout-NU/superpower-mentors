@@ -1,6 +1,6 @@
 "use client";
 import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
-
+import * as emailService from "../backend/utils/emailService";
 import { useState, useEffect, useRef } from "react";
 
 const PURPLE = "#571377";
@@ -9,9 +9,12 @@ const BLUE = "#001EDF";
 export default function QuizModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(QUIZ_QUESTIONS[0]);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<
+    { question: string; answer: string }[]
+  >([]);
   const [showResult, setShowResult] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [email, setEmail] = useState<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -30,8 +33,17 @@ export default function QuizModal() {
     };
   }, []);
 
-  const handleAnswer = (answer: { message: string; nextQuestionId: number }) => {
-    const newAnswers = [...answers, answer.message];
+  const handleAnswer = (answer: {
+    message: string;
+    nextQuestionId: number;
+  }) => {
+    const newAnswers = [
+      ...answers,
+      {
+        question: (currentQuestion as QuizQuestion).question,
+        answer: answer.message,
+      },
+    ];
     setAnswers(newAnswers);
 
     // set next question
@@ -48,6 +60,17 @@ export default function QuizModal() {
     if (!("answers" in nextQuestion)) {
       setShowResult(true);
       sessionStorage.setItem("quizCompleted", "true");
+    }
+  };
+
+  const onSubmitAnswers = async (
+    email: string,
+    answers: { question: string; answer: string }[],
+  ) => {
+    try {
+      await emailService.sendQuizAnswers(email, answers);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -112,6 +135,7 @@ export default function QuizModal() {
         </button>
 
         {!showResult && "answers" in currentQuestion ? (
+          /** if not done with quiz and currently in a question*/
           <div>
             <h1
               style={{
@@ -241,7 +265,12 @@ export default function QuizModal() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <button
-                onClick={closeModal}
+                onClick={() => {
+                  if ((currentQuestion as QuizEnd).onButtonClick) {
+                    (currentQuestion as QuizEnd).onButtonClick!();
+                  }
+                  closeModal}
+                }
                 style={{
                   width: "100%",
                   backgroundColor: BLUE,
@@ -271,9 +300,28 @@ export default function QuizModal() {
                   cursor: "pointer",
                 }}
               >
-                Learn More First
+                Back to Page
               </button>
             </div>
+            {/*<hr className="text-purple-600 my-3" />
+            <div className="p-2 mt-3 flex gap-5 mb-0">
+              <span className="float-start text-left text-zinc-600 dark:text-zinc-400">
+                {" "}
+                Add your email here to send us your answers!{" "}
+              </span>
+              <input
+                type="text"
+                className="border-2 p-2 rounded-xl float-end border-blue-400 focus:border-blue-600 size-fit"
+                placeholder={"superpower@gmail..."}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+            </div>
+            <button
+              className="w-fit float-end p-2 me-5 rounded-2 glow-btn rounded-2xl"
+              onClick={() => onSubmitAnswers(email, answers)}
+            >
+              Send
+            </button>*/}
           </div>
         )}
       </div>
