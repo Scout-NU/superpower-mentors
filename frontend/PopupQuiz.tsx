@@ -2,6 +2,7 @@
 import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
 import * as emailService from "../backend/utils/emailService";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const PURPLE = "#571377";
 const BLUE = "#001EDF";
@@ -183,31 +184,35 @@ export default function QuizModal() {
               {(currentQuestion as QuizQuestion).question}
             </h2>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              {(currentQuestion as QuizQuestion).answers.map((answer, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(answer)}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  style={{
-                    width: "100%",
-                    textAlign: "left",
-                    padding: "20px 28px",
-                    borderRadius: "50px",
-                    border: `3px solid ${hoveredIndex === index ? BLUE : PURPLE}`,
-                    backgroundColor: "#FFFFFF",
-                    fontFamily: "DM Sans",
-                    fontSize: "18px",
-                    fontWeight: 500,
-                    color: "#1A1A1A",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {answer.message}
-                </button>
-              ))}
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            >
+              {(currentQuestion as QuizQuestion).answers.map(
+                (answer, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(answer)}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "20px 28px",
+                      borderRadius: "50px",
+                      border: `3px solid ${hoveredIndex === index ? BLUE : PURPLE}`,
+                      backgroundColor: "#FFFFFF",
+                      fontFamily: "DM Sans",
+                      fontSize: "18px",
+                      fontWeight: 500,
+                      color: "#1A1A1A",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {answer.message}
+                  </button>
+                ),
+              )}
             </div>
           </div>
         ) : (
@@ -249,28 +254,21 @@ export default function QuizModal() {
             >
               {(currentQuestion as QuizEnd).title}
             </h2>
-            {/* <p
-              style={{
-                fontFamily: "DM Sans",
-                fontSize: "18px",
-                color: "#666",
-                marginBottom: "32px",
-                lineHeight: "1.6",
-              }}
-            >
-              We specialize in supporting youth with ADHD, Dyslexia, Autism, and other learning
-              differences. Our mentors understand your unique strengths and challenges because
-              they've been there too.
-            </p> */}
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
+              {(currentQuestion as QuizEnd).message}
+            </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              <button
-                onClick={() => {
-                  if ((currentQuestion as QuizEnd).onButtonClick) {
-                    (currentQuestion as QuizEnd).onButtonClick!();
+            <div className="space-y-3">
+              <Link
+                passHref={(currentQuestion as QuizEnd).href !== undefined}
+                href={(currentQuestion as QuizEnd).href ?? ""}
+                onClick={(e) => {
+                  // if no href, simply close modal, else redirect to provided link
+                  if (!(currentQuestion as QuizEnd).href) {
+                    e.preventDefault();
                   }
-                  closeModal}
-                }
+                  closeModal();
+                }}
                 style={{
                   width: "100%",
                   backgroundColor: BLUE,
@@ -284,8 +282,11 @@ export default function QuizModal() {
                   cursor: "pointer",
                 }}
               >
-                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
-              </button>
+                <button className="w-fit bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                  {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
+                </button>
+              </Link>
+              <br />
               <button
                 onClick={closeModal}
                 style={{
@@ -303,25 +304,6 @@ export default function QuizModal() {
                 Back to Page
               </button>
             </div>
-            {/*<hr className="text-purple-600 my-3" />
-            <div className="p-2 mt-3 flex gap-5 mb-0">
-              <span className="float-start text-left text-zinc-600 dark:text-zinc-400">
-                {" "}
-                Add your email here to send us your answers!{" "}
-              </span>
-              <input
-                type="text"
-                className="border-2 p-2 rounded-xl float-end border-blue-400 focus:border-blue-600 size-fit"
-                placeholder={"superpower@gmail..."}
-                onChange={(e) => setEmail(e.target.value)}
-              ></input>
-            </div>
-            <button
-              className="w-fit float-end p-2 me-5 rounded-2 glow-btn rounded-2xl"
-              onClick={() => onSubmitAnswers(email, answers)}
-            >
-              Send
-            </button>*/}
           </div>
         )}
       </div>
