@@ -15,7 +15,6 @@ export default function QuizModal() {
   >([]);
   const [showResult, setShowResult] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [email, setEmail] = useState<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
