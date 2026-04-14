@@ -8,47 +8,46 @@ export default function Navbar() {
       <div className="absolute left-5 top-1/2 -translate-y-1/2">
         <Logo />
       </div> */}
-      
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center ">
-          <Logo />
+        <Link href="/" className="px-8 py-3 bg-zinc-200 rounded-lg text-black font-medium">
+          Logo
         </Link>
         
         <div className="flex items-center gap-8">
           <Link 
             href="/about-us" 
-            className="text-lg font-medium text-purple-dark hover:text-zinc-600 transition-colors"
+            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
             About Us
           </Link>
           <Link 
             href="/mentoring" 
-            className="text-lg font-medium text-purple-dark hover:text-zinc-600 transition-colors"
+            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
             Mentoring
           </Link>
           <Link 
             href="/partnership" 
-            className="text-lg font-medium text-purple-dark hover:text-zinc-600 transition-colors"
+            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
             Partnerships
           </Link>
           <Link 
             href="/quality" 
-            className="text-lg font-medium text-purple-dark hover:text-zinc-600 transition-colors"
+            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
             Quality
           </Link>
           <Link 
             href="/blog" 
-            className="text-lg font-medium text-purple-dark hover:text-zinc-600 transition-colors"
+            className="text-sm font-medium text-black hover:text-zinc-600 transition-colors"
           >
             Blog
           </Link>
         </div>
 
         <Link 
-          href="/mentoring#strategy-call-form"
+          href="/get-started"
           className="glow-btn glow-btn--alt px-6 py-2.5 bg-blue-600 hover:bg-blue-700 !text-white font-medium rounded-lg transition-colors"
         >
           Get Started
