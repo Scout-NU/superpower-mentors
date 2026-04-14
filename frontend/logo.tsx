@@ -1,14 +1,13 @@
 "use client"
 
-import { Player } from "@lottiefiles/react-lottie-player"
-
+import Image from "next/image"
 export default function Logo() {
   return (
-    <Player
-      autoplay
-      loop
-      src="/animations/logo-spin.json"
-      style={{ height: "45px", width: "45px" }}
+    <Image
+      alt="Logo"
+      src="/images/Group(2).png"
+      width={45}
+      height={45}
     />
   )
 }
