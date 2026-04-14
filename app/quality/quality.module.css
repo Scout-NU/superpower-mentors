@@ -1,11 +1,3 @@
-.page {
-  width: 100%;
-  height: 3505px;
-  position: relative;
-  background: white;
-  overflow: hidden;
-}
-
 .heroBand {
   width: 100%;
   height: 630px;
@@ -15,20 +7,11 @@
   background: #571377;
 }
 
-.heroSection {
-  width: 1524px;
-  height: 748px;
-  position: absolute;
-  left: 28px;
-  top: 222px;
-  overflow: hidden;
-}
-
 .heroHeadingWrap {
   width: 1609px;
-  position: absolute;
+  /* position: absolute; */
   left: 75px;
-  top: -16px;
+  top: 152px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,16 +23,103 @@
   font-size: clamp(2.4rem, 5vw, 6rem);
   font-weight: 700;
   line-height: 110px;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
 }
 
 .vettingBand {
   width: 1512px;
-  height: 618px;
+  min-height: 618px;
+  height: auto;
   position: absolute;
   left: 0;
   top: 1809px;
   background: #571377;
+  box-sizing: border-box;
+  padding: 96px 90px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.vettingBand .vettingHeadingWrap {
+  position: static;
+  width: 100%;
+  height: auto;
+}
+
+.vettingColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 72px;
+  row-gap: 32px;
+  margin-top: 8px;
+}
+
+.vettingColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.vettingBand .stepsHeadingWrap,
+.vettingBand .backgroundCheckTitleRepeat,
+.vettingBand .certificationCourseWrap,
+.vettingBand .biweeklyMeetingWrap,
+.vettingBand .mentorApprovalWrap,
+.vettingBand .sessionRecapsWrap,
+.vettingBand .monthlyCheckInsWrap {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 100%;
+  text-align: left;
+}
+
+.vettingBand .stepsSpacerWrap {
+  display: none;
+}
+
+.vettingBand .monthlyCheckIns {
+  overflow-wrap: anywhere;
+}
+
+.vettingItemWrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.vettingItemIcon {
+  position: relative;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  margin-top: 6px;
+}
+
+.vettingItemEllipse,
+.vettingItemVector {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+}
+
+.vettingItemEllipse {
+  object-fit: cover;
+}
+
+.vettingItemVector {
+  inset: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+
+.vettingItemWrap > span:last-child {
+  flex: 1;
 }
 
 .sectionEyebrow,
@@ -66,15 +136,15 @@
 .backgroundCheckTitleRepeat {
   position: absolute;
   left: 115px;
-  top: 2043px;
+  top: 234px;
   text-align: center;
 }
 
 .commitmentHeadingWrap {
-  width: 884px;
-  height: 113px;
+  width: min(884px, calc(100% - 180px));
+  min-height: 113px;
   position: absolute;
-  left: 90px;
+  left: clamp(40px, 6vw, 90px);
   top: 1446px;
   display: flex;
   flex-direction: column;
@@ -83,10 +153,10 @@
 
 .commitmentHeading {
   color: black;
-  font-family: "Plus Jakarta Sans";
-  font-size: 64px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(2rem, 4.2vw, 4rem);
   font-weight: 700;
-  line-height: 76.8px;
+  line-height: 1.2;
   word-wrap: break-word;
 }
 
@@ -95,7 +165,7 @@
   height: 113px;
   position: absolute;
   left: 90px;
-  top: 1873px;
+  top: 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,17 +181,23 @@
 }
 
 .vettingDescriptionWrap {
-  width: 1155px;
+  width: 100%;
   position: absolute;
-  left: 155px;
+  left: 0;
+  right: 0;
   top: 1559px;
+  padding-left: clamp(55px, 10vw, 155px);
+  padding-right: 75px;
+  box-sizing: border-box;
 }
 
 .vettingDescription {
   color: black;
   font-family: Inter, sans-serif;
-  font-size: 20px;
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
   font-weight: 400;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
   word-wrap: break-word;
 }
 
@@ -135,7 +211,7 @@
 
 .approachPanelBg {
   width: 1331px;
-  height: 711px;
+  height: 311px;
   position: absolute;
   left: 0;
   top: 0;
@@ -147,6 +223,173 @@
   position: absolute;
   left: 48px;
   top: 302px;
+}
+
+.approachDropdownWrap {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+}
+
+/* Flow-based section structure for AnimatedSection wrappers */
+.heroBlock,
+.commitmentBlock,
+.vettingBlock,
+.approachBlock {
+  width: min(100%, 1524px);
+  margin: 0 auto;
+  position: relative;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  box-sizing: border-box;
+}
+
+.heroBlock {
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+}
+
+.heroBlock .heroBand {
+  position: static;
+  width: 100%;
+  height: 600px;
+  background: #571377;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  top:0;
+}
+
+.heroBlock .heroSection,
+.heroBlock .heroHeadingWrap {
+  position: static;
+  width: 100%;
+  /* height: auto; */
+}
+
+.heroBlock .heroHeadingWrap {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.heroBlock .heroHeading {
+  display: block;
+  text-align: left;
+  font-size: calc(clamp(2.4rem, 5vw, 6rem) + 25px);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+
+.heroBlock .heroImage {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: translateY(-15%);
+  z-index: 2;
+  width: min(92vw, 1102px);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1102 / 830;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
+}
+
+.commitmentBlock {
+  margin-top: 50px;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.commitmentBlock .commitmentHeadingWrap,
+.commitmentBlock .vettingDescriptionWrap {
+  position: static;
+  width: 100%;
+  min-height: 0;
+}
+
+.commitmentBlock .commitmentHeadingWrap {
+  margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.vettingBlock {
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.vettingBlock .vettingBand {
+  position: static;
+  width: 100%;
+  left: auto;
+  top: auto;
+}
+
+.approachBlock {
+  height: auto;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.approachBlock .approachSection {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: clamp(420px, 46vw, 711px);
+  left: auto;
+  top: auto;
+  overflow: visible;
+  border-radius: 20px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.approachBlock .approachPanelBg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 95%;
+  height: auto;
+  min-height: 100%;
+  transform: translateX(-50%);
+}
+
+.approachBlock .approachHeadingWrap {
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 2;
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.approachBlock .approachDropdownWrap {
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
+  z-index: 2;
+  align-self: center;
+  flex: 1 1 58%;
+  width: min(100%, 700px);
+  max-width: min(100%, 700px);
+  margin-left: auto;
+  padding-right: 30px;
+  box-sizing: border-box;
 }
 
 .approachHeading {
@@ -170,14 +413,14 @@
 .stepsSpacerWrap {
   position: absolute;
   left: 405px;
-  top: 2103px;
+  top: 294px;
   text-align: center;
 }
 
 .stepsHeadingWrap {
   position: absolute;
   left: 120px;
-  top: 2103px;
+  top: 294px;
   text-align: center;
 }
 
@@ -193,7 +436,7 @@
 .certificationCourseWrap {
   position: absolute;
   left: 120px;
-  top: 2168px;
+  top: 359px;
   text-align: center;
 }
 
@@ -209,7 +452,7 @@
 .biweeklyMeetingWrap {
   position: absolute;
   left: 842px;
-  top: 2048px;
+  top: 239px;
   text-align: center;
 }
 
@@ -225,7 +468,7 @@
 .mentorApprovalWrap {
   position: absolute;
   left: 842px;
-  top: 2104px;
+  top: 295px;
   text-align: center;
 }
 
@@ -241,7 +484,7 @@
 .sessionRecapsWrap {
   position: absolute;
   left: 843px;
-  top: 2164px;
+  top: 355px;
   text-align: center;
 }
 
@@ -257,24 +500,221 @@
 .monthlyCheckInsWrap {
   position: absolute;
   left: 119px;
-  top: 2245px;
+  top: 500px;
   text-align: center;
 }
 
 .monthlyCheckIns {
   color: white;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
+  font-size: 29px;
   font-weight: 700;
   line-height: 36px;
   word-wrap: break-word;
 }
 
 .heroImage {
-  width: 50vw;
-  height: 60vw;
+  width: min(92vw, 1102px);
+  height: auto;
+  max-width: 100%;
   position: absolute;
   left: 50%;
   top: 377px;
   transform: translateX(-50%);
+}
+
+@media (max-width: 1200px) {
+  .pageScale {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+    display: block;
+  }
+
+  .page {
+    width: min(100%, 980px);
+    height: auto;
+    transform: none;
+    overflow: visible;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+  }
+
+  .heroBand,
+  .heroAnimationSpace,
+  .commitmentAnimationSpace,
+  .vettingAnimationSpace,
+  .approachAnimationSpace,
+  .heroSection,
+  .vettingBand,
+  .backgroundCheckTitle,
+  .backgroundCheckTitleRepeat,
+  .commitmentHeadingWrap,
+  .vettingHeadingWrap,
+  .vettingDescriptionWrap,
+  .stepsHeadingWrap,
+  .mentorApprovalWrap,
+  .sessionRecapsWrap,
+  .monthlyCheckInsWrap,
+  .approachSection,
+  .heroHeadingWrap,
+  .approachHeadingWrap,
+  .heroImage {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: auto;
+    height: auto;
+  }
+
+  .heroBand {
+    order: 1;
+    width: 100%;
+    min-height: 0;
+    height: 0;
+  }
+
+  .heroSection {
+    order: 2;
+    width: 100%;
+    background: #571377;
+    border-radius: 20px;
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .heroHeadingWrap {
+    width: 100%;
+    display: block;
+  }
+
+  .heroHeading {
+    font-size: clamp(2rem, 7vw, 3.25rem);
+    line-height: 1.1;
+  }
+
+  .heroImage {
+    width: min(100%, 680px);
+    height: auto;
+    align-self: center;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  .commitmentHeadingWrap,
+  .vettingDescriptionWrap,
+  .vettingHeadingWrap,
+  .backgroundCheckTitle,
+  .backgroundCheckTitleRepeat,
+  .stepsHeadingWrap,
+  .stepsSpacerWrap,
+  .certificationCourseWrap,
+  .biweeklyMeetingWrap,
+  .mentorApprovalWrap,
+  .sessionRecapsWrap,
+  .monthlyCheckInsWrap {
+    width: 100%;
+    text-align: left;
+  }
+
+  .commitmentHeading,
+  .vettingHeading {
+    font-size: clamp(1.75rem, 6vw, 3rem);
+    line-height: 1.15;
+  }
+
+  .vettingDescription {
+    font-size: clamp(1rem, 2.7vw, 1.15rem);
+    line-height: 1.6;
+  }
+
+  .vettingBand {
+    order: 7;
+    width: 100%;
+    background: #571377;
+    border-radius: 20px;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 2.5vw, 1.1rem);
+  }
+
+  .vettingColumns {
+    grid-template-columns: 1fr;
+    row-gap: clamp(0.75rem, 2.5vw, 1.1rem);
+  }
+
+  .vettingColumn {
+    gap: clamp(0.75rem, 2.5vw, 1.1rem);
+  }
+
+  .sectionEyebrow,
+  .sectionEyebrowRepeat,
+  .stepsHeading,
+  .certificationCourse,
+  .biweeklyMeeting,
+  .mentorApproval,
+  .sessionRecaps,
+  .monthlyCheckIns,
+  .stepsSpacer {
+    font-size: clamp(1rem, 3.4vw, 1.4rem);
+    line-height: 1.35;
+  }
+
+  .approachSection {
+    position: relative;
+    width: 100%;
+    min-height: 0;
+    overflow: visible;
+    border-radius: 20px;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .approachPanelBg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    z-index: 1;
+  }
+
+  .approachHeadingWrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  .approachHeading {
+    font-size: clamp(1.25rem, 4.2vw, 2rem);
+    line-height: 1.25;
+  }
+
+  .approachDropdownWrap {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
 }
