@@ -6,7 +6,6 @@ import React from 'react';
 import AnimatedSection from "@/frontend/AnimatedSection";
 import { motion } from "framer-motion";
 
-// Color constants
 const BLACK  = "#000000";
 const PURPLE = "#571377";
 const ORANGE = "#FFC92A";
@@ -26,35 +25,45 @@ function HeroSection() {
   return (
     <section className="bg-white pt-32 pb-16 px-8">
       <div className="max-w-7xl mx-auto relative">
-        <div className="max-w-full">
-          <h1 className="font-bold leading-none text-black uppercase" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '96px', letterSpacing: '-0.02em' }}>
-            RELATE.<br />
-            <span style={{ color: PURPLE }}>EMPOWER.</span><br />
-            TRANSFORM.
-          </h1>
-          <div className="mt-6 flex justify-between items-start gap-12">
-            <p className="text-zinc-700 text-lg" style={{ fontFamily: 'DM Sans', maxWidth: '600px' }}>
-              Trusted online mentorship to launch youth with ADHD, Dyslexia, Autism, and other learning differences.
-            </p>
-            <div className="flex gap-4 flex-shrink-0">
-              <button 
-                style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }} 
-                className="glow-btn glow-btn--alt text-white font-semibold rounded-full"
-              >
-                Start Your Journey
-              </button>
-              <button 
-                style={{ backgroundColor: BLACK, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
-                className="glow-btn text-white font-semibold rounded-full"
-              >
-                Become a Mentor
-              </button>
+        <div className="flex items-center justify-between gap-12">
+          <div className="flex flex-col">
+            <h1 className="font-bold leading-none text-black uppercase" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '96px', letterSpacing: '-0.02em' }}>
+              RELATE.<br />
+              <span style={{ color: PURPLE }}>EMPOWER.</span><br />
+              TRANSFORM.
+            </h1>
+            <div className="mt-6 flex flex-col gap-6">
+              <p className="text-zinc-700 text-lg" style={{ fontFamily: 'DM Sans', maxWidth: '500px' }}>
+                Trusted online mentorship to launch youth with ADHD, Dyslexia, Autism, and other learning differences.
+              </p>
             </div>
           </div>
-        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', flexShrink: 0, justifyContent: 'space-between' }}>
+             <img src="/images/stats.png" alt="Stats" style={{ maxWidth: '400px', width: '100%', height: 'auto', marginTop: '20px' }} />
+              <div style={{ display: 'flex', gap: '16px', marginTop: '30px' }}>
+              <Link href="/mentoring">
+                <button style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
+                  className="glow-btn text-white font-semibold rounded-full"
+                  >
+                Start Your Journey
+                </button>
+              </Link>
+              <Link href="/mentoring">
+                <button
+                style={{ backgroundColor: BLACK, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
+                className="glow-btn text-white font-semibold rounded-full"
+                >
+                Become a Mentor
+          </button>
+          </Link>
+  </div>
+</div>
+</div>
+
         <div className="mt-16 rounded-3xl overflow-hidden relative z-20 mx-auto mb-[-400px]" style={{ width: '1373px', height: '771px', maxWidth: '100%' }}>
-          <ImgPlaceholder className="w-full h-full" />
-        </div>
+        <img src="/images/superpowermentorshero.png" className="w-full h-full" style={{ objectFit: 'cover' }} />
+       </div>
       </div>
     </section>
   );
@@ -62,9 +71,9 @@ function HeroSection() {
 
 function MeetMentorsSection() {
   const mentors = [
-    { name: "Christiana W.", bio: "Los Angeles, USA. ADHD. Creative Art Director, Advertising, Social Media & Semi-Professional Athlete.", tags: ["Los Angeles, USA", "Dyslexia"] },
-    { name: "Jeff S.", bio: "Bronx, NY. ADHD, Aerospace Research Engineer @ NASA, Blockchain Affiliate Marketer.", tags: ["Bronx, NY", "Dyslexia"] },
-    { name: "Dylann C.", bio: "Philadelphia, USA. WS, ADHD, Educator, Writer, Artist, Blogger, Neurodivergent, Entrepreneur.", tags: ["Los Angeles, USA", "Dyslexia"] },
+    { name: "Christiana W.", bio: "Los Angeles, USA. ADHD. Creative Art Director, Advertising, Social Media & Semi-Professional Athlete.", tags: ["Los Angeles, USA", "Dyslexia"], img: "/images/christianaw.png" },
+    { name: "Jeff S.", bio: "Bronx, NY. ADHD, Aerospace Research Engineer @ NASA, Blockchain Affiliate Marketer.", tags: ["Bronx, NY", "Dyslexia"], img: "/images/jeffs.png" },
+    { name: "Dylann C.", bio: "Philadelphia, USA. WS, ADHD, Educator, Writer, Artist, Blogger, Neurodivergent, Entrepreneur.", tags: ["Los Angeles, USA", "Dyslexia"], img: "/images/dylannc.png" },
   ];
 
   return (
@@ -76,13 +85,12 @@ function MeetMentorsSection() {
         <div className="flex gap-6 justify-center">
           {mentors.map((m, i) => (
             <div key={i} className="border-2 border-black bg-white rounded-3xl overflow-hidden flex flex-col" style={{ width: '380px', height: '417px' }}>
-              <div style={{ width: '380px', height: '206px' }}>
-                <ImgPlaceholder className="w-full h-full" />
-              </div>
+          <div style={{ width: '380px', height: '206px', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '16px' }}>
+            <img src={m.img} alt={m.name} style={{ width: '150px', height: '150px', objectFit: 'cover', display: 'block', borderRadius: '50%' }} />
+          </div>
               <div className="p-6 flex flex-col flex-1">
                 <p className="font-bold text-black text-base mb-2" style={{ fontFamily: 'Plus Jakarta Sans' }}>{m.name}</p>
-                <p className="text-zinc-600 text-xs leading-relaxed mb-4 flex-1" style={{ fontFamily: 'DM Sans' }}>{m.bio}</p>
-                <div className="flex gap-2 flex-wrap">
+                <p className="text-zinc-600 text-sm leading-relaxed mb-4 flex-1" style={{ fontFamily: 'DM Sans' }}>{m.bio}</p>                <div className="flex gap-2 flex-wrap">
                   {m.tags.map((tag, idx) => (
                     <span key={idx} style={{ backgroundColor: PURPLE, fontFamily: 'DM Sans' }} className="text-white px-3 py-1 rounded-full text-xs font-medium">
                       {tag}
@@ -94,18 +102,14 @@ function MeetMentorsSection() {
           ))}
         </div>
         <div className="mt-20 text-center">
-          <p className="text-xs text-white opacity-60 uppercase tracking-widest mb-6" style={{ fontFamily: 'DM Sans', letterSpacing: '0.15em' }}>
-            DISCOVER OUR PARTNERS
-          </p>
-          <div className="flex flex-wrap gap-8 items-center justify-center">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="w-20 h-12 bg-white bg-opacity-20 rounded flex items-center justify-center">
-                <span className="text-white text-xs opacity-50">Logo</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+  <p className="text-xs text-white opacity-60 uppercase tracking-widest mb-6" style={{ fontFamily: 'DM Sans', letterSpacing: '0.15em' }}>
+    DISCOVER OUR MENTORS
+  </p>
+  <div className="flex items-center justify-center">
+  <img src="/images/mentortree.png" alt="Mentor Tree" style={{ maxWidth: '70%', height: 'auto' }} />
+  </div>
+</div>
+</div>
     </section>
   );
 }
@@ -201,11 +205,23 @@ function ProgramCard({ program, openItems, toggleItem }: { program: Program; ope
 }
 
 function RealImpactSection() {
-  const programs = [
-    { title: "Neurodiversity" },
-    { title: "Transitions" },
-    { title: "Confidence" },
-    { title: "Direction" }
+  const cards = [
+    {
+      title: "Neurodiversity",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Transitions",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Confidence",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Direction",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
   ];
 
   return (
@@ -215,55 +231,94 @@ function RealImpactSection() {
           HOW WE CAN HELP
         </h2>
 
-        {/* 2x2 Grid with circle dividers */}
+        <style>{`
+          .flip-card {
+            width: 401px;
+            height: 272px;
+            perspective: 1000px;
+            cursor: pointer;
+          }
+          .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+          }
+          .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+          }
+          .flip-card-front,
+          .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 22.09px;
+            border: 2px solid #571377;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+          }
+          .flip-card-front {
+            background: #ffffff;
+          }
+          .flip-card-back {
+            background: #571377;
+            transform: rotateY(180deg);
+          }
+        `}</style>
+
         <div className="flex justify-center items-start gap-6 mb-12">
-          {/* Column 1 */}
           <div className="flex flex-col gap-6">
-            <div className="border-2 border-[#571377] w-[401px] h-[272px] rounded-[22.09px] bg-white flex items-center justify-center">
-              <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-                {programs[0].title}
-              </h3>
-            </div>
-            <div className="border-2 border-[#571377] w-[401px] h-[272px] rounded-[22.09px] bg-white flex items-center justify-center">
-              <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-                {programs[2].title}
-              </h3>
-            </div>
+            {[cards[0], cards[2]].map((card, i) => (
+              <div key={i} className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+                      {card.title}
+                    </h3>
+                  </div>
+                  <div className="flip-card-back">
+                    <p className="text-white text-sm leading-relaxed text-center" style={{ fontFamily: 'DM Sans' }}>
+                      {card.back}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* Circle Divider */}
           <CircleDivider />
 
-          {/* Column 2 */}
           <div className="flex flex-col gap-6">
-            <div className="border-2 border-[#571377] w-[401px] h-[272px] rounded-[22.09px] bg-white flex items-center justify-center">
-              <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-                {programs[1].title}
-              </h3>
-            </div>
-            <div className="border-2 border-[#571377] w-[401px] h-[272px] rounded-[22.09px] bg-white flex items-center justify-center">
-              <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-                {programs[3].title}
-              </h3>
-            </div>
+            {[cards[1], cards[3]].map((card, i) => (
+              <div key={i} className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+                      {card.title}
+                    </h3>
+                  </div>
+                  <div className="flip-card-back">
+                    <p className="text-white text-sm leading-relaxed text-center" style={{ fontFamily: 'DM Sans' }}>
+                      {card.back}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        {/* Find Your Mentor CTA */}
-        <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '48px' }}>
-          <Link href="/mentoring">
-            <button 
-              type="button" 
-              style={{ border: 0, borderRadius: '20px', background: BLUE, color: '#fff', fontFamily: 'DM Sans', fontSize: '1rem', fontWeight: 700, padding: '18px 34px', cursor: 'pointer' }}
-              className="glow-btn glow-btn--alt">
-              Find Your Mentor
-            </button>
-          </Link>
         </div>
 
-        {/* Our Programs Button */}
-        <div className="flex justify-start">
+        <div className="flex justify-start mb-16">
+        <Link href="/mentoring">
           <button className="bg-[#001EDF] text-white font-bold text-base px-[34px] py-[18px] rounded-[20px] border-none cursor-pointer" style={{ fontFamily: 'DM Sans' }}>
             Our Programs
           </button>
+        </Link>
         </div>
         
         {/* Stat */}
@@ -387,7 +442,6 @@ function TestimonialsSection() {
           HEAR FROM OTHER PARENTS
         </h2>
 
-        {/* Scattered quote cards container */}
         <div style={{ position: 'relative', width: '100%', height: '360px' }}>
           {testimonials.map((t, i) => (
             <div
@@ -415,7 +469,6 @@ function TestimonialsSection() {
           ))}
         </div>
 
-        {/* Dot indicators */}
         <div className="flex gap-3 mt-8">
           {testimonials.map((_, i) => (
             <button
@@ -443,11 +496,11 @@ function FAQSection() {
   const [openIndices, setOpenIndices] = useState<number[]>([]);
 
   const faqs = [
-    { q: "Why should my child have a mentor?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "What are the benefits of mentoring?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "What is the difference between tutoring and mentoring?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "How do you track your impact?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "Who are your mentors?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
+    { q: "What is the difference between a Superpower Mentor and traditional therapy?", a: "The Superpower Mentors are not licensed healthcare professionals. Mentors provide guidance, advice, and support through their lived experiences. Mentors are trained through a proprietary course developed with counsel multiple educators and industry professionals. Although clients have stated on multiple occasions that their child has gained more value out of their mentor relationship than their therapist relationship, Superpower Mentors are by no means a replacement for emotional and social health professionals such as therapists and psychiatrists. If your child is in emotional distress please consult your dedicated medical advisors." },
+    { q: "Does my child qualify for your program?", a: "Our program is designed for children and young adults 7-25 who have diagnosed or undiagnosed learning differences. If your child fits under the above criteria there is a place for them in our program." },
+    { q: "Does my child need to be diagnosed with a learning disability to be eligible for a mentor?", a: "No! Your child does not need to be diagnosed with a learning disability to be eligible for a mentor. All children and young adults are unique and everyone learns and experiences life differently. If you want to pair your child up with a mentor, please book your free strategy call so we can best understand your specific needs." },
+    { q: "What happens if we don’t like our mentor?", a: "In the rare case you do not like your mentor, we will work with you closely to align you with someone who fits your liking. There is no added cost with this service. Our safeguards currently in place are designed to be proactive in case you do not like your mentor. More often than not, if the pairing is not viable, we will have been made aware within a couple of weeks of the match and reach out to make a switch as soon as this comes on our radar." },
+    { q: "Do you take insurance?", a: "Unfortunately, we do not take insurance or accept FSA/HSA. Some clients have been able to have this service paid for through their child’s institution or educational sponsor." },
   ];
 
   const toggle = (i: number) => {
@@ -465,9 +518,6 @@ function FAQSection() {
               <h2 className="text-black mb-8" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '48px', fontWeight: 700 }}>
                 Frequently Asked Questions
               </h2>
-              <button className="glow-btn bg-black text-white px-8 py-3 rounded-full cursor-pointer" style={{ fontFamily: 'DM Sans', fontWeight: 600 }}>
-                Read Full FAQs
-              </button>
             </div>
             <div style={{ backgroundColor: DARK_PURPLE, width: '662px' }} className="rounded-3xl p-8">
               {faqs.map((faq, i) => {
@@ -501,9 +551,7 @@ function FAQSection() {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <AnimatedSection>
         <HeroSection />
-      </AnimatedSection>
       <AnimatedSection>
         <MeetMentorsSection />
       </AnimatedSection>
