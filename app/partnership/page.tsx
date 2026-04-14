@@ -2,22 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./partnership.module.css";
-
 const TESTIMONIALS = [
   {
     id: 0,
     image: "partnerships_morelli.jpg",
     avatar: "partnerships_barbara.png",
-    quote: "...",
+    quote:
+      "We are proud to say that while nationally the college dropout rate between freshman and sophomore years is 30%, the dropout rate is 0% for students who have had a Morelli Foundation (Superpower) Mentor.",
     author: "Barbara Wirostko Morelli",
-    authorTitle: "Co-Founder of Joseph James Morelli Foundation",
+    authorTitle: "Co-Founder, Joseph James Morelli Foundation",
   },
   {
     id: 1,
     image: null,
+    avatar: null,
     quote:
-      "\"I'm shouting from the rooftops because what you have created has changed my son's life, and I cannot thank you enough.\"",
-    author: "SPM parent",
+      "I’m shouting from the rooftops because what you have created has changed my son's life, and I cannot thank you enough.",
+    author: "SPM Parent",
     authorTitle: "",
   },
 ];
