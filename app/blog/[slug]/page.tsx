@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { ARTICLES, type Article, type ContentBlock } from "@/data/articles";
+import AnimatedSection from "@/frontend/AnimatedSection";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -83,87 +84,99 @@ export default async function ArticlePage({
       className={`${spaceGrotesk.className} min-h-screen bg-white pt-24`}
     >
       {}
-      <section className="px-6 py-20" style={{ background: "#571377" }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h1
-            className={`${jakarta.className} text-white leading-tight`}
-            style={{
-              fontSize: "clamp(40px, 7vw, 80px)",
-              fontWeight: 500,
-            }}
-          >
-            {article.title}
-          </h1>
-        </div>
-      </section>
-
-      {}
-      <section className="px-6 py-6 max-w-4xl mx-auto">
-        <div className="flex gap-2 mt-4">
-          {article.tags.map((t) => (
-            <TagPill key={t} label={t} />
-          ))}
-        </div>
-      </section>
-
-      {}
-      {article.image && (
-        <section className="px-6 max-w-4xl mx-auto">
-          <img
-            src={article.image}
-            alt={article.title}
-            className="w-full h-auto max-h-[520px] object-cover"
-          />
+      <AnimatedSection>
+        <section className="px-6 py-20" style={{ background: "#571377" }}>
+          <div className="max-w-4xl mx-auto text-center">
+            <h1
+              className={`${jakarta.className} text-white leading-tight`}
+              style={{
+                fontSize: "clamp(40px, 7vw, 80px)",
+                fontWeight: 500,
+              }}
+            >
+              {article.title}
+            </h1>
+          </div>
         </section>
-      )}
-
-      <section className="px-6 py-6 max-w-4xl mx-auto">
-        <div className="flex gap-2 mt-4">
-          <p className="text-lg font-bold text-black leading-relaxed">
-          {article.excerpt}
-        </p>
-        </div>
-      </section>
+      </AnimatedSection>
 
       {}
-      <article className="px-6 py-12 max-w-3xl mx-auto">
-        {article.body.map((block, i) => (
-          <BodyBlock key={i} block={block} />
-        ))}
-      </article>
-
-      {}
-      {related.length > 0 && (
-        <section className="px-6 py-12 max-w-4xl mx-auto border-t-2 border-black">
-          <h2
-            className="font-bold text-black mb-8"
-            style={{ fontSize: "clamp(24px, 3vw, 36px)" }}
-          >
-            Related Stories
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {related.map((r) => (
-              <Link
-                key={r.id}
-                href={`/blog/${r.slug}`}
-                className="group block"
-              >
-                {r.image && (
-                  <img
-                    src={r.image}
-                    alt={r.title}
-                    className="w-full h-48 object-cover mb-3"
-                  />
-                )}
-                <p className="font-bold text-sm text-black group-hover:text-blue-600 transition-colors">
-                  {r.title}
-                </p>
-                <p className="text-xs text-zinc-500 mt-1">{r.excerpt}</p>
-              </Link>
+      <AnimatedSection>
+        <section className="px-6 py-6 max-w-4xl mx-auto">
+          <div className="flex gap-2 mt-4">
+            {article.tags.map((t) => (
+              <TagPill key={t} label={t} />
             ))}
           </div>
         </section>
+      </AnimatedSection>
+
+      {}
+      {article.image && (
+        <AnimatedSection>
+          <section className="px-6 max-w-4xl mx-auto">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-auto max-h-[520px] object-cover"
+            />
+          </section>
+        </AnimatedSection>
+      )}
+
+      <AnimatedSection>
+        <section className="px-6 py-6 max-w-4xl mx-auto">
+          <div className="flex gap-2 mt-4">
+            <p className="text-lg font-bold text-black leading-relaxed">
+            {article.excerpt}
+          </p>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {}
+      <AnimatedSection>
+        <article className="px-6 py-12 max-w-3xl mx-auto">
+          {article.body.map((block, i) => (
+            <BodyBlock key={i} block={block} />
+          ))}
+        </article>
+      </AnimatedSection>
+
+      {}
+      {related.length > 0 && (
+        <AnimatedSection>
+          <section className="px-6 py-12 max-w-4xl mx-auto border-t-2 border-black">
+            <h2
+              className="font-bold text-black mb-8"
+              style={{ fontSize: "clamp(24px, 3vw, 36px)" }}
+            >
+              Related Stories
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {related.map((r) => (
+                <Link
+                  key={r.id}
+                  href={`/blog/${r.slug}`}
+                  className="group block"
+                >
+                  {r.image && (
+                    <img
+                      src={r.image}
+                      alt={r.title}
+                      className="w-full h-48 object-cover mb-3"
+                    />
+                  )}
+                  <p className="font-bold text-sm text-black group-hover:text-blue-600 transition-colors">
+                    {r.title}
+                  </p>
+                  <p className="text-xs text-zinc-500 mt-1">{r.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </AnimatedSection>
       )}
     </main>
   );

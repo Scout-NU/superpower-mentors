@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./mentoring.module.css";
 import React from "react";
 import * as apiService from "../../backend/utils/apiService";
+import AnimatedSection from "@/frontend/AnimatedSection";
 
 type Mentor = {
   id: number;
@@ -230,7 +231,7 @@ export default function MentoringPage() {
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
   const timelineItemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const valuesRef = useRef<HTMLElement | null>(null);
+  const valuesRef = useRef<HTMLDivElement | null>(null);
   const heroRef = useRef<HTMLElement | null>(null);
   const timelineRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLElement | null>(null);
@@ -325,10 +326,13 @@ export default function MentoringPage() {
 
   return (
     <main className={styles.page}>
-      <div ref={valuesRef} className={revealClass("values")}>
-        <ValuesSection />
-      </div>
+      <AnimatedSection>
+        <div ref={valuesRef} className={revealClass("values")}>
+          <ValuesSection />
+        </div>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section ref={heroRef} className={`${styles.hero} ${revealClass("hero")}`}>
         <div className={styles.inner}>
           <h1 className={styles.title}>Hear From our Mentors</h1>
@@ -365,7 +369,9 @@ export default function MentoringPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={timelineRef}
         className={`${styles.howItWorksSection} ${revealClass("timeline")}`}
@@ -431,12 +437,14 @@ export default function MentoringPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={videoRef}
         className={`${styles.videoCtaSection} ${revealClass("video")}`}
         style={{
-          marginTop: "-4rem",
+          marginTop: "calc(-4rem + 30px)",
           paddingTop: "2rem",
         }}
       >
@@ -477,7 +485,9 @@ export default function MentoringPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={formRef}
         id="strategy-call"
@@ -607,6 +617,7 @@ export default function MentoringPage() {
           <span className={styles.formCircleSmallBottom}></span>
         </div>
       </section>
+      </AnimatedSection>
     </main>
   );
 }
