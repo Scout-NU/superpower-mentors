@@ -1,84 +1,151 @@
+.pageRoot {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* Shared section shell */
+.heroBlock,
+.commitmentBlock,
+.vettingBlock,
+.approachBlock {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero */
+.heroBlock {
+  padding-top: 90px;
+  background: #ffffff;
+}
+
 .heroBand {
   width: 100%;
-  height: 830px;
-  position: absolute;
-  left: 0;
-  top: 115px;
+  min-height: 520px;
   background: #571377;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 90px 0 220px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
 .heroHeadingWrap {
-  width: 1609px;
-  left: 75px;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: clamp(2rem, 7vw, 10rem);
+  padding-right: 2rem;
+  box-sizing: border-box;
 }
 
 .heroHeading {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(2.8rem, 7vw, 10vw);
+  margin: 0;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
   font-weight: 500;
-  line-height: 1;
-  color: var(--color-white);
+  line-height: 0.98;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.heroImage {
+  display: block;
+  width: min(92vw, 1102px);
+  max-width: 100%;
+  height: auto;
+  margin: -160px auto 0;
+  position: relative;
+  z-index: 2;
+  object-fit: cover;
+}
+
+/* Commitment */
+.commitmentBlock {
+  margin-top: 48px;
+  margin-bottom: 56px;
+}
+
+.commitmentHeadingWrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 18px;
+  padding-left: clamp(2rem, 7vw, 10rem);
+  padding-right: 2rem;
+  box-sizing: border-box;
+}
+
+.commitmentHeading {
+  margin: 0;
+  color: #571377;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(2rem, 4.2vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.vettingDescriptionWrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: clamp(2rem, 7vw, 10rem);
+  padding-right: 2rem;
+  box-sizing: border-box;
+}
+
+.vettingDescription {
+  display: block;
+  margin: 0;
+  color: #000000;
+  font-family: Inter, sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Vetting */
+.vettingBlock {
+  margin-bottom: 56px;
 }
 
 .vettingBand {
-  width: 1512px;
-  min-height: 618px;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 1809px;
+  width: 100%;
   background: #571377;
   box-sizing: border-box;
-  padding: 96px 90px 70px;
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-}
-
-.vettingBand .vettingHeadingWrap {
-  position: static;
-  width: 100%;
-  height: auto;
-}
-
-.vettingColumns {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: 72px;
-  row-gap: 32px;
-  margin-top: 8px;
-}
-
-.vettingColumn {
+  padding: 72px clamp(2rem, 6vw, 5.5rem);
   display: flex;
   flex-direction: column;
   gap: 36px;
 }
 
-.vettingBand .stepsHeadingWrap,
-.vettingBand .backgroundCheckTitleRepeat,
-.vettingBand .certificationCourseWrap,
-.vettingBand .biweeklyMeetingWrap,
-.vettingBand .mentorApprovalWrap,
-.vettingBand .sessionRecapsWrap,
-.vettingBand .monthlyCheckInsWrap {
-  position: static;
-  left: auto;
-  top: auto;
+.vettingHeadingWrap {
   width: 100%;
-  text-align: left;
 }
 
-.vettingBand .stepsSpacerWrap {
-  display: none;
+.vettingHeading {
+  display: block;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
 }
 
-.vettingBand .monthlyCheckIns {
-  overflow-wrap: anywhere;
+.vettingColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px 72px;
+}
+
+.vettingColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 .vettingItemWrap {
@@ -86,6 +153,10 @@
   align-items: flex-start;
   gap: 16px;
   width: 100%;
+}
+
+.vettingItemWrap > span:last-child {
+  flex: 1;
 }
 
 .vettingItemIcon {
@@ -99,9 +170,9 @@
 .vettingItemEllipse,
 .vettingItemVector {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  inset: 0;
 }
 
 .vettingItemEllipse {
@@ -116,234 +187,52 @@
   object-fit: contain;
 }
 
-.vettingItemWrap > span:last-child {
-  flex: 1;
-}
-
 .sectionEyebrow,
-.sectionEyebrowRepeat {
-  color: white;
-  font-family: "Plus Jakarta Sans";
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.backgroundCheckTitle,
-.backgroundCheckTitleRepeat {
-  position: absolute;
-  left: 115px;
-  top: 234px;
-  text-align: center;
-}
-
-.commitmentHeadingWrap {
-  width: min(884px, calc(100% - 180px));
-  min-height: 113px;
-  position: absolute;
-  left: clamp(40px, 6vw, 90px);
-  top: 1446px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.commitmentHeading {
-  color: black;
+.sectionEyebrowRepeat,
+.stepsHeading,
+.certificationCourse,
+.biweeklyMeeting,
+.mentorApproval,
+.sessionRecaps,
+.monthlyCheckIns {
+  color: #ffffff;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(2rem, 4.2vw, 4rem);
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: clamp(1.1rem, 2vw, 1.875rem);
+  font-weight: 500;
+  line-height: 1.35;
   word-wrap: break-word;
 }
 
-.vettingHeadingWrap {
-  width: 1037px;
-  height: 113px;
-  position: absolute;
-  left: 90px;
-  top: 64px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.vettingHeading {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 76.8px;
-  word-wrap: break-word;
-}
-
-.vettingDescriptionWrap {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 1559px;
-  padding-left: clamp(55px, 10vw, 155px);
-  padding-right: 75px;
-  box-sizing: border-box;
-}
-
-.vettingDescription {
-  color: black;
-  font-family: Inter, sans-serif;
-  font-size: clamp(1rem, 1.35vw, 1.25rem);
-  font-weight: 400;
-  line-height: 1.6;
+.monthlyCheckIns {
   overflow-wrap: anywhere;
-  word-wrap: break-word;
+}
+
+.stepsSpacerWrap {
+  display: none;
+}
+
+.stepsSpacer,
+.backgroundCheckTitle,
+.backgroundCheckTitleRepeat,
+.stepsHeadingWrap,
+.certificationCourseWrap,
+.biweeklyMeetingWrap,
+.mentorApprovalWrap,
+.sessionRecapsWrap,
+.monthlyCheckInsWrap {
+  display: none;
+}
+
+/* Approach */
+.approachBlock {
+  margin-bottom: 56px;
 }
 
 .approachSection {
-  width: 1331px;
-  height: 711px;
-  position: absolute;
-  left: 102px;
-  top: 2508px;
-}
-
-.approachPanelBg {
-  width: 1331px;
-  height: 311px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: #571377;
-  border-radius: 20px;
-}
-
-.approachHeadingWrap {
-  position: absolute;
-  left: 48px;
-  top: 302px;
-}
-
-.approachDropdownWrap {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-}
-
-/* Flow-based section structure for AnimatedSection wrappers */
-.heroBlock,
-.commitmentBlock,
-.vettingBlock,
-.approachBlock {
   width: min(100%, 1524px);
   margin: 0 auto;
   position: relative;
-  padding-inline: clamp(1rem, 3vw, 2rem);
-  box-sizing: border-box;
-}
-
-.heroBlock {
-  width: 100%;
-  max-width: none;
-  padding-inline: 0;
-}
-
-.heroBlock .heroBand {
-  position: static;
-  width: 100%;
-  height: 680px;
-  background: #571377;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-  top:0;
-}
-
-.heroBlock .heroSection,
-.heroBlock .heroHeadingWrap {
-  position: static;
-  width: 100%;
-  /* height: auto; */
-}
-
-.heroBlock .heroHeadingWrap {
-  width: min(100%, 1200px);
-  margin: 0 auto;
-  padding-inline: clamp(1rem, 3vw, 2rem);
-  align-items: center;
-  transform: translateY(-50px);
-}
-
-.heroBlock .heroHeading {
-  display: block;
-  text-align: left;
-  font-size: calc(clamp(2.4rem, 5vw, 6rem) + 25px);
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-
-.heroBlock .heroImage {
-  position: relative;
-  left: auto;
-  top: auto;
-  transform: translateY(-30%);
-  z-index: 2;
-  width: min(92vw, 1102px);
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 1102 / 830;
-  margin: 0 auto;
-  display: block;
-  object-fit: cover;
-}
-
-.commitmentBlock {
-  margin-top: -225px;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.commitmentBlock .commitmentHeadingWrap,
-.commitmentBlock .vettingDescriptionWrap {
-  position: static;
-  width: 100%;
-  min-height: 0;
-}
-
-.commitmentBlock .commitmentHeadingWrap {
-  margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
-}
-
-.vettingBlock {
-  width: 100%;
-  max-width: none;
-  padding-inline: 0;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.vettingBlock .vettingBand {
-  position: static;
-  width: 100%;
-  left: auto;
-  top: auto;
-}
-
-.approachBlock {
-  height: auto;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.approachBlock .approachSection {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: clamp(420px, 46vw, 711px);
-  left: auto;
-  top: auto;
-  overflow: visible;
+  overflow: hidden;
   border-radius: 20px;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   box-sizing: border-box;
@@ -352,23 +241,18 @@
   align-items: stretch;
   justify-content: space-between;
   gap: clamp(1.5rem, 4vw, 3rem);
+  min-height: clamp(420px, 46vw, 711px);
 }
 
-.approachBlock .approachPanelBg {
+.approachPanelBg {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 95%;
-  height: auto;
-  min-height: 100%;
-  transform: translateX(-50%);
+  inset: 0;
+  background: #571377;
+  border-radius: 20px;
 }
 
-.approachBlock .approachHeadingWrap {
+.approachHeadingWrap {
   position: relative;
-  left: auto;
-  top: auto;
   z-index: 2;
   flex: 1 1 50%;
   display: flex;
@@ -377,344 +261,136 @@
   text-align: center;
 }
 
-.approachBlock .approachDropdownWrap {
+.approachHeading {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.approachDropdownWrap {
   position: relative;
-  right: auto;
-  top: auto;
-  transform: none;
   z-index: 2;
-  align-self: center;
   flex: 1 1 58%;
   width: min(100%, 700px);
   max-width: min(100%, 700px);
   margin-left: auto;
-  padding-right: 30px;
+  align-self: center;
   box-sizing: border-box;
 }
 
-.approachHeading {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 43.2px;
-  word-wrap: break-word;
-}
-
-.stepsSpacer {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.stepsSpacerWrap {
-  position: absolute;
-  left: 405px;
-  top: 294px;
-  text-align: center;
-}
-
-.stepsHeadingWrap {
-  position: absolute;
-  left: 120px;
-  top: 294px;
-  text-align: center;
-}
-
-.stepsHeading {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.certificationCourseWrap {
-  position: absolute;
-  left: 120px;
-  top: 359px;
-  text-align: center;
-}
-
-.certificationCourse {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.biweeklyMeetingWrap {
-  position: absolute;
-  left: 842px;
-  top: 239px;
-  text-align: center;
-}
-
-.biweeklyMeeting {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.mentorApprovalWrap {
-  position: absolute;
-  left: 842px;
-  top: 295px;
-  text-align: center;
-}
-
-.mentorApproval {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.sessionRecapsWrap {
-  position: absolute;
-  left: 843px;
-  top: 355px;
-  text-align: center;
-}
-
-.sessionRecaps {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.monthlyCheckInsWrap {
-  position: absolute;
-  left: 119px;
-  top: 500px;
-  text-align: center;
-}
-
-.monthlyCheckIns {
-  color: white;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 29px;
-  font-weight: 700;
-  line-height: 36px;
-  word-wrap: break-word;
-}
-
-.heroImage {
-  width: min(92vw, 1102px);
-  height: auto;
-  max-width: 100%;
-  position: absolute;
-  left: 50%;
-  top: 377px;
-  transform: translateX(-50%);
-}
-
+/* Responsive */
 @media (max-width: 1200px) {
-  .pageScale {
-    height: auto;
-    min-height: 100%;
-    overflow: visible;
-    display: block;
-  }
-
-  .page {
-    width: min(100%, 980px);
-    height: auto;
-    transform: none;
-    overflow: visible;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    padding: clamp(1rem, 3vw, 2rem);
-    box-sizing: border-box;
-  }
-
-  .heroBand,
-  .heroAnimationSpace,
-  .commitmentAnimationSpace,
-  .vettingAnimationSpace,
-  .approachAnimationSpace,
-  .heroSection,
-  .vettingBand,
-  .backgroundCheckTitle,
-  .backgroundCheckTitleRepeat,
-  .commitmentHeadingWrap,
-  .vettingHeadingWrap,
-  .vettingDescriptionWrap,
-  .stepsHeadingWrap,
-  .mentorApprovalWrap,
-  .sessionRecapsWrap,
-  .monthlyCheckInsWrap,
-  .approachSection,
-  .heroHeadingWrap,
-  .approachHeadingWrap,
-  .heroImage {
-    position: static;
-    left: auto;
-    right: auto;
-    top: auto;
-    bottom: auto;
-    transform: none;
-    width: auto;
-    height: auto;
+  .heroBlock {
+    padding-top: 90px;
   }
 
   .heroBand {
-    order: 1;
-    width: 100%;
-    min-height: 0;
-    height: 0;
-  }
-
-  .heroSection {
-    order: 2;
-    width: 100%;
-    background: #571377;
-    border-radius: 20px;
-    padding: clamp(1.25rem, 4vw, 2.25rem);
-    box-sizing: border-box;
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1rem, 2.5vw, 1.5rem);
+    min-height: 420px;
+    padding: 64px 0 160px;
   }
 
   .heroHeadingWrap {
-    width: 100%;
-    display: block;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .heroHeading {
-    font-size: clamp(2rem, 7vw, 3.25rem);
-    line-height: 1.1;
+    font-size: clamp(2.7rem, 10vw, 5rem);
+    white-space: normal;
   }
 
   .heroImage {
-    width: min(100%, 680px);
-    height: auto;
-    align-self: center;
-    border-radius: 16px;
-    object-fit: cover;
+    width: min(94vw, 760px);
+    margin-top: -110px;
   }
 
   .commitmentHeadingWrap,
-  .vettingDescriptionWrap,
-  .vettingHeadingWrap,
-  .backgroundCheckTitle,
-  .backgroundCheckTitleRepeat,
-  .stepsHeadingWrap,
-  .stepsSpacerWrap,
-  .certificationCourseWrap,
-  .biweeklyMeetingWrap,
-  .mentorApprovalWrap,
-  .sessionRecapsWrap,
-  .monthlyCheckInsWrap {
-    width: 100%;
-    text-align: left;
-  }
-
-  .commitmentHeading,
-  .vettingHeading {
-    font-size: clamp(1.75rem, 6vw, 3rem);
-    line-height: 1.15;
-  }
-
-  .vettingDescription {
-    font-size: clamp(1rem, 2.7vw, 1.15rem);
-    line-height: 1.6;
+  .vettingDescriptionWrap {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .vettingBand {
-    order: 7;
-    width: 100%;
-    background: #571377;
-    border-radius: 20px;
-    padding: clamp(1.25rem, 4vw, 2rem);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(0.75rem, 2.5vw, 1.1rem);
+    padding: 56px 2rem;
   }
 
   .vettingColumns {
     grid-template-columns: 1fr;
-    row-gap: clamp(0.75rem, 2.5vw, 1.1rem);
+    gap: 24px;
   }
 
   .vettingColumn {
-    gap: clamp(0.75rem, 2.5vw, 1.1rem);
-  }
-
-  .sectionEyebrow,
-  .sectionEyebrowRepeat,
-  .stepsHeading,
-  .certificationCourse,
-  .biweeklyMeeting,
-  .mentorApproval,
-  .sessionRecaps,
-  .monthlyCheckIns,
-  .stepsSpacer {
-    font-size: clamp(1rem, 3.4vw, 1.4rem);
-    line-height: 1.35;
+    gap: 24px;
   }
 
   .approachSection {
-    position: relative;
-    width: 100%;
     min-height: 0;
-    overflow: visible;
-    border-radius: 20px;
-    padding: clamp(1.25rem, 4vw, 2rem);
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: clamp(1rem, 3vw, 1.5rem);
-  }
-
-  .approachPanelBg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    z-index: 1;
+    gap: 1.5rem;
   }
 
   .approachHeadingWrap {
-    position: relative;
-    z-index: 2;
-  }
-
-  .approachHeading {
-    font-size: clamp(1.25rem, 4.2vw, 2rem);
-    line-height: 1.25;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .approachDropdownWrap {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    z-index: 2;
     width: 100%;
     max-width: 100%;
-    padding-right: 30px;
-    box-sizing: border-box;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroBlock {
+    padding-top: 90px;
+  }
+
+  .heroBand {
+    min-height: 360px;
+    padding: 48px 0 120px;
+  }
+
+  .heroHeadingWrap {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .heroHeading {
+    font-size: clamp(2.3rem, 12vw, 4rem);
+    line-height: 1;
+  }
+
+  .heroImage {
+    width: min(94vw, 620px);
+    margin-top: -72px;
+  }
+
+  .commitmentBlock,
+  .vettingBlock,
+  .approachBlock {
+    margin-bottom: 40px;
+  }
+
+  .commitmentHeadingWrap,
+  .vettingDescriptionWrap,
+  .vettingBand {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .vettingBand {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .approachSection {
+    padding: 1.25rem;
   }
 }
