@@ -71,7 +71,7 @@ function HeroSection() {
                   height: "67px",
                 }}
                 className="glow-btn text-white font-semibold rounded-full"
-              >
+                >
                 Become a Mentor
               </button>
             </div>
@@ -778,7 +778,6 @@ function FAQSection() {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <AnimatedSection>
         <HeroSection />
       </AnimatedSection>
 
