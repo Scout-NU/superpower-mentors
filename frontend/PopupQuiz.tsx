@@ -281,11 +281,10 @@ export default function QuizModal() {
                   cursor: "pointer",
                 }}
               >
-                <button className="w-fit bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
-                  {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
-                </button>
+                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
               </Link>
               <br />
+
               <button
                 onClick={closeModal}
                 style={{
