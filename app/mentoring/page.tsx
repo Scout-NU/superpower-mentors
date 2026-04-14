@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from "react";
 import styles from "./mentoring.module.css";
 import React from "react";
 import * as apiService from "../../backend/utils/apiService";
@@ -34,15 +34,15 @@ type RootLogo = {
 };
 
 type TimelineStep = {
-  id: number
-  title: string
-  description: string
-}
+  id: number;
+  title: string;
+  description: string;
+};
 
 type ValueCard = {
-  title: string
-  back: string
-}
+  title: string;
+  back: string;
+};
 
 const mentors: Mentor[] = [
   {
@@ -93,56 +93,56 @@ const roots: RootLogo[] = [
 const timelineSteps: TimelineStep[] = [
   {
     id: 1,
-    title: 'Get Matched',
+    title: "Get Matched",
     description:
-      'During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them.',
+      "During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them.",
   },
   {
     id: 2,
-    title: 'Meet Your Mentor',
+    title: "Meet Your Mentor",
     description:
-      'Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if this match is the right fit.',
+      "Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if this match is the right fit.",
   },
   {
     id: 3,
-    title: 'In the Session',
+    title: "In the Session",
     description:
-      'We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee’s specific interests and age.',
+      "We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee’s specific interests and age.",
   },
   {
     id: 4,
-    title: 'Family Matters',
+    title: "Family Matters",
     description:
-      'Each month you and your child’s mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!',
+      "Each month you and your child’s mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!",
   },
   {
     id: 5,
-    title: 'For the Parents',
+    title: "For the Parents",
     description:
-      'The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!',
+      "The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!",
   },
 ];
 
 const valueCards: ValueCard[] = [
   {
-    title: 'Neurodiversity',
+    title: "Neurodiversity",
     back:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
-    title: 'Transitions',
+    title: "Transitions",
     back:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
-    title: 'Confidence',
+    title: "Confidence",
     back:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
-    title: 'Direction',
+    title: "Direction",
     back:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
 ];
 
@@ -156,7 +156,7 @@ function CircleDivider() {
     { w: 46, h: 46 },
     { w: 26, h: 26 },
     { w: 18, h: 18 },
-  ]
+  ];
 
   return (
     <div className={styles.circleDivider} aria-hidden="true">
@@ -222,63 +222,114 @@ function ValuesSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default function MentoringPage() {
-  const [activeStep, setActiveStep] = useState(1)
-  const timelineItemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [activeStep, setActiveStep] = useState(1);
+  const [visibleSections, setVisibleSections] = useState<string[]>([]);
+  const timelineItemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const valuesRef = useRef<HTMLElement | null>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
+  const timelineRef = useRef<HTMLElement | null>(null);
+  const videoRef = useRef<HTMLElement | null>(null);
+  const formRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
+    const observers: IntersectionObserver[] = [];
 
     timelineItemRefs.current.forEach((item, index) => {
-      if (!item) return
+      if (!item) return;
 
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setActiveStep(index + 1)
+            setActiveStep(index + 1);
           }
         },
         {
           threshold: 0.55,
-          rootMargin: '-10% 0px -35% 0px',
+          rootMargin: "-10% 0px -35% 0px",
         }
-      )
+      );
 
-      observer.observe(item)
-      observers.push(observer)
-    })
+      observer.observe(item);
+      observers.push(observer);
+    });
 
     return () => {
-      observers.forEach((observer) => observer.disconnect())
-    }
-  }, [])
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
+  useEffect(() => {
+    const refs = [
+      { key: "values", ref: valuesRef },
+      { key: "hero", ref: heroRef },
+      { key: "timeline", ref: timelineRef },
+      { key: "video", ref: videoRef },
+      { key: "form", ref: formRef },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const key = entry.target.getAttribute("data-section");
+          if (entry.isIntersecting && key) {
+            setVisibleSections((prev) =>
+              prev.includes(key) ? prev : [...prev, key]
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    refs.forEach(({ key, ref }) => {
+      if (ref.current) {
+        ref.current.setAttribute("data-section", key);
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const revealClass = (key: string) =>
+    `${styles.revealSection} ${
+      visibleSections.includes(key) ? styles.revealSectionVisible : ""
+    }`;
 
   const midpoint = Math.ceil(roots.length / 2);
   const topRowRoots = roots.slice(0, midpoint);
   const bottomRowRoots = roots.slice(midpoint);
 
-  const onFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
     try {
       const body = Object.fromEntries(formData);
       await apiService.bookStrategyCall(body);
-      // clear form fields
-      e.target.reset();
+      form.reset();
     } catch (error) {
       console.log("Error submitting form", error);
-      // show a toast message indicating failure?
     }
   };
 
   return (
     <main className={styles.page}>
-      <ValuesSection />
+      <div ref={valuesRef} className={revealClass("values")}>
+        <ValuesSection />
+      </div>
 
-      <section className={styles.hero}>
+      <section ref={heroRef} className={`${styles.hero} ${revealClass("hero")}`}>
         <div className={styles.inner}>
           <h1 className={styles.title}>Hear From our Mentors</h1>
 
@@ -315,7 +366,10 @@ export default function MentoringPage() {
         </div>
       </section>
 
-      <section className={styles.howItWorksSection}>
+      <section
+        ref={timelineRef}
+        className={`${styles.howItWorksSection} ${revealClass("timeline")}`}
+      >
         <div className={styles.inner}>
           <h2 className={styles.howItWorksTitle}>How It Works</h2>
 
@@ -323,14 +377,14 @@ export default function MentoringPage() {
             <div className={styles.purpleTimelineRail} aria-hidden="true" />
 
             {timelineSteps.map((step, index) => {
-              const isActive = activeStep === step.id
-              const isPast = activeStep > step.id
+              const isActive = activeStep === step.id;
+              const isPast = activeStep > step.id;
 
               return (
                 <div
                   key={step.id}
                   ref={(el) => {
-                    timelineItemRefs.current[index] = el
+                    timelineItemRefs.current[index] = el;
                   }}
                   className={styles.purpleTimelineRow}
                 >
@@ -340,7 +394,7 @@ export default function MentoringPage() {
                         ? styles.purpleTimelineTitleWrapActive
                         : isPast
                         ? styles.purpleTimelineTitleWrapPast
-                        : ''
+                        : ""
                     }`}
                   >
                     <h3 className={styles.purpleTimelineTitle}>{step.title}</h3>
@@ -353,7 +407,7 @@ export default function MentoringPage() {
                           ? styles.purpleTimelineDotActive
                           : isPast
                           ? styles.purpleTimelineDotPast
-                          : ''
+                          : ""
                       }`}
                     />
                   </div>
@@ -364,7 +418,7 @@ export default function MentoringPage() {
                         ? styles.purpleTimelineDescriptionWrapActive
                         : isPast
                         ? styles.purpleTimelineDescriptionWrapPast
-                        : ''
+                        : ""
                     }`}
                   >
                     <p className={styles.purpleTimelineDescription}>
@@ -372,17 +426,18 @@ export default function MentoringPage() {
                     </p>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
       </section>
 
       <section
-        className={styles.videoCtaSection}
+        ref={videoRef}
+        className={`${styles.videoCtaSection} ${revealClass("video")}`}
         style={{
-          marginTop: '-4rem',
-          paddingTop: '2rem',
+          marginTop: "-4rem",
+          paddingTop: "2rem",
         }}
       >
         <div className={styles.inner}>
@@ -423,7 +478,11 @@ export default function MentoringPage() {
         </div>
       </section>
 
-      <section id="strategy-call" className={styles.formSection}>
+      <section
+        ref={formRef}
+        id="strategy-call"
+        className={`${styles.formSection} ${revealClass("form")}`}
+      >
         <div className={styles.formInner}>
           <h2 className={styles.formTitle}>
             Book Your Free Strategy Call Today!
@@ -506,7 +565,7 @@ export default function MentoringPage() {
                   <option value="student">Student</option>
                   <option value="guardian">Guardian</option>
                   <option value="educator">Educator</option>
-                  <option value="partner"> Organization/Partner </option>
+                  <option value="partner">Organization/Partner</option>
                   <option value="other">Other</option>
                 </select>
 

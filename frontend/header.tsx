@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "./logo";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
@@ -11,13 +11,17 @@ export default function Navbar() {
       </div> 
       */}
 
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="px-8 py-3 bg-zinc-200 rounded-lg text-black text-lg font-semibold"
-        >
-          Logo
-        </Link>
+      <div className="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
+      <Link href="/" className="flex items-center">
+      <Image
+        src="/spm_logo.png"
+        alt="Logo"
+        className="h-20 w-auto"
+        width={100}
+        height={40}
+        priority
+      />
+      </Link>
 
         <div className="flex items-center gap-8 text-lg font-medium">
           <Link href="/about-us" className="hover:text-zinc-600 transition-colors">

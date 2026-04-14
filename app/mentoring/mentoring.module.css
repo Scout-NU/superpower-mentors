@@ -4,12 +4,24 @@
   
   .hero {
     background: var(--color-purple-dark);
-    padding: 120px 24px 96px;
+    padding: 120px 24px 80px;
   }
   
   .inner {
     max-width: 1320px;
     margin: 0 auto;
+  }
+
+  .revealSection {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+  }
+  
+  .revealSectionVisible {
+    opacity: 1;
+    transform: translateY(0);
   }
   
   .title {

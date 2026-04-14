@@ -1,20 +1,69 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './about-us.module.css'
 
 export default function AboutPage() {
   const [isLetterOpen, setIsLetterOpen] = useState(false)
+  const [visibleSections, setVisibleSections] = useState<string[]>([])
+
+  const heroRef = useRef<HTMLElement | null>(null)
+  const whyRef = useRef<HTMLElement | null>(null)
+  const founderRef = useRef<HTMLElement | null>(null)
+  const superpowerRef = useRef<HTMLElement | null>(null)
+  const letterRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const refs = [
+      { key: 'hero', ref: heroRef },
+      { key: 'why', ref: whyRef },
+      { key: 'founder', ref: founderRef },
+      { key: 'superpower', ref: superpowerRef },
+      { key: 'letter', ref: letterRef },
+    ]
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const key = entry.target.getAttribute('data-section')
+          if (entry.isIntersecting && key) {
+            setVisibleSections((prev) =>
+              prev.includes(key) ? prev : [...prev, key]
+            )
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    )
+
+    refs.forEach(({ key, ref }) => {
+      if (ref.current) {
+        ref.current.setAttribute('data-section', key)
+        observer.observe(ref.current)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const revealClass = (key: string) =>
+    `${styles.revealSection} ${
+      visibleSections.includes(key) ? styles.revealSectionVisible : ''
+    }`
 
   return (
     <main className={styles.page}>
-      <section className={styles.hero}>
+      <section ref={heroRef} className={`${styles.hero} ${revealClass('hero')}`}>
         <div className={styles.inner}>
-          <h1 className={styles.heroTitle}>ABOUT US</h1>
+          <h1 className={styles.heroTitle}>About Us</h1>
         </div>
       </section>
 
-      <section className={styles.whySection}>
+      <section ref={whyRef} className={`${styles.whySection} ${revealClass('why')}`}>
         <div className={styles.inner}>
           <div className={styles.whyGrid}>
             <div className={styles.whyContent}>
@@ -40,7 +89,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className={styles.founderSection}>
+      <section
+        ref={founderRef}
+        className={`${styles.founderSection} ${revealClass('founder')}`}
+      >
         <div className={styles.inner}>
           <h2 className={styles.founderTitle}>
             Hear from our <span>FOUNDER</span>
@@ -85,18 +137,21 @@ export default function AboutPage() {
             <p>
               <span>2)</span> Students are expected to show up to school, and
               just learn. But that is not how it works for kids who are so
-              triggered by “learning” itself due to their learning differences.
+              triggered by learning itself due to their learning differences.
             </p>
 
             <p>
-              <span>3)</span> We have become obsessed with “fixing” the problem.
-              That, in it of itself is the problem.
+              <span>3)</span> We have become obsessed with fixing the problem.
+              That, in itself, is the problem.
             </p>
           </div>
         </div>
       </section>
 
-      <section className={styles.superpowerSection}>
+      <section
+        ref={superpowerRef}
+        className={`${styles.superpowerSection} ${revealClass('superpower')}`}
+      >
         <div className={styles.inner}>
           <h2 className={styles.superpowerTitle}>
             What is a <span>SUPERPOWER?</span>
@@ -105,7 +160,7 @@ export default function AboutPage() {
           <div className={styles.superpowerContent}>
             <p>
               We were all misunderstood for how we learned. It felt like
-              everyone around us was trying to “fix” us. We were often
+              everyone around us was trying to fix us. We were often
               misunderstood by our teachers, peers, professionals and sometimes
               even loved ones. With this came anxiety, constantly comparing
               ourselves. Don’t even get us started with reading or math...
@@ -120,7 +175,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className={styles.letterSection}>
+      <section
+        ref={letterRef}
+        className={`${styles.letterSection} ${revealClass('letter')}`}
+      >
         <div className={styles.inner}>
           <button
             type="button"

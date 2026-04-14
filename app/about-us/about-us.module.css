@@ -9,14 +9,15 @@
 
 .hero {
   background: var(--color-purple-dark);
-  padding: 150px 0 64px;
+  padding: 60px 30px 64px;
+  margin-top: 80px;
 }
 
 .heroTitle {
-  margin: 0;
+  margin-top: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(4rem, 8vw, 8.5rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 0.95;
   letter-spacing: 0em;
   color: var(--color-white);
@@ -325,6 +326,18 @@
   line-height: 1;
   cursor: pointer;
   z-index: 2;
+}
+
+.revealSection {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.revealSectionVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
