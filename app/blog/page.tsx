@@ -15,10 +15,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 const CATEGORIES = ["ADHD", "Autism", "Mentoring", "Students"];
 
 const FEATURED = {
-  title: "Case: College Transition",
-  excerpt:
-    '"We are proud to say that while nationally the college dropout rate between freshman and sophomore years is 30%, the dropout rate is ZERO for students who have had a Morelli Foundation (Superpower) Mentor!"',
-  tags: ["Mentoring", "Students"],
+  image: "/blog_dropoutrate.png"
 };
 
 const ARTICLES = [
@@ -141,16 +138,6 @@ function TagPill({
   );
 }
 
-function ImgPlaceholder({ className = "" }: { className?: string }) {
-  return (
-    <div
-      className={`bg-zinc-200 flex items-center justify-center ${className}`}
-    >
-      <span className="text-zinc-400 text-xs">IMG</span>
-    </div>
-  );
-}
-
 function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
   return (
     <Link
@@ -173,7 +160,9 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
           className="w-4/5 h-60 object-cover"
         />
       ) : (
-        <ImgPlaceholder className="w-4/5 h-40" />
+        <div className="bg-zinc-200 flex items-center justify-center w-4/5 h-40">
+          <span className="text-zinc-400 text-xs">IMG</span>
+        </div>
       )}
 
       <div style={{ width: "80%" }}>
@@ -211,31 +200,16 @@ export default function BlogPage() {
 
       {/* Featured */}
       <section className="px-6 pt-8 pb-10 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 gap-8 items-start mb-6">
-          <h2
-            className="font-bold text-black leading-snug"
-            style={{ fontSize: "clamp(28px, 4vw, 52px)" }}
-          >
-            {FEATURED.title}
-          </h2>
-
-          <div className="w-full">
-            <p className="w-full text-2xl font-bold text-black leading-relaxed mb-4">
-              {FEATURED.excerpt}
-            </p>
-
-            <div className="flex gap-2 flex-wrap items-center w-full">
-              {FEATURED.tags.map((t) => (
-                <TagPill key={t} label={t} />
-              ))}
-              <button className="glow-btn glow-btn--alt ml-auto bg-blue-600 text-white text-xs font-bold px-5 py-2 rounded-md hover:bg-blue-700 transition-colors">
-                Read More
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <ImgPlaceholder className="w-full h-[480px]" />
+        <a
+          href="https://www.researchsquare.com/article/rs-5189431/v1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={FEATURED.image}
+            className="w-full h-full object-cover cursor-pointer"
+          />
+        </a>
       </section>
 
       {/* Category Filter Bar */}
@@ -256,7 +230,7 @@ export default function BlogPage() {
       </section>
 
       {/* Blog Grid */}
-      <section className="px-6 py-8 pb-16 max-w-7xl mx-auto">
+      <section id="articles" className="px-6 py-8 pb-16 max-w-7xl mx-auto">
         <div className="grid grid-cols-3">
           {filtered.map((article, i) => {
             const col = i % 3;

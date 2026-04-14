@@ -16,7 +16,7 @@ export default function Footer() {
             
             <div className="flex items-center gap-4">
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/superpowermentors/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-white hover:!text-gray-300 transition-colors"
@@ -28,7 +28,7 @@ export default function Footer() {
               </a>
               
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/SuperpowerMentorship/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-white hover:!text-gray-300 transition-colors"
@@ -54,12 +54,6 @@ export default function Footer() {
           <div className="flex gap-16">
             <div className="flex flex-col gap-3">
               <Link 
-                href="/faqs" 
-                className="text-white hover:!text-gray-300 transition-colors"
-              >
-                FAQs
-              </Link>
-              <Link 
                 href="/privacy-policy" 
                 className="text-white hover:!text-gray-300 transition-colors"
               >
@@ -74,14 +68,16 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <Link 
-                href="/career" 
+              <a 
+                href="https://app.dover.com/jobs/superpowermentors"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:!text-gray-300 transition-colors"
               >
                 Career
-              </Link>
+              </a>
               <Link 
-                href="/contact-us" 
+                href="/mentoring#strategy-call-form" 
                 className="text-white hover:!text-gray-300 transition-colors"
               >
                 Contact Us
