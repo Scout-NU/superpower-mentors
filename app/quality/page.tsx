@@ -9,7 +9,7 @@ function HeroSection() {
       <div className={styles.heroBand}>
           <div className={styles.heroHeadingWrap}><span className={styles.heroHeading}>Safety <br/>&amp; Quality Assurance</span></div>
       </div>
-      <img className={styles.heroImage} src="https://placehold.co/1102x830" />
+      <img className={styles.heroImage} src="placeholder.png" />
     </section>
   );
 }
