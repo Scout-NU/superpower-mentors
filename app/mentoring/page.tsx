@@ -1,22 +1,38 @@
-'use client'
+"use client";
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import styles from './mentoring.module.css'
+import React from "react";
+import * as apiService from "../../backend/utils/apiService";
 
 type Mentor = {
-  id: number
-  name: string
-  description: string
-  quote: string
-  image: string
-}
+  id: number;
+  name: string;
+  description: string;
+  quote: string;
+  image: string;
+};
+
+type ProgramItem = {
+  id: number;
+  title: string;
+  content: string;
+};
+
+type Program = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  items: ProgramItem[];
+};
 
 type RootLogo = {
-  id: number
-  name: string
-  image: string
-}
+  id: number;
+  name: string;
+  image: string;
+};
 
 type TimelineStep = {
   id: number
@@ -30,44 +46,48 @@ const PURPLE = '#571377'
 const mentors: Mentor[] = [
   {
     id: 1,
-    name: 'Meet Tyler',
+    name: "Meet Tyler",
     description:
-      'Professional music artist and sound engineer with millions of Spotify streams, as well as an OCD advocate and podcast host.',
+      "Professional music artist and sound engineer with millions of Spotify streams, as well as an OCD advocate and podcast host.",
     quote:
-      '“Your differences can become your edge once you learn how to work with them instead of against them.”',
-    image: '/mentor_tyler.png',
+      "“Your differences can become your edge once you learn how to work with them instead of against them.”",
+    image: "/mentor_tyler.png",
   },
   {
     id: 2,
-    name: 'Meet Eden',
+    name: "Meet Eden",
     description:
-      'Marketing agency CEO w/ ADHD partnering with brands such as Dove, Samsung, and Amazon.',
+      "Marketing agency CEO w/ ADHD partnering with brands such as Dove, Samsung, and Amazon.",
     quote:
-      '“Confidence grows when you stop trying to fit a mold that was never built for you.”',
-    image: '/mentor_eden.png',
+      "“Confidence grows when you stop trying to fit a mold that was never built for you.”",
+    image: "/mentor_eden.png",
   },
   {
     id: 3,
-    name: 'Meet Franck',
+    name: "Meet Franck",
     description:
-      'Growth strategist, educator, advocate, and technologist with ADHD.',
+      "Growth strategist, educator, advocate, and technologist with ADHD.",
     quote:
-      '“The right direction starts with understanding how your mind works, then building from there.”',
-    image: '/mentor_franck.png',
+      "“The right direction starts with understanding how your mind works, then building from there.”",
+    image: "/mentor_franck.png",
   },
-]
+];
 
 const roots: RootLogo[] = [
-  { id: 1, name: 'Apple', image: '/mentor_apple_logo.png' },
-  { id: 2, name: 'Northeastern University', image: '/mentor_northeastern_logo.jpg' },
-  { id: 3, name: 'Harvard University', image: '/mentor_harvard_logo.png' },
-  { id: 4, name: 'Hubspot', image: '/mentor_hubspot_logo.png' },
-  { id: 5, name: 'NASA', image: '/mentor_nasa_logo.png' },
-  { id: 6, name: 'Spotify', image: '/mentor_spotify_logo.png' },
-  { id: 7, name: 'United Nations', image: '/mentor_un_logo.png' },
-  { id: 8, name: 'US Figure Skating', image: '/mentor_skating_logo.png' },
-  { id: 9, name: 'Duke University', image: '/mentor_duke_logo.png' },
-]
+  { id: 1, name: "Apple", image: "/mentor_apple_logo.png" },
+  {
+    id: 2,
+    name: "Northeastern University",
+    image: "/mentor_northeastern_logo.jpg",
+  },
+  { id: 3, name: "Harvard University", image: "/mentor_harvard_logo.png" },
+  { id: 4, name: "Hubspot", image: "/mentor_hubspot_logo.png" },
+  { id: 5, name: "NASA", image: "/mentor_nasa_logo.png" },
+  { id: 6, name: "Spotify", image: "/mentor_spotify_logo.png" },
+  { id: 7, name: "United Nations", image: "/mentor_un_logo.png" },
+  { id: 8, name: "US Figure Skating", image: "/mentor_skating_logo.png" },
+  { id: 9, name: "Duke University", image: "/mentor_duke_logo.png" },
+];
 
 const timelineSteps: TimelineStep[] = [
   {
@@ -100,7 +120,7 @@ const timelineSteps: TimelineStep[] = [
     description:
       'The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!',
   },
-]
+];
 
 function CircleDivider() {
   const circles = [
@@ -138,7 +158,7 @@ function CircleDivider() {
         />
       ))}
     </div>
-  )
+  );
 }
 
 function ValuesSection() {
@@ -351,9 +371,23 @@ export default function MentoringPage() {
     }
   }, [])
 
-  const midpoint = Math.ceil(roots.length / 2)
-  const topRowRoots = roots.slice(0, midpoint)
-  const bottomRowRoots = roots.slice(midpoint)
+  const midpoint = Math.ceil(roots.length / 2);
+  const topRowRoots = roots.slice(0, midpoint);
+  const bottomRowRoots = roots.slice(midpoint);
+
+  const onFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    try {
+      const body = Object.fromEntries(formData);
+      await apiService.bookStrategyCall(body);
+      // clear form fields
+      e.target.reset();
+    } catch (error) {
+      console.log("Error submitting form", error);
+      // show a toast message indicating failure?
+    }
+  };
 
   return (
     <main className={styles.page}>
@@ -460,8 +494,8 @@ export default function MentoringPage() {
             Unlock Your Child&apos;s Full Potential
           </h2>
           <p className={styles.videoCtaSubtitle}>
-            Watch “Dear Younger Self,” our message to those struggling with learning
-            differences.
+            Watch “Dear Younger Self,” our message to those struggling with
+            learning differences.
           </p>
 
           <div className={styles.videoCtaGrid}>
@@ -477,9 +511,9 @@ export default function MentoringPage() {
 
             <div className={styles.videoCtaContent}>
               <p className={styles.videoCtaText}>
-                Every mentor on our team, including our founder Jake Sussman, truly
-                understands the challenges of being misunderstood, as they have all
-                navigated their own learning differences.
+                Every mentor on our team, including our founder Jake Sussman,
+                truly understands the challenges of being misunderstood, as they
+                have all navigated their own learning differences.
               </p>
 
               <a
@@ -493,15 +527,21 @@ export default function MentoringPage() {
         </div>
       </section>
 
-      <section id="strategy-call-form" className={styles.formSection}>
+      <section id="strategy-call" className={styles.formSection}>
         <div className={styles.formInner}>
-          <h2 className={styles.formTitle}>Book Your Free Strategy Call Today!</h2>
+          <h2 className={styles.formTitle}>
+            Book Your Free Strategy Call Today!
+          </h2>
           <p className={styles.formSubtitle}>
             Meet with Founder and Program Director of Superpower Mentors, Jake
             Sussman, by filling out this form!
           </p>
 
-          <form className={styles.strategyForm}>
+          <form
+            id="strategy-call-form"
+            className={styles.strategyForm}
+            onSubmit={onFormSubmit}
+          >
             <div className={styles.formGrid}>
               <div className={styles.fieldGroup}>
                 <label htmlFor="firstName" className={styles.formLabel}>
@@ -570,6 +610,7 @@ export default function MentoringPage() {
                   <option value="student">Student</option>
                   <option value="guardian">Guardian</option>
                   <option value="educator">Educator</option>
+                  <option value="partner"> Organization/Partner </option>
                   <option value="other">Other</option>
                 </select>
 
@@ -612,5 +653,5 @@ export default function MentoringPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

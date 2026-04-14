@@ -8,12 +8,19 @@ import axios from "axios";
  */
 export const sendQuizAnswers = async (email: string, quizAnswers: object[]) => {
   try {
-    await axios
-      .post("/api/send-email", {
-        email: email,
-        quizAnswers: quizAnswers,
-        requestType: "send-email"
-      });
+    await axios.post("/api/send-email", {
+      email: email,
+      quizAnswers: quizAnswers,
+      requestType: "send-email",
+    });
+  } catch (e) {
+    console.log("Error sending request to internal API:", e);
+  }
+};
+
+export const bookStrategyCall = async (body: object) => {
+  try {
+    await axios.post("/api/strategy-call", {...body, requestType: "strategy-call"});
   } catch (e) {
     console.log("Error sending request to internal API:", e);
   }

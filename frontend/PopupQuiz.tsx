@@ -1,6 +1,6 @@
 "use client";
 import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
-import * as emailService from "../backend/utils/emailService";
+import * as emailService from "../backend/utils/apiService";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
