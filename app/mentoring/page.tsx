@@ -1,162 +1,335 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import styles from './mentoring.module.css'
+import { useEffect, useRef, useState } from "react";
+import styles from "./mentoring.module.css";
+import React from "react";
+import * as apiService from "../../backend/utils/apiService";
 
 type Mentor = {
-  id: number
-  name: string
-  description: string
-  image: string
-}
+  id: number;
+  name: string;
+  description: string;
+  quote: string;
+  image: string;
+};
 
 type ProgramItem = {
-  id: number
-  title: string
-  content: string
-}
+  id: number;
+  title: string;
+  content: string;
+};
 
 type Program = {
-  id: number
-  title: string
-  description: string
-  image: string
-  items: ProgramItem[]
-}
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  items: ProgramItem[];
+};
 
 type RootLogo = {
-  id: number
-  name: string
-  image: string
-}
+  id: number;
+  name: string;
+  image: string;
+};
+
+type TimelineStep = {
+  id: number;
+  title: string;
+  description: string;
+};
+
+type ValueCard = {
+  title: string;
+  back: string;
+};
 
 const mentors: Mentor[] = [
   {
     id: 1,
-    name: 'Christiana W',
+    name: "Meet Tyler",
     description:
-      'Los Angeles, USA. Dyslexic. Art Director, Advertising, Social Media Influencer, Semi-Professional Athlete',
-    image: '/mentor_christiana.jpg',
+      "Professional music artist and sound engineer with millions of Spotify streams, as well as an OCD advocate and podcast host.",
+    quote:
+      "“Your differences can become your edge once you learn how to work with them instead of against them.”",
+    image: "/mentor_tyler.png",
   },
   {
     id: 2,
-    name: 'Jeff S',
+    name: "Meet Eden",
     description:
-      'Bronx, NY. ADHD. Aerospace Research Engineer @ NASA. Marathon Athlete, Musician, Scientific Tech Developer',
-    image: '/mentor_jeff.jpg',
+      "Marketing agency CEO w/ ADHD partnering with brands such as Dove, Samsung, and Amazon.",
+    quote:
+      "“Confidence grows when you stop trying to fit a mold that was never built for you.”",
+    image: "/mentor_eden.png",
   },
   {
     id: 3,
-    name: 'Dylann C',
+    name: "Meet Franck",
     description:
-      'Massachusetts, USA. ADHD, Educator, Writer, Artist, Blogger, Health Enthusiast, Entrepreneur.',
-    image: '/mentor_dylann.jpg',
+      "Growth strategist, educator, advocate, and technologist with ADHD.",
+    quote:
+      "“The right direction starts with understanding how your mind works, then building from there.”",
+    image: "/mentor_franck.png",
   },
-]
+];
 
 const roots: RootLogo[] = [
-  { id: 1, name: 'Apple', image: '/mentor_apple_logo.png' },
-  { id: 2, name: 'Northeastern University', image: '/mentor_northeastern_logo.jpg' },
-  { id: 3, name: 'Harvard University', image: '/mentor_harvard_logo.png' },
-  { id: 4, name: 'Hubspot', image: '/mentor_hubspot_logo.png' },
-  { id: 5, name: 'NASA', image: '/mentor_nasa_logo.png' },
-  { id: 6, name: 'Spotify', image: '/mentor_spotify_logo.png' },
-  { id: 7, name: 'United Nations', image: '/mentor_un_logo.png' },
-  { id: 8, name: 'US Figure Skating', image: '/mentor_skating_logo.png' },
-  { id: 9, name: 'Duke University', image: '/mentor_duke_logo.png' },
-]
+  { id: 1, name: "Apple", image: "/mentor_apple_logo.png" },
+  {
+    id: 2,
+    name: "Northeastern University",
+    image: "/mentor_northeastern_logo.jpg",
+  },
+  { id: 3, name: "Harvard University", image: "/mentor_harvard_logo.png" },
+  { id: 4, name: "Hubspot", image: "/mentor_hubspot_logo.png" },
+  { id: 5, name: "NASA", image: "/mentor_nasa_logo.png" },
+  { id: 6, name: "Spotify", image: "/mentor_spotify_logo.png" },
+  { id: 7, name: "United Nations", image: "/mentor_un_logo.png" },
+  { id: 8, name: "US Figure Skating", image: "/mentor_skating_logo.png" },
+  { id: 9, name: "Duke University", image: "/mentor_duke_logo.png" },
+];
 
-const programs: Program[] = [
+const timelineSteps: TimelineStep[] = [
   {
     id: 1,
-    title: 'Neurodiversity',
+    title: "Get Matched",
     description:
-      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/mentor_kids.jpg',
-    items: [
-      {
-        id: 1,
-        title: 'Value 1',
-        content:
-          'This program helps younger students build confidence, communication, and healthy routines while learning how to understand their strengths.',
-      },
-      {
-        id: 2,
-        title: 'Value 2',
-        content:
-          'The most common age in our program is 11-14 year olds. In this bracket, your child will dive into deeper concepts, learn how to embrace their Superpower, and work through challenges like bullying, communication, and emotional expression.',
-      },
-    ],
+      "During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them.",
   },
   {
     id: 2,
-    title: 'Direction & Transitions',
+    title: "Meet Your Mentor",
     description:
-      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/mentor_hs.jpg',
-    items: [
-      {
-        id: 1,
-        title: 'Value 1',
-        content:
-          'Students get support with identity, academic pressure, confidence, goal setting, and preparing for the transition into college or work.',
-      },
-      {
-        id: 2,
-        title: 'Value 2',
-        content:
-          'College students get guidance on independence, time management, burnout, belonging, and staying on track through the hardest transition years.',
-      },
-    ],
+      "Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if this match is the right fit.",
   },
   {
     id: 3,
-    title: 'Confidence',
+    title: "In the Session",
     description:
-      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/mentor_college.jpg',
-    items: [
-      {
-        id: 1,
-        title: 'Value 1',
-        content:
-          'This track helps students move from school into adult life with more clarity, confidence, and a practical plan for what comes next.',
-      },
-      {
-        id: 2,
-        title: 'Value 2',
-        content:
-          'Young professionals get support with communication, workplace confidence, leadership habits, boundaries, and career growth.',
-      },
-    ],
+      "We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee’s specific interests and age.",
   },
-]
+  {
+    id: 4,
+    title: "Family Matters",
+    description:
+      "Each month you and your child’s mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!",
+  },
+  {
+    id: 5,
+    title: "For the Parents",
+    description:
+      "The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!",
+  },
+];
+
+const valueCards: ValueCard[] = [
+  {
+    title: "Neurodiversity",
+    back:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    title: "Transitions",
+    back:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    title: "Confidence",
+    back:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    title: "Direction",
+    back:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+];
+
+function CircleDivider() {
+  const circles = [
+    { w: 20, h: 20 },
+    { w: 28, h: 28 },
+    { w: 40, h: 40 },
+    { w: 58, h: 58 },
+    { w: 72, h: 72 },
+    { w: 46, h: 46 },
+    { w: 26, h: 26 },
+    { w: 18, h: 18 },
+  ];
+
+  return (
+    <div className={styles.circleDivider} aria-hidden="true">
+      {circles.map((c, i) => (
+        <span
+          key={i}
+          style={{
+            width: `${c.w}px`,
+            height: `${c.h}px`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ValuesSection() {
+  return (
+    <section className={styles.valuesSection}>
+      <div className={styles.valuesHeader}>
+        <div className={styles.inner}>
+          <h2 className={styles.valuesTitle}>How We Can Help</h2>
+        </div>
+      </div>
+
+      <div className={styles.valuesBody}>
+        <div className={styles.inner}>
+          <div className={styles.valuesCardsWrap}>
+            <div className={styles.valuesCardsColumn}>
+              {[valueCards[0], valueCards[2]].map((card) => (
+                <div key={card.title} className={styles.flipCard}>
+                  <div className={styles.flipCardInner}>
+                    <div className={styles.flipCardFront}>
+                      <h3 className={styles.flipCardTitle}>{card.title}</h3>
+                    </div>
+
+                    <div className={styles.flipCardBack}>
+                      <p className={styles.flipCardBackText}>{card.back}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <CircleDivider />
+
+            <div className={styles.valuesCardsColumn}>
+              {[valueCards[1], valueCards[3]].map((card) => (
+                <div key={card.title} className={styles.flipCard}>
+                  <div className={styles.flipCardInner}>
+                    <div className={styles.flipCardFront}>
+                      <h3 className={styles.flipCardTitle}>{card.title}</h3>
+                    </div>
+
+                    <div className={styles.flipCardBack}>
+                      <p className={styles.flipCardBackText}>{card.back}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function MentoringPage() {
-  const [openItems, setOpenItems] = useState<Record<number, number[]>>({
-    1: [],
-    2: [],
-    3: [],
-  })
+  const [activeStep, setActiveStep] = useState(1);
+  const [visibleSections, setVisibleSections] = useState<string[]>([]);
+  const timelineItemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const toggleItem = (programId: number, itemId: number) => {
-    setOpenItems((prev) => {
-      const current = prev[programId]
-  
-      const isOpen = current.includes(itemId)
-  
-      return {
-        ...prev,
-        [programId]: isOpen
-          ? current.filter((id) => id !== itemId)
-          : [...current, itemId],
+  const valuesRef = useRef<HTMLElement | null>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
+  const timelineRef = useRef<HTMLElement | null>(null);
+  const videoRef = useRef<HTMLElement | null>(null);
+  const formRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    timelineItemRefs.current.forEach((item, index) => {
+      if (!item) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveStep(index + 1);
+          }
+        },
+        {
+          threshold: 0.55,
+          rootMargin: "-10% 0px -35% 0px",
+        }
+      );
+
+      observer.observe(item);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
+  useEffect(() => {
+    const refs = [
+      { key: "values", ref: valuesRef },
+      { key: "hero", ref: heroRef },
+      { key: "timeline", ref: timelineRef },
+      { key: "video", ref: videoRef },
+      { key: "form", ref: formRef },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const key = entry.target.getAttribute("data-section");
+          if (entry.isIntersecting && key) {
+            setVisibleSections((prev) =>
+              prev.includes(key) ? prev : [...prev, key]
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -40px 0px",
       }
-    })
-  }
+    );
+
+    refs.forEach(({ key, ref }) => {
+      if (ref.current) {
+        ref.current.setAttribute("data-section", key);
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const revealClass = (key: string) =>
+    `${styles.revealSection} ${
+      visibleSections.includes(key) ? styles.revealSectionVisible : ""
+    }`;
+
+  const midpoint = Math.ceil(roots.length / 2);
+  const topRowRoots = roots.slice(0, midpoint);
+  const bottomRowRoots = roots.slice(midpoint);
+
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const body = Object.fromEntries(formData);
+      await apiService.bookStrategyCall(body);
+      form.reset();
+    } catch (error) {
+      console.log("Error submitting form", error);
+    }
+  };
 
   return (
     <main className={styles.page}>
-      <section className={styles.hero}>
+      <div ref={valuesRef} className={revealClass("values")}>
+        <ValuesSection />
+      </div>
+
+      <section ref={heroRef} className={`${styles.hero} ${revealClass("hero")}`}>
         <div className={styles.inner}>
           <h1 className={styles.title}>Hear From our Mentors</h1>
 
@@ -174,260 +347,266 @@ export default function MentoringPage() {
                 <div className={styles.content}>
                   <h2 className={styles.name}>{mentor.name}</h2>
                   <p className={styles.text}>{mentor.description}</p>
+                  <p className={styles.quote}>{mentor.quote}</p>
                 </div>
               </article>
             ))}
           </div>
 
-          <div className={styles.rootsSection}>
-            <p className={styles.rootsLabel}>OUR MENTOR’S ROOTS</p>
+          <div className={styles.mentorTreeSection}>
+            <p className={styles.mentorTreeLabel}>DISCOVER OUR MENTORS</p>
+            <div className={styles.mentorTreeImageWrap}>
+              <img
+                src="/images/mentortree.png"
+                alt="Mentor Tree"
+                className={styles.mentorTreeImage}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <div className={styles.logoCarousel}>
-              <div className={styles.logoTrack}>
-                {[...roots, ...roots].map((logo, index) => (
-                  <div key={`${logo.id}-${index}`} className={styles.logoItem}>
-                    <img
-                      src={logo.image}
-                      alt={logo.name}
-                      className={styles.logoImage}
+      <section
+        ref={timelineRef}
+        className={`${styles.howItWorksSection} ${revealClass("timeline")}`}
+      >
+        <div className={styles.inner}>
+          <h2 className={styles.howItWorksTitle}>How It Works</h2>
+
+          <div className={styles.purpleTimeline}>
+            <div className={styles.purpleTimelineRail} aria-hidden="true" />
+
+            {timelineSteps.map((step, index) => {
+              const isActive = activeStep === step.id;
+              const isPast = activeStep > step.id;
+
+              return (
+                <div
+                  key={step.id}
+                  ref={(el) => {
+                    timelineItemRefs.current[index] = el;
+                  }}
+                  className={styles.purpleTimelineRow}
+                >
+                  <div
+                    className={`${styles.purpleTimelineTitleWrap} ${
+                      isActive
+                        ? styles.purpleTimelineTitleWrapActive
+                        : isPast
+                        ? styles.purpleTimelineTitleWrapPast
+                        : ""
+                    }`}
+                  >
+                    <h3 className={styles.purpleTimelineTitle}>{step.title}</h3>
+                  </div>
+
+                  <div className={styles.purpleTimelineCenter}>
+                    <span
+                      className={`${styles.purpleTimelineDot} ${
+                        isActive
+                          ? styles.purpleTimelineDotActive
+                          : isPast
+                          ? styles.purpleTimelineDotPast
+                          : ""
+                      }`}
                     />
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  <div
+                    className={`${styles.purpleTimelineDescriptionWrap} ${
+                      isActive
+                        ? styles.purpleTimelineDescriptionWrapActive
+                        : isPast
+                        ? styles.purpleTimelineDescriptionWrapPast
+                        : ""
+                    }`}
+                  >
+                    <p className={styles.purpleTimelineDescription}>
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className={styles.programsSection}>
+      <section
+        ref={videoRef}
+        className={`${styles.videoCtaSection} ${revealClass("video")}`}
+        style={{
+          marginTop: "-4rem",
+          paddingTop: "2rem",
+        }}
+      >
         <div className={styles.inner}>
-          <h2 className={styles.programsTitle}>Our Programs</h2>
+          <h2 className={styles.videoCtaTitle}>
+            Unlock Your Child&apos;s Full Potential
+          </h2>
+          <p className={styles.videoCtaSubtitle}>
+            Watch “Dear Younger Self,” our message to those struggling with
+            learning differences.
+          </p>
 
-          <div className={styles.programsLayout}>
-            <article className={styles.programCard}>
-              <div className={styles.programImageWrap}>
-                <img
-                  src={programs[0].image}
-                  alt={programs[0].title}
-                  className={styles.programImage}
-                />
-              </div>
-
-              <h3 className={styles.programName}>{programs[0].title}</h3>
-              <p className={styles.programDescription}>{programs[0].description}</p>
-
-              <div className={styles.accordionGroup}>
-                {programs[0].items.map((item) => {
-                  const isOpen = openItems[programs[0].id].includes(item.id)
-
-                  return (
-                    <div
-                      key={item.id}
-                      className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className={styles.accordionTrigger}
-                        onClick={() => toggleItem(programs[0].id, item.id)}
-                        aria-expanded={isOpen}
-                      >
-                        <span>{item.title}</span>
-                        <span
-                          className={`${styles.accordionIcon} ${isOpen ? styles.accordionIconOpen : ''}`}
-                          aria-hidden="true"
-                        >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6 9L12 15L18 9"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-
-                      {isOpen && (
-                        <div className={styles.accordionContent}>
-                          <p>{item.content}</p>
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </article>
-
-            <div className={styles.circleDivider} aria-hidden="true">
-              <span className={styles.circle1}></span>
-              <span className={styles.circle2}></span>
-              <span className={styles.circle3}></span>
-              <span className={styles.circle4}></span>
-              <span className={styles.circle5}></span>
-              <span className={styles.circle6}></span>
-              <span className={styles.circle7}></span>
-              <span className={styles.circle8}></span>
+          <div className={styles.videoCtaGrid}>
+            <div className={styles.videoFrame}>
+              <iframe
+                src="https://www.youtube.com/embed/RiwiAOCSVJY"
+                title="Dear Younger Self"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className={styles.videoEmbed}
+              />
             </div>
 
-            <article className={styles.programCard}>
-              <div className={styles.programImageWrap}>
-                <img
-                  src={programs[1].image}
-                  alt={programs[1].title}
-                  className={styles.programImage}
-                />
-              </div>
+            <div className={styles.videoCtaContent}>
+              <p className={styles.videoCtaText}>
+                Every mentor on our team, including our founder Jake Sussman,
+                truly understands the challenges of being misunderstood, as they
+                have all navigated their own learning differences.
+              </p>
 
-              <h3 className={styles.programName}>{programs[1].title}</h3>
-              <p className={styles.programDescription}>{programs[1].description}</p>
-
-              <div className={styles.accordionGroup}>
-                {programs[1].items.map((item) => {
-                  const isOpen = openItems[programs[1].id].includes(item.id)
-
-                  return (
-                    <div
-                      key={item.id}
-                      className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className={styles.accordionTrigger}
-                        onClick={() => toggleItem(programs[1].id, item.id)}
-                        aria-expanded={isOpen}
-                      >
-                        <span>{item.title}</span>
-                        <span
-                          className={`${styles.accordionIcon} ${isOpen ? styles.accordionIconOpen : ''}`}
-                          aria-hidden="true"
-                        >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6 9L12 15L18 9"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-
-                      {isOpen && (
-                        <div className={styles.accordionContent}>
-                          <p>{item.content}</p>
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </article>
-
-            <div className={styles.circleDivider} aria-hidden="true">
-              <span className={styles.circle1}></span>
-              <span className={styles.circle2}></span>
-              <span className={styles.circle3}></span>
-              <span className={styles.circle4}></span>
-              <span className={styles.circle5}></span>
-              <span className={styles.circle6}></span>
-              <span className={styles.circle7}></span>
-              <span className={styles.circle8}></span>
+              <a
+                href="#strategy-call-form"
+                className={`${styles.programButton} glow-btn glow-btn--alt`}
+              >
+                Find Your Mentor
+              </a>
             </div>
-
-            <article className={styles.programCard}>
-              <div className={styles.programImageWrap}>
-                <img
-                  src={programs[2].image}
-                  alt={programs[2].title}
-                  className={styles.programImage}
-                />
-              </div>
-
-              <h3 className={styles.programName}>{programs[2].title}</h3>
-              <p className={styles.programDescription}>{programs[2].description}</p>
-
-              <div className={styles.accordionGroup}>
-                {programs[2].items.map((item) => {
-                  const isOpen = openItems[programs[2].id].includes(item.id)
-
-                  return (
-                    <div
-                      key={item.id}
-                      className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className={styles.accordionTrigger}
-                        onClick={() => toggleItem(programs[2].id, item.id)}
-                        aria-expanded={isOpen}
-                      >
-                        <span>{item.title}</span>
-                        <span
-                          className={`${styles.accordionIcon} ${isOpen ? styles.accordionIconOpen : ''}`}
-                          aria-hidden="true"
-                        >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6 9L12 15L18 9"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-
-                      {isOpen && (
-                        <div className={styles.accordionContent}>
-                          <p>{item.content}</p>
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </article>
-          </div>
-
-          <div className={styles.programsCta}>
-            <button type="button" className={styles.programButton}>
-              Find Your Mentor
-            </button>
           </div>
         </div>
       </section>
 
-      <section className={styles.ctaSection}>
-        <div className={styles.ctaInner}>
-          <div className={styles.ctaCard}>
-            <div
-              className={styles.ctaBg}
-              style={{ backgroundImage: "url('/mentor_cta.jpg')" }}
-            />
-            <div className={styles.ctaOverlay} />
+      <section
+        ref={formRef}
+        id="strategy-call"
+        className={`${styles.formSection} ${revealClass("form")}`}
+      >
+        <div className={styles.formInner}>
+          <h2 className={styles.formTitle}>
+            Book Your Free Strategy Call Today!
+          </h2>
+          <p className={styles.formSubtitle}>
+            Meet with Founder and Program Director of Superpower Mentors, Jake
+            Sussman, by filling out this form!
+          </p>
 
-            <div className={styles.ctaContent}>
-              <h2 className={styles.ctaTitle}>Get Matched Today</h2>
-              <button className={styles.ctaButton}>Find Your Mentor</button>
+          <form
+            id="strategy-call-form"
+            className={styles.strategyForm}
+            onSubmit={onFormSubmit}
+          >
+            <div className={styles.formGrid}>
+              <div className={styles.fieldGroup}>
+                <label htmlFor="firstName" className={styles.formLabel}>
+                  First Name
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  className={styles.formInput}
+                />
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label htmlFor="lastName" className={styles.formLabel}>
+                  Last Name
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  className={styles.formInput}
+                />
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label htmlFor="phoneNumber" className={styles.formLabel}>
+                  Phone Number
+                </label>
+                <input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  className={styles.formInput}
+                />
+              </div>
+
+              <div className={styles.fieldGroup}>
+                <label htmlFor="email" className={styles.formLabel}>
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className={styles.formInput}
+                />
+              </div>
             </div>
-          </div>
+
+            <div className={styles.fieldGroupFull}>
+              <label htmlFor="descriptionType" className={styles.formLabel}>
+                What most closely describes you?
+              </label>
+              <div className={styles.selectWrap}>
+                <select
+                  id="descriptionType"
+                  name="descriptionType"
+                  className={styles.formSelect}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  <option value="parent">Parent</option>
+                  <option value="student">Student</option>
+                  <option value="guardian">Guardian</option>
+                  <option value="educator">Educator</option>
+                  <option value="partner">Organization/Partner</option>
+                  <option value="other">Other</option>
+                </select>
+
+                <span className={styles.selectIcon} aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.formButtonWrap}>
+              <button type="submit" className={styles.submitButton}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className={styles.formCornerLeft} aria-hidden="true">
+          <span className={styles.formCircleSmallTop}></span>
+          <span className={styles.formCircleLarge}></span>
+          <span className={styles.formCircleSmallBottom}></span>
+        </div>
+
+        <div className={styles.formCornerRight} aria-hidden="true">
+          <span className={styles.formCircleSmallTop}></span>
+          <span className={styles.formCircleLarge}></span>
+          <span className={styles.formCircleSmallBottom}></span>
         </div>
       </section>
     </main>
-  )
+  );
 }

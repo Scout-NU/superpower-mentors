@@ -9,21 +9,21 @@ import { Plus_Jakarta_Sans, Space_Grotesk, DM_Sans } from 'next/font/google'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['700'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-heading',
   display: 'swap',
 })
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['500'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-accent',
   display: 'swap',
 })
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['500'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 })

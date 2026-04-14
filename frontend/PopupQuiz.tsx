@@ -1,85 +1,31 @@
 "use client";
-
+import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
+import * as emailService from "../backend/utils/apiService";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
-interface Question {
-  id: number;
-  question: string;
-  options: string[];
-}
-
-const questions: Question[] = [
-  {
-    id: 1,
-    question: "Who are you looking for support for?",
-    options: [
-      "My child/teen",
-      "Myself",
-      "A student I work with",
-      "Just exploring options"
-    ]
-  },
-  {
-    id: 2,
-    question: "What learning difference best describes your situation?",
-    options: [
-      "ADHD",
-      "Dyslexia",
-      "Autism/ASD",
-      "Multiple or other learning differences"
-    ]
-  },
-  {
-    id: 3,
-    question: "What's your biggest challenge right now?",
-    options: [
-      "Building confidence and self-advocacy",
-      "Academic organization and study skills",
-      "Social connections and communication",
-      "Planning for college or career"
-    ]
-  },
-  {
-    id: 4,
-    question: "What type of mentor support would be most helpful?",
-    options: [
-      "Someone who understands neurodivergence firsthand",
-      "Help with executive function and time management",
-      "Guidance on navigating school systems",
-      "Career and future planning advice"
-    ]
-  },
-  {
-    id: 5,
-    question: "What would success look like for you?",
-    options: [
-      "Increased independence and confidence",
-      "Better grades and academic performance",
-      "Stronger self-understanding and acceptance",
-      "Clear goals and a path forward"
-    ]
-  }
-];
+const PURPLE = "#571377";
+const BLUE = "#001EDF";
 
 export default function QuizModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState(QUIZ_QUESTIONS[0]);
+  const [answers, setAnswers] = useState<
+    { question: string; answer: string }[]
+  >([]);
   const [showResult, setShowResult] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Check if quiz has been completed or if it's been shown
     const quizCompleted = sessionStorage.getItem("quizCompleted");
     const quizShown = sessionStorage.getItem("quizShown");
 
     if (!quizCompleted && !quizShown) {
-      // Show quiz on first visit
       setIsOpen(true);
       sessionStorage.setItem("quizShown", "true");
     }
 
-    // Cleanup timeout on unmount
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -87,107 +33,284 @@ export default function QuizModal() {
     };
   }, []);
 
-  const handleAnswer = (answer: string) => {
-    const newAnswers = [...answers, answer];
+  const handleAnswer = (answer: {
+    message: string;
+    nextQuestionId: number;
+  }) => {
+    const newAnswers = [
+      ...answers,
+      {
+        question: (currentQuestion as QuizQuestion).question,
+        answer: answer.message,
+      },
+    ];
     setAnswers(newAnswers);
 
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
+    // set next question
+    const nextQuestion = QUIZ_QUESTIONS.find(
+      (q) => q.id === answer.nextQuestionId,
+    ) as QuizEnd | QuizQuestion;
+    if (!nextQuestion) {
+      console.error(`next question with id ${answer.nextQuestionId} not found`);
+    }
+
+    setCurrentQuestion(nextQuestion);
+
+    // if quiz end, show results
+    if (!("answers" in nextQuestion)) {
       setShowResult(true);
-      // Mark quiz as completed in session storage
       sessionStorage.setItem("quizCompleted", "true");
+    }
+  };
+
+  const onSubmitAnswers = async (
+    email: string,
+    answers: { question: string; answer: string }[],
+  ) => {
+    try {
+      await emailService.sendQuizAnswers(email, answers);
+    } catch (e) {
+      console.log(e);
     }
   };
 
   const closeModal = () => {
     setIsOpen(false);
 
-    // If quiz wasn't completed, set timer to reopen after 10 minutes
     const quizCompleted = sessionStorage.getItem("quizCompleted");
     if (!quizCompleted) {
-      timeoutRef.current = setTimeout(() => {
-        setIsOpen(true);
-        setCurrentQuestion(0);
-        setAnswers([]);
-        setShowResult(false);
-      }, 10 * 60 * 1000); // 10 minutes in milliseconds
+      timeoutRef.current = setTimeout(
+        () => {
+          setIsOpen(true);
+          setCurrentQuestion(QUIZ_QUESTIONS[0]);
+          setAnswers([]);
+          setShowResult(false);
+        },
+        10 * 60 * 1000, // 10 minutes in milliseconds
+      );
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-lg bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl p-8">
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        padding: "clamp(8px, 4vw, 16px)",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "clamp(280px, 90vw, 900px)",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "clamp(16px, 4vw, 24px)",
+          padding: "clamp(24px, 6vw, 48px)",
+          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.3)",
+          maxHeight: "90vh",
+          overflowY: "auto",
+        }}
+      >
         <button
           onClick={closeModal}
-          className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors"
-          aria-label="Close"
+          style={{
+            position: "absolute",
+            top: "clamp(12px, 3vw, 24px)",
+            right: "clamp(12px, 3vw, 24px)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "clamp(24px, 5vw, 32px)",
+            color: "#1A1A1A",
+            lineHeight: 1,
+          }}
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          ✕
         </button>
 
-        {!showResult ? (
+        {!showResult && "answers" in currentQuestion ? (
+          /** if not done with quiz and currently in a question*/
           <div>
-            <div className="mb-6">
-              <div className="flex justify-between text-sm text-zinc-500 dark:text-zinc-400 mb-2">
-                <span>Question {currentQuestion + 1} of {questions.length}</span>
-                <span className="font-medium">Find Your Match</span>
-              </div>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2">
+            <h1
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "clamp(32px, 6vw, 48px)",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                marginBottom: "clamp(16px, 4vw, 24px)",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              FIND YOUR MATCH
+            </h1>
+            <div style={{ marginBottom: "clamp(24px, 4vw, 40px)" }}>
+              <p
+                style={{
+                  fontFamily: "DM Sans",
+                  fontSize: "clamp(12px, 2.5vw, 14px)",
+                  color: "#666",
+                  marginBottom: "clamp(8px, 2vw, 12px)",
+                }}
+              >
+                Question {answers.length + 1} of {QUIZ_QUESTIONS.filter((q) => "answers" in q).length}
+              </p>
+              <div
+                style={{
+                  width: "100%",
+                  height: "12px",
+                  backgroundColor: "#E5E5E5",
+                  borderRadius: "6px",
+                  overflow: "hidden",
+                }}
+              >
                 <div
-                  className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                  style={{
+                    width: `${((answers.length + 1) / QUIZ_QUESTIONS.filter((q) => "answers" in q).length) * 100}%`,
+                    height: "100%",
+                    backgroundColor: PURPLE,
+                    transition: "width 0.3s ease",
+                  }}
                 />
               </div>
             </div>
 
-            <h2 className="text-2xl font-semibold text-black dark:text-white mb-6">
-              {questions[currentQuestion].question}
+            <h2
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "clamp(20px, 5vw, 32px)",
+                fontWeight: 700,
+                marginBottom: "clamp(20px, 4vw, 32px)",
+                color: "#1A1A1A",
+              }}
+            >
+              {(currentQuestion as QuizQuestion).question}
             </h2>
 
-            <div className="space-y-3">
-              {questions[currentQuestion].options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(option)}
-                  className="w-full text-left p-4 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all text-zinc-700 dark:text-zinc-300"
-                >
-                  {option}
-                </button>
-              ))}
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "clamp(12px, 2vw, 16px)" }}
+            >
+              {(currentQuestion as QuizQuestion).answers.map(
+                (answer, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(answer)}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "clamp(12px, 3vw, 20px) clamp(16px, 4vw, 28px)",
+                      borderRadius: "50px",
+                      border: `3px solid ${hoveredIndex === index ? BLUE : PURPLE}`,
+                      backgroundColor: "#FFFFFF",
+                      fontFamily: "DM Sans",
+                      fontSize: "clamp(14px, 3vw, 18px)",
+                      fontWeight: 500,
+                      color: "#1A1A1A",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {answer.message}
+                  </button>
+                ),
+              )}
             </div>
           </div>
         ) : (
-          <div className="text-center py-8">
-            <div className="mx-auto w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
-              <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <div style={{ textAlign: "center", padding: "clamp(24px, 4vw, 40px) 0" }}>
+            <div
+              style={{
+                width: "clamp(60px, 12vw, 80px)",
+                height: "clamp(60px, 12vw, 80px)",
+                backgroundColor: "#E8F4FF",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto clamp(16px, 4vw, 24px)",
+              }}
+            >
+              <svg
+                style={{ width: "clamp(30px, 6vw, 40px)", height: "clamp(30px, 6vw, 40px)", color: BLUE }}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={3}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
 
-            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">
-              Superpower Mentors Is For You! 🚀
+            <h2
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "clamp(24px, 5vw, 40px)",
+                fontWeight: 700,
+                marginBottom: "clamp(12px, 2vw, 16px)",
+              }}
+            >
+              {(currentQuestion as QuizEnd).title}
             </h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-              We specialize in supporting youth with ADHD, Dyslexia, Autism, and other learning differences. Our mentors understand your unique strengths and challenges because they've been there too.
+              {(currentQuestion as QuizEnd).message}
             </p>
 
             <div className="space-y-3">
+              <Link
+                passHref={(currentQuestion as QuizEnd).href !== undefined}
+                href={(currentQuestion as QuizEnd).href ?? ""}
+                onClick={(e) => {
+                  // if no href, simply close modal, else redirect to provided link
+                  if (!(currentQuestion as QuizEnd).href) {
+                    e.preventDefault();
+                  }
+                  closeModal();
+                }}
+                style={{
+                  width: "100%",
+                  backgroundColor: BLUE,
+                  color: "#FFFFFF",
+                  fontFamily: "DM Sans",
+                  fontWeight: 600,
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  padding: "clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px)",
+                  borderRadius: "50px",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
+              </Link>
+              <br />
+
               <button
                 onClick={closeModal}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                style={{
+                  width: "100%",
+                  backgroundColor: "transparent",
+                  color: "#666",
+                  fontFamily: "DM Sans",
+                  fontWeight: 600,
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  padding: "clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px)",
+                  border: "none",
+                  cursor: "pointer",
+                }}
               >
-                Connect With a Mentor
-              </button>
-              <button
-                onClick={closeModal}
-                className="w-full text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white font-medium py-3 transition-colors"
-              >
-                Learn More First
+                Back to Page
               </button>
             </div>
           </div>

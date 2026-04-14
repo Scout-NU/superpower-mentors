@@ -1,17 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React from 'react';
 import AnimatedSection from "@/frontend/AnimatedSection";
-import "./page.css";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import styles from "./homepage.module.css";
 
 // Color constants
-const BLACK  = "#000000";
-
+const BLACK = "#000000";
 const PURPLE = "#571377";
-const ORANGE = "#FFC92A";
 const BLUE = "#001EDF";
 const DARK_PURPLE = "#350B49";
 const LIGHT_PURPLE = "#B959F1";
@@ -28,35 +25,45 @@ function HeroSection() {
   return (
     <section className="bg-white pt-32 pb-16 px-8">
       <div className="max-w-7xl mx-auto relative">
-        <div className="max-w-full">
-          <h1 className="font-bold leading-none text-black uppercase" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '96px', letterSpacing: '-0.02em' }}>
-            RELATE.<br />
-            <span style={{ color: PURPLE }}>EMPOWER.</span><br />
-            TRANSFORM.
-          </h1>
-          <div className="mt-6 flex justify-between items-start gap-12">
-            <p className="text-zinc-700 text-lg" style={{ fontFamily: 'DM Sans', maxWidth: '600px' }}>
-              Trusted online mentorship to launch youth with ADHD, Dyslexia, Autism, and other learning differences.
-            </p>
-            <div className="flex gap-4 flex-shrink-0">
-              <button 
-                style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }} 
-                className="glow-btn text-white font-semibold rounded-full"
-              >
-                Start Your Journey
-              </button>
-              <button 
-                style={{ backgroundColor: BLACK, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
-                className="glow-btn text-white font-semibold rounded-full"
-              >
-                Become a Mentor
-              </button>
+        <div className="flex items-center justify-between gap-12">
+          <div className="flex flex-col">
+            <h1 className="font-bold leading-none text-black uppercase" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '96px', letterSpacing: '-0.02em' }}>
+              RELATE.<br />
+              <span style={{ color: PURPLE }}>EMPOWER.</span><br />
+              TRANSFORM.
+            </h1>
+            <div className="mt-6 flex flex-col gap-6">
+              <p className="text-zinc-700 text-lg" style={{ fontFamily: 'DM Sans', maxWidth: '500px' }}>
+                Trusted online mentorship to launch youth with ADHD, Dyslexia, Autism, and other learning differences.
+              </p>
             </div>
           </div>
-        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', flexShrink: 0, justifyContent: 'space-between' }}>
+             <img src="/images/stats.png" alt="Stats" style={{ maxWidth: '400px', width: '100%', height: 'auto', marginTop: '20px' }} />
+              <div style={{ display: 'flex', gap: '16px', marginTop: '30px', fontSize: '18px'}}>
+              <Link href="/mentoring#strategy-call-form">
+                <button style={{ backgroundColor: BLUE, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
+                  className="glow-btn text-white font-semibold rounded-full"
+                  >
+                Start Your Journey
+                </button>
+              </Link>
+              <Link href="/mentoring">
+                <button
+                style={{ backgroundColor: BLACK, fontFamily: 'DM Sans', width: '234px', height: '67px' }}
+                className="glow-btn text-white font-semibold rounded-full"
+                >
+                Become a Mentor
+          </button>
+          </Link>
+  </div>
+</div>
+</div>
+
         <div className="mt-16 rounded-3xl overflow-hidden relative z-20 mx-auto mb-[-400px]" style={{ width: '1373px', height: '771px', maxWidth: '100%' }}>
-          <ImgPlaceholder className="w-full h-full" />
-        </div>
+        <img src="/images/superpowermentorshero.png" className="w-full h-full" style={{ objectFit: 'cover' }} />
+       </div>
       </div>
     </section>
   );
@@ -64,9 +71,9 @@ function HeroSection() {
 
 function MeetMentorsSection() {
   const mentors = [
-    { name: "Christiana W.", bio: "Los Angeles, USA. ADHD. Creative Art Director, Advertising, Social Media & Semi-Professional Athlete.", tags: ["Los Angeles, USA", "Dyslexia"] },
-    { name: "Jeff S.", bio: "Bronx, NY. ADHD, Aerospace Research Engineer @ NASA, Blockchain Affiliate Marketer.", tags: ["Bronx, NY", "Dyslexia"] },
-    { name: "Dylann C.", bio: "Philadelphia, USA. WS, ADHD, Educator, Writer, Artist, Blogger, Neurodivergent, Entrepreneur.", tags: ["Los Angeles, USA", "Dyslexia"] },
+    { name: "Christiana W.", bio: "Los Angeles, USA. ADHD. Creative Art Director, Advertising, Social Media & Semi-Professional Athlete.", tags: ["Los Angeles, USA", "Dyslexia"], img: "/images/christianaw.png" },
+    { name: "Jeff S.", bio: "Bronx, NY. ADHD, Aerospace Research Engineer @ NASA, Blockchain Affiliate Marketer.", tags: ["Bronx, NY", "Dyslexia"], img: "/images/jeffs.png" },
+    { name: "Dylann C.", bio: "Philadelphia, USA. WS, ADHD, Educator, Writer, Artist, Blogger, Neurodivergent, Entrepreneur.", tags: ["Los Angeles, USA", "Dyslexia"], img: "/images/dylannc.png" },
   ];
 
   return (
@@ -77,14 +84,16 @@ function MeetMentorsSection() {
         </h2>
         <div className="flex gap-6 justify-center">
           {mentors.map((m, i) => (
-            <div key={i} className="border-2 border-black bg-white rounded-3xl overflow-hidden flex flex-col" style={{ width: '380px', height: '417px' }}>
-              <div style={{ width: '380px', height: '206px' }}>
-                <ImgPlaceholder className="w-full h-full" />
-              </div>
+            <div
+            key={i}
+            className={` bg-white rounded-3xl overflow-hidden flex flex-col ${styles.homepageMentorCard}`}
+          >
+          <div style={{ width: '380px', height: '206px', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '16px' }}>
+            <img src={m.img} alt={m.name} style={{ width: '150px', height: '150px', objectFit: 'cover', display: 'block', borderRadius: '50%' }} />
+          </div>
               <div className="p-6 flex flex-col flex-1">
-                <p className="font-bold text-black text-base mb-2" style={{ fontFamily: 'Plus Jakarta Sans' }}>{m.name}</p>
-                <p className="text-zinc-600 text-xs leading-relaxed mb-4 flex-1" style={{ fontFamily: 'DM Sans' }}>{m.bio}</p>
-                <div className="flex gap-2 flex-wrap">
+                <p className="font-bold text-black text-xl mb-2" style={{ fontFamily: 'Plus Jakarta Sans' }}>{m.name}</p>
+                <p className="text-zinc-600 text-large leading-relaxed mb-4 flex-1" style={{ fontFamily: 'DM Sans' }}>{m.bio}</p>                <div className="flex gap-2 flex-wrap">
                   {m.tags.map((tag, idx) => (
                     <span key={idx} style={{ backgroundColor: PURPLE, fontFamily: 'DM Sans' }} className="text-white px-3 py-1 rounded-full text-xs font-medium">
                       {tag}
@@ -96,18 +105,14 @@ function MeetMentorsSection() {
           ))}
         </div>
         <div className="mt-20 text-center">
-          <p className="text-xs text-white opacity-60 uppercase tracking-widest mb-6" style={{ fontFamily: 'DM Sans', letterSpacing: '0.15em' }}>
-            DISCOVER OUR PARTNERS
-          </p>
-          <div className="flex flex-wrap gap-8 items-center justify-center">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="w-20 h-12 bg-white bg-opacity-20 rounded flex items-center justify-center">
-                <span className="text-white text-xs opacity-50">Logo</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+  <p className="text-xl text-white opacity-60 uppercase tracking-widest mb-6" style={{ fontFamily: 'DM Sans', letterSpacing: '0.15em' }}>
+    DISCOVER OUR MENTORS
+  </p>
+  <div className="flex items-center justify-center">
+  <img src="/images/mentortree.png" alt="Mentor Tree" style={{ maxWidth: '70%', height: 'auto' }} />
+  </div>
+</div>
+</div>
     </section>
   );
 }
@@ -202,42 +207,116 @@ function ProgramCard({ program, openItems, toggleItem }: { program: Program; ope
   );
 }
 
-function RealImpactSection() {
-  const [openItems, setOpenItems] = useState<Record<number, number[]>>({ 1: [], 2: [], 3: [] });
 
-  const toggleItem = (programId: number, itemId: number) => {
-    setOpenItems((prev) => {
-      const current = prev[programId];
-      const isOpen = current.includes(itemId);
-      return { ...prev, [programId]: isOpen ? current.filter((id) => id !== itemId) : [...current, itemId] };
-    });
-  };
+function RealImpactSection() {
+  const cards = [
+    {
+      title: "Neurodiversity",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Transitions",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Confidence",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Direction",
+      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+  ];
 
   return (
     <section className="bg-white py-20 px-8">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl font-bold text-black uppercase mb-16" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-          REAL IMPACT, REAL RESULTS
+          HOW WE CAN HELP
         </h2>
 
-        {/* Program cards with circle dividers */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 72px minmax(0,1fr) 72px minmax(0,1fr)', alignItems: 'start', columnGap: '24px', marginBottom: '48px' }}>
-          <ProgramCard program={programs[0]} openItems={openItems} toggleItem={toggleItem} />
-          <CircleDivider />
-          <ProgramCard program={programs[1]} openItems={openItems} toggleItem={toggleItem} />
-          <CircleDivider />
-          <ProgramCard program={programs[2]} openItems={openItems} toggleItem={toggleItem} />
-        </div>
+        <style>{`
+          .flip-card {
+            width: 401px;
+            height: 272px;
+            perspective: 1000px;
+            cursor: pointer;
+          }
+          .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+          }
+          .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+          }
+          .flip-card-front,
+          .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 22.09px;
+            border: 2px solid #571377;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+          }
+          .flip-card-front {
+            background: #ffffff;
+          }
+          .flip-card-back {
+            background: #571377;
+            transform: rotateY(180deg);
+          }
+        `}</style>
 
-        {/* Find Your Mentor CTA */}
-        <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '48px' }}>
-          <Link href="/mentoring">
-            <button type="button" style={{ border: 0, borderRadius: '20px', background: BLUE, color: '#fff', fontFamily: 'DM Sans', fontSize: '1rem', fontWeight: 700, padding: '18px 34px', cursor: 'pointer' }}>
-              Find Your Mentor
-            </button>
-          </Link>
-        </div>
+        <div className="flex justify-center items-start gap-6 mb-12">
+          <div className="flex flex-col gap-6">
+            {[cards[0], cards[2]].map((card, i) => (
+              <div key={i} className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+                      {card.title}
+                    </h3>
+                  </div>
+                  <div className="flip-card-back">
+                    <p className="text-white text-sm leading-relaxed text-center" style={{ fontFamily: 'DM Sans' }}>
+                      {card.back}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
+          <CircleDivider />
+
+          <div className="flex flex-col gap-6">
+            {[cards[1], cards[3]].map((card, i) => (
+              <div key={i} className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <h3 className="font-bold text-center text-[48px] text-[#571377]" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+                      {card.title}
+                    </h3>
+                  </div>
+                  <div className="flip-card-back">
+                    <p className="text-white text-sm leading-relaxed text-center" style={{ fontFamily: 'DM Sans' }}>
+                      {card.back}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
         {/* Stat */}
         <p className="text-2xl font-bold text-black mb-12" style={{ fontFamily: 'Plus Jakarta Sans' }}>
           30% Reduction In School Dropout Rates
@@ -276,49 +355,146 @@ function RealImpactSection() {
 }
 
 function HowItWorksSection() {
-  const steps = [
-    { n: 1, title: "Get Matched", body: "During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them." },
-    { n: 2, title: "Meet Your Mentor", body: "Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if the match is the right fit." },
-    { n: 3, title: "In the Session", body: "We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee's specific interests and age." },
-    { n: 4, title: "Family Matters", body: "Each month you and your child's mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!" },
-    { n: 5, title: "For the Parents", body: "The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!" },
-  ];
+  const [activeStep, setActiveStep] = useState(1)
+  const timelineItemRefs = React.useRef<(HTMLDivElement | null)[]>([])
+
+  const timelineSteps = [
+    {
+      id: 1,
+      title: "Get Matched",
+      description:
+        "During the mentor matching process, we learn about the needs of each mentee on an individual basis and match them to mentor who is the older version of them.",
+    },
+    {
+      id: 2,
+      title: "Meet Your Mentor",
+      description:
+        "Before mentorship begins, families meet and approve each mentor. These meetings allow both the mentor and the family to get to know each other and see if this match is the right fit.",
+    },
+    {
+      id: 3,
+      title: "In the Session",
+      description:
+        "We are focused on delivering content that is custom to each mentee; all activities, conversations, and needs are based on each mentee's specific interests and age.",
+    },
+    {
+      id: 4,
+      title: "Family Matters",
+      description:
+        "Each month you and your child's mentor hop on a call to debrief the sessions, set goals, and talk progress. This helps keep everyone on the same page throughout the relationship!",
+    },
+    {
+      id: 5,
+      title: "For the Parents",
+      description:
+        "The value of being a member of Superpower Mentors does not stop with your child. Parents gain access to our Facebook community, member only Q+As, expert interviews, weekly updates, and more!",
+    },
+  ]
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    timelineItemRefs.current.forEach((item, index) => {
+      if (!item) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveStep(index + 1)
+          }
+        },
+        {
+          threshold: 0.55,
+          rootMargin: "-10% 0px -35% 0px",
+        }
+      )
+
+      observer.observe(item)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [])
 
   return (
-    <section style={{ backgroundColor: PURPLE }} className="py-20 px-8">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-5xl font-bold text-white uppercase mb-16" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-          HOW IT WORKS
-        </h2>
-        <div className="relative">
-          <div className="absolute left-7 top-0 w-px bg-white opacity-40" style={{ height: 'calc(100% - 80px)' }}></div>
-          <div className="space-y-6">
-            {steps.map((s) => (
-              <div key={s.n} className="relative flex gap-6 items-start">
-                <div className="w-14 h-14 rounded-full bg-white border-2 border-black flex items-center justify-center flex-shrink-0 relative z-10 font-bold text-2xl" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-                  {s.n}
+    <section className={styles.howItWorksSection}>
+      <div className={styles.howItWorksInner}>
+        <h2 className={styles.howItWorksTitle}>How It Works</h2>
+
+        <div className={styles.purpleTimeline}>
+          <div className={styles.purpleTimelineRail} aria-hidden="true" />
+
+          {timelineSteps.map((step, index) => {
+            const isActive = activeStep === step.id
+            const isPast = activeStep > step.id
+
+            return (
+              <div
+                key={step.id}
+                ref={(el) => {
+                  timelineItemRefs.current[index] = el
+                }}
+                className={styles.purpleTimelineRow}
+              >
+                <div
+                  className={`${styles.purpleTimelineTitleWrap} ${
+                    isActive
+                      ? styles.purpleTimelineTitleWrapActive
+                      : isPast
+                      ? styles.purpleTimelineTitleWrapPast
+                      : ""
+                  }`}
+                >
+                  <h3 className={styles.purpleTimelineTitle}>{step.title}</h3>
                 </div>
-                <div className="bg-white rounded-2xl p-6 flex-1">
-                  <p className="font-bold text-black text-lg mb-2" style={{ fontFamily: 'Plus Jakarta Sans' }}>{s.title}</p>
-                  <p className="text-zinc-700 text-sm leading-relaxed" style={{ fontFamily: 'DM Sans' }}>{s.body}</p>
+
+                <div className={styles.purpleTimelineCenter}>
+                  <span
+                    className={`${styles.purpleTimelineDot} ${
+                      isActive
+                        ? styles.purpleTimelineDotActive
+                        : isPast
+                        ? styles.purpleTimelineDotPast
+                        : ""
+                    }`}
+                  />
+                </div>
+
+                <div
+                  className={`${styles.purpleTimelineDescriptionWrap} ${
+                    isActive
+                      ? styles.purpleTimelineDescriptionWrapActive
+                      : isPast
+                      ? styles.purpleTimelineDescriptionWrapPast
+                      : ""
+                  }`}
+                >
+                  <p className={styles.purpleTimelineDescription}>
+                    {step.description}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+            )
+          })}
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 function TestimonialsSection() {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [fading, setFading] = useState(false);
+  const [activeIdx, setActiveIdx] = React.useState(0);
+  const [fading, setFading] = React.useState(false);
 
   const testimonials = [
-    { text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", author: "- Parent", top: '0%', left: '0%' },
-    { text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", author: "- Parent", top: '15%', left: '30%' },
-    { text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", author: "- Parent", top: '5%', left: '55%' },
+    { text: "The transition from high school to college is tough for anyone—now throw in LD, ADHD, and virtual college! My daughter said for the first time in her life, after numerous unsuccessful therapists and learning consultants, she is actually excited to be able to use and apply the things they are working on. Our Superpower Mentor gets her because she was her!", author: "Liz R", location: "Austin, Texas", top: '0%', left: '0%' },
+    { text: "Our Superpower Mentor offers something that no other professional can, his full attention and belief that my son will succeed. He creates positive bonds with his mentees like no one else. Our mentor looks for small wins to build confidence...and it is working. I am grateful for all you are doing for my son.", author: "John D", location: "London, England", top: '15%', left: '30%' },
+    { text: "Our son has really opened up and gained so much confidence while working with Superpower Mentor in just a short time. He is gaining such an understanding of how his own mind works through their conversations and is viewing these differences as strengths instead of a challenge.", author: "Ashley P", location: "Nashville, Tennessee", top: '5%', left: '55%' },
+    { text: "Our Superpower Mentor has a very intuitive way of reaching my son and can turn things around in sessions that I never thought possible!", author: "Diana T", location: "Long Island, New York", top: '10%', left: '10%' },
+    { text: "My son's relationship with his Superpower Mentor has been pivotal.", author: "Bethany K", location: "Miami, Florida", top: '20%', left: '40%' },
+    { text: "IN JUST THREE SESSIONS, my son opened up in ways like I have never seen before. I was holding back tears!", author: "Rebecca H", location: "Austin, Texas", top: '8%', left: '65%' },
   ];
 
   const goTo = (idx: number) => {
@@ -356,7 +532,6 @@ function TestimonialsSection() {
           HEAR FROM OTHER PARENTS
         </h2>
 
-        {/* Scattered quote cards container */}
         <div style={{ position: 'relative', width: '100%', height: '360px' }}>
           {testimonials.map((t, i) => (
             <div
@@ -384,7 +559,6 @@ function TestimonialsSection() {
           ))}
         </div>
 
-        {/* Dot indicators */}
         <div className="flex gap-3 mt-8">
           {testimonials.map((_, i) => (
             <button
@@ -409,17 +583,21 @@ function TestimonialsSection() {
 }
 
 function FAQSection() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [openIndices, setOpenIndices] = useState<number[]>([]);
 
   const faqs = [
-    { q: "Why should my child have a mentor?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "What are the benefits of mentoring?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "What is the difference between tutoring and mentoring?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "How do you track your impact?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { q: "Who are your mentors?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
+    { q: "What is the difference between a Superpower Mentor and traditional therapy?", a: "The Superpower Mentors are not licensed healthcare professionals. Mentors provide guidance, advice, and support through their lived experiences. Mentors are trained through a proprietary course developed with counsel multiple educators and industry professionals. Although clients have stated on multiple occasions that their child has gained more value out of their mentor relationship than their therapist relationship, Superpower Mentors are by no means a replacement for emotional and social health professionals such as therapists and psychiatrists. If your child is in emotional distress please consult your dedicated medical advisors." },
+    { q: "Does my child qualify for your program?", a: "Our program is designed for children and young adults 7-25 who have diagnosed or undiagnosed learning differences. If your child fits under the above criteria there is a place for them in our program." },
+    { q: "Does my child need to be diagnosed with a learning disability to be eligible for a mentor?", a: "No! Your child does not need to be diagnosed with a learning disability to be eligible for a mentor. All children and young adults are unique and everyone learns and experiences life differently. If you want to pair your child up with a mentor, please book your free strategy call so we can best understand your specific needs." },
+    { q: "What happens if we don’t like our mentor?", a: "In the rare case you do not like your mentor, we will work with you closely to align you with someone who fits your liking. There is no added cost with this service. Our safeguards currently in place are designed to be proactive in case you do not like your mentor. More often than not, if the pairing is not viable, we will have been made aware within a couple of weeks of the match and reach out to make a switch as soon as this comes on our radar." },
+    { q: "Do you take insurance?", a: "Unfortunately, we do not take insurance or accept FSA/HSA. Some clients have been able to have this service paid for through their child’s institution or educational sponsor." },
   ];
 
-  const toggle = (i: number) => setOpenIdx(openIdx === i ? null : i);
+  const toggle = (i: number) => {
+    setOpenIndices(prev => 
+      prev.includes(i) ? prev.filter(idx => idx !== i) : [...prev, i]
+    );
+  };
 
   return (
     <section className="py-20 px-8 bg-white">
@@ -430,28 +608,39 @@ function FAQSection() {
               <h2 className="text-black mb-8" style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '48px', fontWeight: 700 }}>
                 Frequently Asked Questions
               </h2>
-              <button className="bg-black text-white px-8 py-3 rounded-full cursor-pointer" style={{ fontFamily: 'DM Sans', fontWeight: 600 }}>
-                Read Full FAQs
-              </button>
             </div>
             <div style={{ backgroundColor: DARK_PURPLE, width: '662px' }} className="rounded-3xl p-8">
-              {faqs.map((faq, i) => (
-                <div key={i}>
-                  <div className="py-5 flex justify-between items-center cursor-pointer gap-4" onClick={() => toggle(i)}>
-                    <p className="text-white font-medium text-base" style={{ fontFamily: 'DM Sans' }}>{faq.q}</p>
-                    <span
-                      className="text-white text-sm flex-shrink-0"
-                      style={{ display: 'inline-block', transform: openIdx === i ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s ease' }}
+              {faqs.map((faq, i) => {
+                const isOpen = openIndices.includes(i);
+                return (
+                  <div key={i}>
+                    <div className="py-5 flex justify-between items-center cursor-pointer gap-4" onClick={() => toggle(i)}>
+                      <p className="text-white font-large text-base" style={{ fontFamily: 'DM Sans' }}>{faq.q}</p>
+                      <span
+                        className="text-white text-sm flex-shrink-0"
+                        style={{ display: 'inline-block', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s ease' }}
+                      >
+                        ▼
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        maxHeight: isOpen ? '520px' : '0px',
+                        overflow: 'hidden',
+                        transition: 'max-height 0.35s ease',
+                      }}
                     >
-                      ▼
-                    </span>
+                      <p
+                        className="text-white leading-relaxed pb-4 opacity-80"
+                        style={{ fontFamily: 'DM Sans' }}
+                      >
+                        {faq.a}
+                      </p>
+                    </div>
+                    {i < faqs.length - 1 && <div style={{ backgroundColor: LIGHT_PURPLE, height: '1px' }}></div>}
                   </div>
-                  <div style={{ maxHeight: openIdx === i ? '200px' : '0px', overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
-                    <p className="text-white text-sm leading-relaxed pb-4 opacity-80" style={{ fontFamily: 'DM Sans' }}>{faq.a}</p>
-                  </div>
-                  {i < faqs.length - 1 && <div style={{ backgroundColor: LIGHT_PURPLE, height: '1px' }}></div>}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -463,9 +652,7 @@ function FAQSection() {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <AnimatedSection>
         <HeroSection />
-      </AnimatedSection>
       <AnimatedSection>
         <MeetMentorsSection />
       </AnimatedSection>
