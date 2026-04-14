@@ -1,122 +1,128 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import styles from './mentoring.module.css'
+import { useState } from "react";
+import React from "react";
+import styles from "./mentoring.module.css";
+import * as apiService from "../../backend/utils/apiService";
 
 type Mentor = {
-  id: number
-  name: string
-  description: string
-  quote: string
-  image: string
-}
+  id: number;
+  name: string;
+  description: string;
+  quote: string;
+  image: string;
+};
 
 type ProgramItem = {
-  id: number
-  title: string
-  content: string
-}
+  id: number;
+  title: string;
+  content: string;
+};
 
 type Program = {
-  id: number
-  title: string
-  description: string
-  image: string
-  items: ProgramItem[]
-}
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  items: ProgramItem[];
+};
 
 type RootLogo = {
-  id: number
-  name: string
-  image: string
-}
+  id: number;
+  name: string;
+  image: string;
+};
 
 const mentors: Mentor[] = [
   {
     id: 1,
-    name: 'Meet Tyler',
+    name: "Meet Tyler",
     description:
-      'Professional music artist and sound engineer with millions of Spotify streams, as well as an OCD advocate and podcast host.',
+      "Professional music artist and sound engineer with millions of Spotify streams, as well as an OCD advocate and podcast host.",
     quote:
-      '“Your differences can become your edge once you learn how to work with them instead of against them.”',
-    image: '/mentor_tyler.png',
+      "“Your differences can become your edge once you learn how to work with them instead of against them.”",
+    image: "/mentor_tyler.png",
   },
   {
     id: 2,
-    name: 'Meet Eden',
+    name: "Meet Eden",
     description:
-      'Marketing agency CEO w/ ADHD partnering with brands such as Dove, Samsung, and Amazon.',
+      "Marketing agency CEO w/ ADHD partnering with brands such as Dove, Samsung, and Amazon.",
     quote:
-      '“Confidence grows when you stop trying to fit a mold that was never built for you.”',
-    image: '/mentor_eden.png',
+      "“Confidence grows when you stop trying to fit a mold that was never built for you.”",
+    image: "/mentor_eden.png",
   },
   {
     id: 3,
-    name: 'Meet Franck',
+    name: "Meet Franck",
     description:
-      'Growth strategist, educator, advocate, and technologist with ADHD.',
+      "Growth strategist, educator, advocate, and technologist with ADHD.",
     quote:
-      '“The right direction starts with understanding how your mind works, then building from there.”',
-    image: '/mentor_franck.png',
+      "“The right direction starts with understanding how your mind works, then building from there.”",
+    image: "/mentor_franck.png",
   },
-]
+];
 
 const roots: RootLogo[] = [
-  { id: 1, name: 'Apple', image: '/mentor_apple_logo.png' },
-  { id: 2, name: 'Northeastern University', image: '/mentor_northeastern_logo.jpg' },
-  { id: 3, name: 'Harvard University', image: '/mentor_harvard_logo.png' },
-  { id: 4, name: 'Hubspot', image: '/mentor_hubspot_logo.png' },
-  { id: 5, name: 'NASA', image: '/mentor_nasa_logo.png' },
-  { id: 6, name: 'Spotify', image: '/mentor_spotify_logo.png' },
-  { id: 7, name: 'United Nations', image: '/mentor_un_logo.png' },
-  { id: 8, name: 'US Figure Skating', image: '/mentor_skating_logo.png' },
-  { id: 9, name: 'Duke University', image: '/mentor_duke_logo.png' },
-]
+  { id: 1, name: "Apple", image: "/mentor_apple_logo.png" },
+  {
+    id: 2,
+    name: "Northeastern University",
+    image: "/mentor_northeastern_logo.jpg",
+  },
+  { id: 3, name: "Harvard University", image: "/mentor_harvard_logo.png" },
+  { id: 4, name: "Hubspot", image: "/mentor_hubspot_logo.png" },
+  { id: 5, name: "NASA", image: "/mentor_nasa_logo.png" },
+  { id: 6, name: "Spotify", image: "/mentor_spotify_logo.png" },
+  { id: 7, name: "United Nations", image: "/mentor_un_logo.png" },
+  { id: 8, name: "US Figure Skating", image: "/mentor_skating_logo.png" },
+  { id: 9, name: "Duke University", image: "/mentor_duke_logo.png" },
+];
 
 const programs: Program[] = [
   {
     id: 1,
-    title: 'Neurodiversity & Confidence',
+    title: "Neurodiversity & Confidence",
     description:
-      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/mentor_kids.jpg',
+      "Program description coming soon... please reach out to us at info@superpowermentors.com for more information.",
+    image: "/mentor_kids.jpg",
     items: [
       {
         id: 1,
-        title: 'Neurodiversity',
+        title: "Neurodiversity",
         content:
-          'This program helps younger students build confidence, communication, and healthy routines while learning how to understand their strengths.',
+          "This program helps younger students build confidence, communication, and healthy routines while learning how to understand their strengths.",
       },
       {
         id: 2,
-        title: 'Confidence',
+        title: "Confidence",
         content:
-          'The most common age in our program is 11-14 year olds. In this bracket, your child will dive into deeper concepts, learn how to embrace their Superpower, and work through challenges like bullying, communication, and emotional expression.',
+          "The most common age in our program is 11-14 year olds. In this bracket, your child will dive into deeper concepts, learn how to embrace their Superpower, and work through challenges like bullying, communication, and emotional expression.",
       },
     ],
   },
   {
     id: 2,
-    title: 'Transition & Direction',
+    title: "Transition & Direction",
     description:
-      'Program description coming soon... please reach out to us at info@superpowermentors.com for more information.',
-    image: '/mentor_hs.jpg',
+      "Program description coming soon... please reach out to us at info@superpowermentors.com for more information.",
+    image: "/mentor_hs.jpg",
     items: [
       {
         id: 1,
-        title: 'Transitions',
+        title: "Transitions",
         content:
-          'Students get support with identity, academic pressure, confidence, goal setting, and preparing for the transition into college or work.',
+          "Students get support with identity, academic pressure, confidence, goal setting, and preparing for the transition into college or work.",
       },
       {
         id: 2,
-        title: 'Direction',
+        title: "Direction",
         content:
-          'College students get guidance on independence, time management, burnout, belonging, and staying on track through the hardest transition years.',
+          "College students get guidance on independence, time management, burnout, belonging, and staying on track through the hardest transition years.",
       },
     ],
   },
-]
+];
 
 function CircleDivider() {
   return (
@@ -130,32 +136,46 @@ function CircleDivider() {
       <span className={styles.circle7}></span>
       <span className={styles.circle8}></span>
     </div>
-  )
+  );
 }
 
 export default function MentoringPage() {
   const [openItems, setOpenItems] = useState<Record<number, number[]>>({
     1: [],
     2: [],
-  })
+  });
 
   const toggleItem = (programId: number, itemId: number) => {
     setOpenItems((prev) => {
-      const current = prev[programId] || []
-      const isOpen = current.includes(itemId)
+      const current = prev[programId] || [];
+      const isOpen = current.includes(itemId);
 
       return {
         ...prev,
         [programId]: isOpen
           ? current.filter((id) => id !== itemId)
           : [...current, itemId],
-      }
-    })
-  }
+      };
+    });
+  };
 
-  const midpoint = Math.ceil(roots.length / 2)
-  const topRowRoots = roots.slice(0, midpoint)
-  const bottomRowRoots = roots.slice(midpoint)
+  const midpoint = Math.ceil(roots.length / 2);
+  const topRowRoots = roots.slice(0, midpoint);
+  const bottomRowRoots = roots.slice(midpoint);
+
+  const onFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    try {
+      const body = Object.fromEntries(formData);
+      await apiService.bookStrategyCall(body);
+      // clear form fields
+      e.target.reset();
+    } catch (error) {
+      console.log("Error submitting form", error);
+      // show a toast message indicating failure?
+    }
+  };
 
   return (
     <main className={styles.page}>
@@ -208,13 +228,13 @@ export default function MentoringPage() {
 
               <div className={styles.accordionGroup}>
                 {programs[0].items.map((item) => {
-                  const isOpen = openItems[programs[0].id].includes(item.id)
+                  const isOpen = openItems[programs[0].id].includes(item.id);
 
                   return (
                     <div
                       key={item.id}
                       className={`${styles.accordionItem} ${
-                        isOpen ? styles.accordionItemOpen : ''
+                        isOpen ? styles.accordionItemOpen : ""
                       }`}
                     >
                       <button
@@ -226,7 +246,7 @@ export default function MentoringPage() {
                         <span>{item.title}</span>
                         <span
                           className={`${styles.accordionIcon} ${
-                            isOpen ? styles.accordionIconOpen : ''
+                            isOpen ? styles.accordionIconOpen : ""
                           }`}
                           aria-hidden="true"
                         >
@@ -252,7 +272,7 @@ export default function MentoringPage() {
                         </div>
                       )}
                     </div>
-                  )
+                  );
                 })}
               </div>
             </article>
@@ -275,13 +295,13 @@ export default function MentoringPage() {
 
               <div className={styles.accordionGroup}>
                 {programs[1].items.map((item) => {
-                  const isOpen = openItems[programs[1].id].includes(item.id)
+                  const isOpen = openItems[programs[1].id].includes(item.id);
 
                   return (
                     <div
                       key={item.id}
                       className={`${styles.accordionItem} ${
-                        isOpen ? styles.accordionItemOpen : ''
+                        isOpen ? styles.accordionItemOpen : ""
                       }`}
                     >
                       <button
@@ -293,7 +313,7 @@ export default function MentoringPage() {
                         <span>{item.title}</span>
                         <span
                           className={`${styles.accordionIcon} ${
-                            isOpen ? styles.accordionIconOpen : ''
+                            isOpen ? styles.accordionIconOpen : ""
                           }`}
                           aria-hidden="true"
                         >
@@ -319,7 +339,7 @@ export default function MentoringPage() {
                         </div>
                       )}
                     </div>
-                  )
+                  );
                 })}
               </div>
             </article>
@@ -328,12 +348,12 @@ export default function MentoringPage() {
           </div>
 
           <div className={styles.programsCta}>
-          <a
-            href="#strategy-call-form"
-            className={`${styles.programButton} glow-btn glow-btn--alt`}
-          >
-            Find Your Mentor
-          </a>
+            <a
+              href="#strategy-call-form"
+              className={`${styles.programButton} glow-btn glow-btn--alt`}
+            >
+              Find Your Mentor
+            </a>
           </div>
 
           <div className={styles.rootsSectionWhite}>
@@ -389,9 +409,9 @@ export default function MentoringPage() {
               <div className={styles.timelineCard}>
                 <h3 className={styles.timelineCardTitle}>Strategy Call</h3>
                 <p className={styles.timelineCardText}>
-                  Book a call with our founder, Jake Sussman, where we’ll learn more
-                  about your family to discover your unique needs and answer your
-                  questions.
+                  Book a call with our founder, Jake Sussman, where we’ll learn
+                  more about your family to discover your unique needs and
+                  answer your questions.
                 </p>
               </div>
             </div>
@@ -401,8 +421,8 @@ export default function MentoringPage() {
               <div className={styles.timelineCard}>
                 <h3 className={styles.timelineCardTitle}>Mentor Matching</h3>
                 <p className={styles.timelineCardText}>
-                  We work diligently to match your child with a mentor that works for
-                  them. Finding the perfect match can take time.
+                  We work diligently to match your child with a mentor that
+                  works for them. Finding the perfect match can take time.
                 </p>
               </div>
             </div>
@@ -421,11 +441,13 @@ export default function MentoringPage() {
             <div className={styles.timelineRow}>
               <div className={styles.timelineNumber}>4</div>
               <div className={styles.timelineCard}>
-                <h3 className={styles.timelineCardTitle}>Your Child’s First Meeting</h3>
+                <h3 className={styles.timelineCardTitle}>
+                  Your Child’s First Meeting
+                </h3>
                 <p className={styles.timelineCardText}>
                   Fully virtual, mentor to mentee. Our mentors are expert
-                  communicators and will ease first-session stressors to help your
-                  child become more confident with each session.
+                  communicators and will ease first-session stressors to help
+                  your child become more confident with each session.
                 </p>
               </div>
             </div>
@@ -433,11 +455,13 @@ export default function MentoringPage() {
             <div className={styles.timelineRow}>
               <div className={styles.timelineNumber}>5</div>
               <div className={styles.timelineCard}>
-                <h3 className={styles.timelineCardTitle}>Family Matters Meeting</h3>
+                <h3 className={styles.timelineCardTitle}>
+                  Family Matters Meeting
+                </h3>
                 <p className={styles.timelineCardText}>
-                  Parents meet with mentors monthly. We discuss progress, goals and
-                  how your child could best be supported at home, school and in their
-                  social lives. Next month, repeat steps 4 and 5.
+                  Parents meet with mentors monthly. We discuss progress, goals
+                  and how your child could best be supported at home, school and
+                  in their social lives. Next month, repeat steps 4 and 5.
                 </p>
               </div>
             </div>
@@ -451,8 +475,8 @@ export default function MentoringPage() {
             Unlock Your Child&apos;s Full Potential
           </h2>
           <p className={styles.videoCtaSubtitle}>
-            Watch “Dear Younger Self,” our message to those struggling with learning
-            differences.
+            Watch “Dear Younger Self,” our message to those struggling with
+            learning differences.
           </p>
 
           <div className={styles.videoCtaGrid}>
@@ -468,9 +492,9 @@ export default function MentoringPage() {
 
             <div className={styles.videoCtaContent}>
               <p className={styles.videoCtaText}>
-                Every mentor on our team, including our founder Jake Sussman, truly
-                understands the challenges of being misunderstood, as they have all
-                navigated their own learning differences.
+                Every mentor on our team, including our founder Jake Sussman,
+                truly understands the challenges of being misunderstood, as they
+                have all navigated their own learning differences.
               </p>
 
               <a
@@ -484,15 +508,21 @@ export default function MentoringPage() {
         </div>
       </section>
 
-      <section id="strategy-call-form" className={styles.formSection}>
+      <section id="strategy-call" className={styles.formSection}>
         <div className={styles.formInner}>
-          <h2 className={styles.formTitle}>Book Your Free Strategy Call Today!</h2>
+          <h2 className={styles.formTitle}>
+            Book Your Free Strategy Call Today!
+          </h2>
           <p className={styles.formSubtitle}>
             Meet with Founder and Program Director of Superpower Mentors, Jake
             Sussman, by filling out this form!
           </p>
 
-          <form className={styles.strategyForm}>
+          <form
+            id="strategy-call-form"
+            className={styles.strategyForm}
+            onSubmit={onFormSubmit}
+          >
             <div className={styles.formGrid}>
               <div className={styles.fieldGroup}>
                 <label htmlFor="firstName" className={styles.formLabel}>
@@ -561,6 +591,7 @@ export default function MentoringPage() {
                   <option value="student">Student</option>
                   <option value="guardian">Guardian</option>
                   <option value="educator">Educator</option>
+                  <option value="partner"> Organization/Partner </option>
                   <option value="other">Other</option>
                 </select>
 
@@ -603,5 +634,5 @@ export default function MentoringPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

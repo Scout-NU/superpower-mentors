@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({error: "'Answers' field not found."}, {status: 400});
     }
 
-    if (!type || !(type in ["send-email", "strategy-call"])) {
+    if (!type || type !== "send-email") {
       return NextResponse.json({error: "Request type not identified"}, {status: 400});
     }
 

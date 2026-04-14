@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-
 export interface QuizQuestion {
   id: number;
   question: string;
@@ -54,7 +52,9 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
     question: "What type of organization do you represent?",
     answers: [
       { message: "Nonprofit", nextQuestionId: 5 },
-      { message: "Other types here", nextQuestionId: 5 },
+      { message: "Community & Social Outreach", nextQuestionId: 5 },
+      { message: "Educational", nextQuestionId: 5 },
+      { message: "Other", nextQuestionId: 5 },
     ],
   },
   {
@@ -82,7 +82,11 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
   {
     id: 5,
     question: "Which of our services are you interested in?",
-    answers: [],
+    answers: [
+      { message: "Our mentoring plans", nextQuestionId: 20 },
+      { message: "Our mentors and faculty", nextQuestionId: 20},
+      { message: "Collaborating with SPM", nextQuestionId: 20},
+    ],
   },
   {
     id: 6,
@@ -100,12 +104,13 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
     answers: [
       { message: "12 and under", nextQuestionId: 11 },
       { message: "13 to 18", nextQuestionId: 11 },
-      { message: "Older than 18", nextQuestionId: 11 }
+      { message: "Older than 18", nextQuestionId: 11 },
     ],
   },
   {
     id: 8,
-    question: "What type of mentor support do you think would be most helpful? ",
+    question:
+      "What type of mentor support do you think would be most helpful? ",
     answers: [
       { message: "Neurodiversity Mentorship", nextQuestionId: 10 },
       { message: "Confidence Mentorship", nextQuestionId: 10 },
@@ -128,6 +133,14 @@ const QUIZ_QUESTIONS: (QuizQuestion | QuizEnd)[] = [
     title: "SPM is for You! 🚀",
     message:
       "Good news! Based on your answers, we believe our services can be a good fit for you. Feel free to continue exploring our mentorship options or book a call with us.",
+    buttonMessage: "Book a Call",
+    href: "/mentoring/#strategy-call-form",
+  },
+  {
+    id: 20,
+    title: "Thanks for reaching out! 🚀",
+    message:
+      "We're excited to hear more from you! Click below to schedule a call with us.",
     buttonMessage: "Book a Call",
     href: "/mentoring/#strategy-call-form",
   },
