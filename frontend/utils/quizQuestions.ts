@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-
 export interface QuizQuestion {
   id: number;
   question: string;

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react'
-import styles from './mentoring.module.css'
 import React from "react";
+import styles from "./mentoring.module.css";
 import * as apiService from "../../backend/utils/apiService";
 
 type Mentor = {
@@ -144,7 +144,7 @@ const valueCards: ValueCard[] = [
     back:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
-]
+];
 
 function CircleDivider() {
   const circles = [
