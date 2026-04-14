@@ -462,6 +462,126 @@
     object-fit: contain;
     display: block;
   }
+
+  .valuesSection {
+    background: var(--color-purple-dark);
+    padding: 80px 0px 0px;
+  }
+  
+  .valuesTitle {
+    margin: 0 0 72px;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 10vw);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-white);
+  }
+  
+  .valuesCardsWrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0px;
+    flex-wrap: wrap;
+  }
+  
+  .valuesCardsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .flipCard {
+    width: 401px;
+    max-width: 90vw;
+    height: 272px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  .flipCardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .flipCard:hover .flipCardInner {
+    transform: rotateY(180deg);
+  }
+  
+  .flipCardFront,
+  .flipCardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 22px;
+    border: 2px solid #571377;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+  }
+  
+  .flipCardFront {
+    background: #ffffff;
+  }
+  
+  .flipCardBack {
+    background: #571377;
+    transform: rotateY(180deg);
+  }
+  
+  .flipCardTitle {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.05;
+    text-align: center;
+    color: #571377;
+  }
+  
+  .flipCardBackText {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .mentorTreeSection {
+    margin-top: 80px;
+    text-align: center;
+  }
+  
+  .mentorTreeLabel {
+    margin: 0 0 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+  }
+  
+  .mentorTreeImageWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mentorTreeImage {
+    max-width: 70%;
+    height: auto;
+    display: block;
+  }
+
   
   @keyframes scrollLeft {
     from {
@@ -667,7 +787,7 @@
   .formSection {
     position: relative;
     background: #efefef;
-    padding: 90px 0 120px;
+    padding: 60px 0 80px;
     overflow: hidden;
   }
   
@@ -708,7 +828,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 56px;
-    row-gap: 42px;
+    row-gap: 35px;
   }
   
   .fieldGroup {
@@ -734,7 +854,7 @@
   .formInput,
   .formSelect {
     width: 100%;
-    height: 70px;
+    height: 56px;
     border: 3px solid #6a1b9a;
     border-radius: 26px;
     background: transparent;
@@ -995,6 +1115,146 @@
     font-size: clamp(1rem, 1.4vw, 1.25rem);
     line-height: 1.6;
     color: #ffffff;
+  }
+
+  .valuesSection {
+    background: #ffffff;
+  }
+  
+  .valuesHeader {
+    background: var(--color-purple-dark);
+    padding: 70px 24px 30px;
+  }
+  
+  .valuesBody {
+    background: #ffffff;
+    padding: 72px 24px 110px;
+  }
+  
+  .valuesCardsWrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  
+  .valuesCardsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .flipCard {
+    width: 401px;
+    max-width: 90vw;
+    height: 272px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  .flipCardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .flipCard:hover .flipCardInner {
+    transform: rotateY(180deg);
+  }
+  
+  .flipCardFront,
+  .flipCardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 22px;
+    border: 2px solid #571377;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+  }
+  
+  .flipCardFront {
+    background: #ffffff;
+  }
+  
+  .flipCardBack {
+    background: #571377;
+    transform: rotateY(180deg);
+  }
+  
+  .flipCardTitle {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.05;
+    text-align: center;
+    color: #571377;
+  }
+  
+  .flipCardBackText {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .circleDivider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding-top: 110px;
+  }
+  
+  .circleDivider span {
+    display: block;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ffe941, #ffc92a);
+    backdrop-filter: blur(2px);
+  }
+
+  @media (max-width: 1100px) {
+    .valuesCardsWrap {
+      gap: 36px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .valuesSection {
+      padding: 80px 20px 90px;
+    }
+  
+    .valuesTitle {
+      margin-bottom: 44px;
+    }
+  
+    .valuesCardsColumn {
+      width: 100%;
+      align-items: center;
+    }
+  
+    .flipCardTitle {
+      font-size: 2.2rem;
+    }
+  
+    .mentorTreeSection {
+      margin-top: 56px;
+    }
+  
+    .mentorTreeImage {
+      max-width: 100%;
+    }
   }
 
   @media (max-width: 900px) {

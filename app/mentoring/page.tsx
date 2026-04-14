@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import styles from './mentoring.module.css'
 
 type Mentor = {
@@ -12,20 +11,16 @@ type Mentor = {
   image: string
 }
 
-type RootLogo = {
-  id: number
-  name: string
-  image: string
-}
-
 type TimelineStep = {
   id: number
   title: string
   description: string
 }
 
-const BLUE = '#001EDF'
-const PURPLE = '#571377'
+type ValueCard = {
+  title: string
+  back: string
+}
 
 const mentors: Mentor[] = [
   {
@@ -55,18 +50,6 @@ const mentors: Mentor[] = [
       '“The right direction starts with understanding how your mind works, then building from there.”',
     image: '/mentor_franck.png',
   },
-]
-
-const roots: RootLogo[] = [
-  { id: 1, name: 'Apple', image: '/mentor_apple_logo.png' },
-  { id: 2, name: 'Northeastern University', image: '/mentor_northeastern_logo.jpg' },
-  { id: 3, name: 'Harvard University', image: '/mentor_harvard_logo.png' },
-  { id: 4, name: 'Hubspot', image: '/mentor_hubspot_logo.png' },
-  { id: 5, name: 'NASA', image: '/mentor_nasa_logo.png' },
-  { id: 6, name: 'Spotify', image: '/mentor_spotify_logo.png' },
-  { id: 7, name: 'United Nations', image: '/mentor_un_logo.png' },
-  { id: 8, name: 'US Figure Skating', image: '/mentor_skating_logo.png' },
-  { id: 9, name: 'Duke University', image: '/mentor_duke_logo.png' },
 ]
 
 const timelineSteps: TimelineStep[] = [
@@ -102,6 +85,29 @@ const timelineSteps: TimelineStep[] = [
   },
 ]
 
+const valueCards: ValueCard[] = [
+  {
+    title: 'Neurodiversity',
+    back:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Transitions',
+    back:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Confidence',
+    back:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Direction',
+    back:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+]
+
 function CircleDivider() {
   const circles = [
     { w: 20, h: 20 },
@@ -115,25 +121,13 @@ function CircleDivider() {
   ]
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '18px',
-        paddingTop: '110px',
-      }}
-      aria-hidden="true"
-    >
+    <div className={styles.circleDivider} aria-hidden="true">
       {circles.map((c, i) => (
         <span
           key={i}
           style={{
-            display: 'block',
-            borderRadius: '50%',
-            background: 'linear-gradient(145deg, #FFE941, #FFC92A)',
-            width: c.w,
-            height: c.h,
+            width: `${c.w}px`,
+            height: `${c.h}px`,
           }}
         />
       ))}
@@ -142,178 +136,51 @@ function CircleDivider() {
 }
 
 function ValuesSection() {
-  const programs = [
-    { title: 'Neurodiversity' },
-    { title: 'Transitions' },
-    { title: 'Confidence' },
-    { title: 'Direction' },
-  ]
-
-  function vars(variable: string): string | undefined {
-    const cssVariables: Record<string, string> = {
-      '--purple-dark': '#571377',
-    }
-    return cssVariables[variable]
-  }
   return (
-    <section
-      style={{
-        backgroundColor: '#ffffff',
-        padding: '5rem 2rem 4rem 2rem',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: 'Plus Jakarta Sans',
-            fontSize: 'clamp(2.5rem, 5vw, 7rem)',
-            fontWeight: 600,
-            color: '#000000',
-            margin: '4rem 0',
-            textAlign: 'center',
-            width: '100%',
-          }}
-        >
-          How We Can Help
-        </h2>
-
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            gap: '24px',
-            marginBottom: '3rem',
-            flexWrap: 'wrap',
-          }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div
-              style={{
-                border: '2px solid #571377',
-                width: '401px',
-                maxWidth: '90vw',
-                height: '272px',
-                borderRadius: '22px',
-                background: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: 'Plus Jakarta Sans',
-                  fontWeight: 700,
-                  textAlign: 'center',
-                  fontSize: '48px',
-                  color: '#571377',
-                  margin: 0,
-                }}
-              >
-                {programs[0].title}
-              </h3>
-            </div>
-
-            <div
-              style={{
-                border: '2px solid #571377',
-                width: '401px',
-                maxWidth: '90vw',
-                height: '272px',
-                borderRadius: '22px',
-                background: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: 'Plus Jakarta Sans',
-                  fontWeight: 700,
-                  textAlign: 'center',
-                  fontSize: '48px',
-                  color: '#571377',
-                  margin: 0,
-                }}
-              >
-                {programs[2].title}
-              </h3>
-            </div>
-          </div>
-
-          <CircleDivider />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div
-              style={{
-                border: '2px solid #571377',
-                width: '401px',
-                maxWidth: '90vw',
-                height: '272px',
-                borderRadius: '22px',
-                background: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: 'Plus Jakarta Sans',
-                  fontWeight: 700,
-                  textAlign: 'center',
-                  fontSize: '48px',
-                  color: '#571377',
-                  margin: 0,
-                }}
-              >
-                {programs[1].title}
-              </h3>
-            </div>
-
-            <div
-              style={{
-                border: '2px solid #571377',
-                width: '401px',
-                maxWidth: '90vw',
-                height: '272px',
-                borderRadius: '22px',
-                background: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: 'Plus Jakarta Sans',
-                  fontWeight: 700,
-                  textAlign: 'center',
-                  fontSize: '48px',
-                  color: '#571377',
-                  margin: 0,
-                }}
-              >
-                {programs[3].title}
-              </h3>
-            </div>
-          </div>
+    <section className={styles.valuesSection}>
+      <div className={styles.valuesHeader}>
+        <div className={styles.inner}>
+          <h2 className={styles.valuesTitle}>How We Can Help</h2>
         </div>
+      </div>
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '2rem',
-          }}
-        >
+      <div className={styles.valuesBody}>
+        <div className={styles.inner}>
+          <div className={styles.valuesCardsWrap}>
+            <div className={styles.valuesCardsColumn}>
+              {[valueCards[0], valueCards[2]].map((card) => (
+                <div key={card.title} className={styles.flipCard}>
+                  <div className={styles.flipCardInner}>
+                    <div className={styles.flipCardFront}>
+                      <h3 className={styles.flipCardTitle}>{card.title}</h3>
+                    </div>
+
+                    <div className={styles.flipCardBack}>
+                      <p className={styles.flipCardBackText}>{card.back}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <CircleDivider />
+
+            <div className={styles.valuesCardsColumn}>
+              {[valueCards[1], valueCards[3]].map((card) => (
+                <div key={card.title} className={styles.flipCard}>
+                  <div className={styles.flipCardInner}>
+                    <div className={styles.flipCardFront}>
+                      <h3 className={styles.flipCardTitle}>{card.title}</h3>
+                    </div>
+
+                    <div className={styles.flipCardBack}>
+                      <p className={styles.flipCardBackText}>{card.back}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -351,10 +218,6 @@ export default function MentoringPage() {
     }
   }, [])
 
-  const midpoint = Math.ceil(roots.length / 2)
-  const topRowRoots = roots.slice(0, midpoint)
-  const bottomRowRoots = roots.slice(midpoint)
-
   return (
     <main className={styles.page}>
       <ValuesSection />
@@ -381,6 +244,17 @@ export default function MentoringPage() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className={styles.mentorTreeSection}>
+            <p className={styles.mentorTreeLabel}>DISCOVER OUR MENTORS</p>
+            <div className={styles.mentorTreeImageWrap}>
+              <img
+                src="/images/mentortree.png"
+                alt="Mentor Tree"
+                className={styles.mentorTreeImage}
+              />
+            </div>
           </div>
         </div>
       </section>

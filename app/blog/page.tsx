@@ -196,9 +196,9 @@ export default function BlogPage() {
     : ARTICLES;
 
   return (
-    <main className={`${spaceGrotesk.className} min-h-screen pt-24 bg-white`}>
+    <main className={`${spaceGrotesk.className} min-h-screen pt-20 bg-white`}>
       {/* Hero */}
-      <section className="px-6 py-16" style={{ background: "#571377" }}>
+      <section className="px-6 py-24" style={{ background: "#571377" }}>
         <div className="max-w-7xl mx-auto">
           <h1
             className={`${jakarta.className} text-white leading-none text-center`}
