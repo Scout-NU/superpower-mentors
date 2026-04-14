@@ -332,6 +332,7 @@
 }
 
 .approachBlock {
+  width: min(calc(100% - 2rem), 1524px);
   height: auto;
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
