@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./partnership.module.css";
+import AnimatedSection from "@/frontend/AnimatedSection";
 
 const TESTIMONIALS = [
   {
@@ -229,6 +230,7 @@ export default function PartnershipsPage() {
 
   return (
     <main className="min-h-screen bg-white font-['Plus_Jakarta_Sans'] text-black">
+      <AnimatedSection>
       <section
         ref={heroRef}
         className={`${isVisible("hero")} bg-white`}
@@ -269,7 +271,9 @@ export default function PartnershipsPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={gameRef}
         className={`${isVisible("game")} px-6 py-20 md:py-24`}
@@ -309,7 +313,9 @@ export default function PartnershipsPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={partnersRef}
         className={`${isVisible("partners")} px-6 pb-16 pt-4`}
@@ -340,7 +346,9 @@ export default function PartnershipsPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={benefitsRef}
         className={`${styles.benefitsSection} ${isVisible("benefits")}`}
@@ -407,7 +415,9 @@ export default function PartnershipsPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <section
         ref={statsRef}
         className={`${styles.partnerStatsSection} ${isVisible("stats")}`}
@@ -451,6 +461,7 @@ export default function PartnershipsPage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
     </main>
   );
 }

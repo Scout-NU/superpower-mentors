@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import AnimatedSection from "@/frontend/AnimatedSection";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -187,71 +188,79 @@ export default function BlogPage() {
   return (
     <main className={`${spaceGrotesk.className} min-h-screen pt-20 bg-white`}>
       {/* Hero */}
-      <section className="px-6 py-24" style={{ background: "#571377" }}>
-        <div className="max-w-7xl mx-auto">
-          <h1
-            className={`${jakarta.className} text-white leading-none text-center`}
-            style={{ fontSize: "clamp(64px, 10vw, 120px)", fontWeight: 500 }}
-          >
-            Insights & Stories
-          </h1>
-        </div>
-      </section>
+      <AnimatedSection>
+        <section className="px-6 py-24" style={{ background: "#571377" }}>
+          <div className="max-w-7xl mx-auto">
+            <h1
+              className={`${jakarta.className} text-white leading-none text-center`}
+              style={{ fontSize: "clamp(64px, 10vw, 120px)", fontWeight: 500 }}
+            >
+              Insights & Stories
+            </h1>
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* Featured */}
-      <section className="px-6 pt-8 pb-10 max-w-7xl mx-auto">
-        <a
-          href="https://www.researchsquare.com/article/rs-5189431/v1"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src={FEATURED.image}
-            className="w-full h-full object-cover cursor-pointer"
-          />
-        </a>
-      </section>
+      <AnimatedSection>
+        <section className="px-6 pt-8 pb-10 max-w-7xl mx-auto">
+          <a
+            href="https://www.researchsquare.com/article/rs-5189431/v1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={FEATURED.image}
+              className="w-full h-full object-cover cursor-pointer"
+            />
+          </a>
+        </section>
+      </AnimatedSection>
 
       {/* Category Filter Bar */}
-      <section className="px-6 py-3 max-w-7xl mx-auto flex gap-3 items-center flex-wrap">
-        <span className="text-lg font-bold text-black mr-auto">
-          Categories
-        </span>
-        {CATEGORIES.map((c) => (
-          <TagPill
-            key={c}
-            label={c}
-            active={activeCategory === c}
-            onClick={() =>
-              setActiveCategory(activeCategory === c ? null : c)
-            }
-          />
-        ))}
-      </section>
+      <AnimatedSection>
+        <section className="px-6 py-3 max-w-7xl mx-auto flex gap-3 items-center flex-wrap">
+          <span className="text-lg font-bold text-black mr-auto">
+            Categories
+          </span>
+          {CATEGORIES.map((c) => (
+            <TagPill
+              key={c}
+              label={c}
+              active={activeCategory === c}
+              onClick={() =>
+                setActiveCategory(activeCategory === c ? null : c)
+              }
+            />
+          ))}
+        </section>
+      </AnimatedSection>
 
       {/* Blog Grid */}
-      <section id="articles" className="px-6 py-8 pb-16 max-w-7xl mx-auto">
-        <div className="grid grid-cols-3">
-          {filtered.map((article, i) => {
-            const col = i % 3;
-            const row = Math.floor(i / 3);
-            return (
-              <div
-                key={article.id}
-                style={{
-                  minHeight: "390px",
-                  borderTop: row === 0 ? "2px solid #000" : "none",
-                  borderBottom: "2px solid #000",
-                  borderLeft: col === 0 ? "2px solid #000" : "none",
-                  borderRight: "2px solid #000",
-                }}
-              >
-                <ArticleCard article={article} />
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <AnimatedSection>
+        <section id="articles" className="px-6 py-8 pb-16 max-w-7xl mx-auto">
+          <div className="grid grid-cols-3">
+            {filtered.map((article, i) => {
+              const col = i % 3;
+              const row = Math.floor(i / 3);
+              return (
+                <div
+                  key={article.id}
+                  style={{
+                    minHeight: "390px",
+                    borderTop: row === 0 ? "2px solid #000" : "none",
+                    borderBottom: "2px solid #000",
+                    borderLeft: col === 0 ? "2px solid #000" : "none",
+                    borderRight: "2px solid #000",
+                  }}
+                >
+                  <ArticleCard article={article} />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      </AnimatedSection>
     </main>
   );
 }
