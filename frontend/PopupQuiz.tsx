@@ -103,30 +103,32 @@ export default function QuizModal() {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        padding: "16px",
+        padding: "clamp(8px, 4vw, 16px)",
       }}
     >
       <div
         style={{
           position: "relative",
           width: "100%",
-          maxWidth: "900px",
+          maxWidth: "clamp(280px, 90vw, 900px)",
           backgroundColor: "#FFFFFF",
-          borderRadius: "24px",
-          padding: "48px",
+          borderRadius: "clamp(16px, 4vw, 24px)",
+          padding: "clamp(24px, 6vw, 48px)",
           boxShadow: "0 25px 50px rgba(0, 0, 0, 0.3)",
+          maxHeight: "90vh",
+          overflowY: "auto",
         }}
       >
         <button
           onClick={closeModal}
           style={{
             position: "absolute",
-            top: "24px",
-            right: "24px",
+            top: "clamp(12px, 3vw, 24px)",
+            right: "clamp(12px, 3vw, 24px)",
             background: "none",
             border: "none",
             cursor: "pointer",
-            fontSize: "32px",
+            fontSize: "clamp(24px, 5vw, 32px)",
             color: "#1A1A1A",
             lineHeight: 1,
           }}
@@ -140,16 +142,26 @@ export default function QuizModal() {
             <h1
               style={{
                 fontFamily: "Plus Jakarta Sans",
-                fontSize: "48px",
+                fontSize: "clamp(32px, 6vw, 48px)",
                 fontWeight: 700,
                 textTransform: "uppercase",
-                marginBottom: "24px",
+                marginBottom: "clamp(16px, 4vw, 24px)",
                 letterSpacing: "-0.02em",
               }}
             >
               FIND YOUR MATCH
             </h1>
-            <div style={{ marginBottom: "40px" }}>
+            <div style={{ marginBottom: "clamp(24px, 4vw, 40px)" }}>
+              <p
+                style={{
+                  fontFamily: "DM Sans",
+                  fontSize: "clamp(12px, 2.5vw, 14px)",
+                  color: "#666",
+                  marginBottom: "clamp(8px, 2vw, 12px)",
+                }}
+              >
+                Question {answers.length + 1} of {QUIZ_QUESTIONS.filter((q) => "answers" in q).length}
+              </p>
               <div
                 style={{
                   width: "100%",
@@ -159,24 +171,23 @@ export default function QuizModal() {
                   overflow: "hidden",
                 }}
               >
-                {/* Progress bar inner div commented out — restore when ready:
                 <div
                   style={{
-                    width: `${((currentQuestion + 1) / questions.length) * 100}%`,
-                    height: '100%',
+                    width: `${((answers.length + 1) / QUIZ_QUESTIONS.filter((q) => "answers" in q).length) * 100}%`,
+                    height: "100%",
                     backgroundColor: PURPLE,
-                    transition: 'width 0.3s ease'
+                    transition: "width 0.3s ease",
                   }}
-                /> */}
+                />
               </div>
             </div>
 
             <h2
               style={{
                 fontFamily: "Plus Jakarta Sans",
-                fontSize: "32px",
+                fontSize: "clamp(20px, 5vw, 32px)",
                 fontWeight: 700,
-                marginBottom: "32px",
+                marginBottom: "clamp(20px, 4vw, 32px)",
                 color: "#1A1A1A",
               }}
             >
@@ -184,7 +195,7 @@ export default function QuizModal() {
             </h2>
 
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+              style={{ display: "flex", flexDirection: "column", gap: "clamp(12px, 2vw, 16px)" }}
             >
               {(currentQuestion as QuizQuestion).answers.map(
                 (answer, index) => (
@@ -196,12 +207,12 @@ export default function QuizModal() {
                     style={{
                       width: "100%",
                       textAlign: "left",
-                      padding: "20px 28px",
+                      padding: "clamp(12px, 3vw, 20px) clamp(16px, 4vw, 28px)",
                       borderRadius: "50px",
                       border: `3px solid ${hoveredIndex === index ? BLUE : PURPLE}`,
                       backgroundColor: "#FFFFFF",
                       fontFamily: "DM Sans",
-                      fontSize: "18px",
+                      fontSize: "clamp(14px, 3vw, 18px)",
                       fontWeight: 500,
                       color: "#1A1A1A",
                       cursor: "pointer",
@@ -215,21 +226,21 @@ export default function QuizModal() {
             </div>
           </div>
         ) : (
-          <div style={{ textAlign: "center", padding: "40px 0" }}>
+          <div style={{ textAlign: "center", padding: "clamp(24px, 4vw, 40px) 0" }}>
             <div
               style={{
-                width: "80px",
-                height: "80px",
+                width: "clamp(60px, 12vw, 80px)",
+                height: "clamp(60px, 12vw, 80px)",
                 backgroundColor: "#E8F4FF",
                 borderRadius: "50%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: "0 auto 24px",
+                margin: "0 auto clamp(16px, 4vw, 24px)",
               }}
             >
               <svg
-                style={{ width: "40px", height: "40px", color: BLUE }}
+                style={{ width: "clamp(30px, 6vw, 40px)", height: "clamp(30px, 6vw, 40px)", color: BLUE }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -246,9 +257,9 @@ export default function QuizModal() {
             <h2
               style={{
                 fontFamily: "Plus Jakarta Sans",
-                fontSize: "40px",
+                fontSize: "clamp(24px, 5vw, 40px)",
                 fontWeight: 700,
-                marginBottom: "16px",
+                marginBottom: "clamp(12px, 2vw, 16px)",
               }}
             >
               {(currentQuestion as QuizEnd).title}
@@ -274,8 +285,8 @@ export default function QuizModal() {
                   color: "#FFFFFF",
                   fontFamily: "DM Sans",
                   fontWeight: 600,
-                  fontSize: "18px",
-                  padding: "16px 32px",
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  padding: "clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px)",
                   borderRadius: "50px",
                   border: "none",
                   cursor: "pointer",
@@ -293,8 +304,8 @@ export default function QuizModal() {
                   color: "#666",
                   fontFamily: "DM Sans",
                   fontWeight: 600,
-                  fontSize: "18px",
-                  padding: "16px 32px",
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  padding: "clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px)",
                   border: "none",
                   cursor: "pointer",
                 }}
