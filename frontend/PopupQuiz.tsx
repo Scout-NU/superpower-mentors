@@ -1,73 +1,18 @@
 "use client";
-
+import QUIZ_QUESTIONS, { QuizEnd, QuizQuestion } from "./utils/quizQuestions";
+import * as emailService from "../backend/utils/apiService";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const PURPLE = "#571377";
 const BLUE = "#001EDF";
 
-interface Question {
-  id: number;
-  question: string;
-  options: string[];
-}
-
-const questions: Question[] = [
-  {
-    id: 1,
-    question: "Who are you looking for support for?",
-    options: [
-      "My child/teen",
-      "Myself",
-      "A student I work with",
-      "Just exploring options"
-    ]
-  },
-  {
-    id: 2,
-    question: "What learning difference best describes your situation?",
-    options: [
-      "ADHD",
-      "Dyslexia",
-      "Autism/ASD",
-      "Multiple or other learning differences"
-    ]
-  },
-  {
-    id: 3,
-    question: "What's your biggest challenge right now?",
-    options: [
-      "Building confidence and self-advocacy",
-      "Academic organization and study skills",
-      "Social connections and communication",
-      "Planning for college or career"
-    ]
-  },
-  {
-    id: 4,
-    question: "What type of mentor support would be most helpful?",
-    options: [
-      "Someone who understands neurodivergence firsthand",
-      "Help with executive function and time management",
-      "Guidance on navigating school systems",
-      "Career and future planning advice"
-    ]
-  },
-  {
-    id: 5,
-    question: "What would success look like for you?",
-    options: [
-      "Increased independence and confidence",
-      "Better grades and academic performance",
-      "Stronger self-understanding and acceptance",
-      "Clear goals and a path forward"
-    ]
-  }
-];
-
 export default function QuizModal() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(QUIZ_QUESTIONS[0]);
+  const [answers, setAnswers] = useState<
+    { question: string; answer: string }[]
+  >([]);
   const [showResult, setShowResult] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -88,15 +33,44 @@ export default function QuizModal() {
     };
   }, []);
 
-  const handleAnswer = (answer: string) => {
-    const newAnswers = [...answers, answer];
+  const handleAnswer = (answer: {
+    message: string;
+    nextQuestionId: number;
+  }) => {
+    const newAnswers = [
+      ...answers,
+      {
+        question: (currentQuestion as QuizQuestion).question,
+        answer: answer.message,
+      },
+    ];
     setAnswers(newAnswers);
 
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
+    // set next question
+    const nextQuestion = QUIZ_QUESTIONS.find(
+      (q) => q.id === answer.nextQuestionId,
+    ) as QuizEnd | QuizQuestion;
+    if (!nextQuestion) {
+      console.error(`next question with id ${answer.nextQuestionId} not found`);
+    }
+
+    setCurrentQuestion(nextQuestion);
+
+    // if quiz end, show results
+    if (!("answers" in nextQuestion)) {
       setShowResult(true);
       sessionStorage.setItem("quizCompleted", "true");
+    }
+  };
+
+  const onSubmitAnswers = async (
+    email: string,
+    answers: { question: string; answer: string }[],
+  ) => {
+    try {
+      await emailService.sendQuizAnswers(email, answers);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -105,217 +79,238 @@ export default function QuizModal() {
 
     const quizCompleted = sessionStorage.getItem("quizCompleted");
     if (!quizCompleted) {
-      timeoutRef.current = setTimeout(() => {
-        setIsOpen(true);
-        setCurrentQuestion(0);
-        setAnswers([]);
-        setShowResult(false);
-      }, 10 * 60 * 1000);
+      timeoutRef.current = setTimeout(
+        () => {
+          setIsOpen(true);
+          setCurrentQuestion(QUIZ_QUESTIONS[0]);
+          setAnswers([]);
+          setShowResult(false);
+        },
+        10 * 60 * 1000, // 10 minutes in milliseconds
+      );
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       style={{
-        position: 'fixed',
+        position: "fixed",
         inset: 0,
         zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        padding: '16px'
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        padding: "clamp(8px, 4vw, 16px)",
       }}
     >
-      <div 
+      <div
         style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: '900px',
-          backgroundColor: '#FFFFFF',
-          borderRadius: '24px',
-          padding: '48px',
-          boxShadow: '0 25px 50px rgba(0, 0, 0, 0.3)'
+          position: "relative",
+          width: "100%",
+          maxWidth: "clamp(280px, 90vw, 900px)",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "clamp(16px, 4vw, 24px)",
+          padding: "clamp(24px, 6vw, 48px)",
+          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.3)",
+          maxHeight: "90vh",
+          overflowY: "auto",
         }}
       >
         <button
           onClick={closeModal}
           style={{
-            position: 'absolute',
-            top: '24px',
-            right: '24px',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '32px',
-            color: '#1A1A1A',
-            lineHeight: 1
+            position: "absolute",
+            top: "clamp(12px, 3vw, 24px)",
+            right: "clamp(12px, 3vw, 24px)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "clamp(24px, 5vw, 32px)",
+            color: "#1A1A1A",
+            lineHeight: 1,
           }}
         >
           ✕
         </button>
 
-        {!showResult ? (
+        {!showResult && "answers" in currentQuestion ? (
+          /** if not done with quiz and currently in a question*/
           <div>
-            <h1 
+            <h1
               style={{
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: '48px',
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "clamp(32px, 6vw, 48px)",
                 fontWeight: 700,
-                textTransform: 'uppercase',
-                marginBottom: '24px',
-                letterSpacing: '-0.02em'
+                textTransform: "uppercase",
+                marginBottom: "clamp(16px, 4vw, 24px)",
+                letterSpacing: "-0.02em",
               }}
             >
               FIND YOUR MATCH
             </h1>
-
-            <div style={{ marginBottom: '40px' }}>
-              <p 
+            <div style={{ marginBottom: "clamp(24px, 4vw, 40px)" }}>
+              <p
                 style={{
-                  fontFamily: 'DM Sans',
-                  fontSize: '14px',
-                  color: '#666',
-                  marginBottom: '12px'
+                  fontFamily: "DM Sans",
+                  fontSize: "clamp(12px, 2.5vw, 14px)",
+                  color: "#666",
+                  marginBottom: "clamp(8px, 2vw, 12px)",
                 }}
               >
-                Question {currentQuestion + 1} of {questions.length}
+                Question {answers.length + 1} of {QUIZ_QUESTIONS.filter((q) => "answers" in q).length}
               </p>
-              <div 
+              <div
                 style={{
-                  width: '100%',
-                  height: '12px',
-                  backgroundColor: '#E5E5E5',
-                  borderRadius: '6px',
-                  overflow: 'hidden'
+                  width: "100%",
+                  height: "12px",
+                  backgroundColor: "#E5E5E5",
+                  borderRadius: "6px",
+                  overflow: "hidden",
                 }}
               >
                 <div
                   style={{
-                    width: `${((currentQuestion + 1) / questions.length) * 100}%`,
-                    height: '100%',
+                    width: `${((answers.length + 1) / QUIZ_QUESTIONS.filter((q) => "answers" in q).length) * 100}%`,
+                    height: "100%",
                     backgroundColor: PURPLE,
-                    transition: 'width 0.3s ease'
+                    transition: "width 0.3s ease",
                   }}
                 />
               </div>
             </div>
 
-            <h2 
+            <h2
               style={{
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: '32px',
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "clamp(20px, 5vw, 32px)",
                 fontWeight: 700,
-                marginBottom: '32px',
-                color: '#1A1A1A'
+                marginBottom: "clamp(20px, 4vw, 32px)",
+                color: "#1A1A1A",
               }}
             >
-              {questions[currentQuestion].question}
+              {(currentQuestion as QuizQuestion).question}
             </h2>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {questions[currentQuestion].options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(option)}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  style={{
-                    width: '100%',
-                    textAlign: 'left',
-                    padding: '20px 28px',
-                    borderRadius: '50px',
-                    border: `3px solid ${hoveredIndex === index ? BLUE : PURPLE}`,
-                    backgroundColor: '#FFFFFF',
-                    fontFamily: 'DM Sans',
-                    fontSize: '18px',
-                    fontWeight: 500,
-                    color: '#1A1A1A',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
-                >
-                  {option}
-                </button>
-              ))}
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "clamp(12px, 2vw, 16px)" }}
+            >
+              {(currentQuestion as QuizQuestion).answers.map(
+                (answer, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(answer)}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "clamp(12px, 3vw, 20px) clamp(16px, 4vw, 28px)",
+                      borderRadius: "50px",
+                      border: `3px solid ${hoveredIndex === index ? BLUE : PURPLE}`,
+                      backgroundColor: "#FFFFFF",
+                      fontFamily: "DM Sans",
+                      fontSize: "clamp(14px, 3vw, 18px)",
+                      fontWeight: 500,
+                      color: "#1A1A1A",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {answer.message}
+                  </button>
+                ),
+              )}
             </div>
           </div>
         ) : (
-          <div style={{ textAlign: 'center', padding: '40px 0' }}>
-            <div 
+          <div style={{ textAlign: "center", padding: "clamp(24px, 4vw, 40px) 0" }}>
+            <div
               style={{
-                width: '80px',
-                height: '80px',
-                backgroundColor: '#E8F4FF',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 24px'
+                width: "clamp(60px, 12vw, 80px)",
+                height: "clamp(60px, 12vw, 80px)",
+                backgroundColor: "#E8F4FF",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto clamp(16px, 4vw, 24px)",
               }}
             >
-              <svg style={{ width: '40px', height: '40px', color: BLUE }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              <svg
+                style={{ width: "clamp(30px, 6vw, 40px)", height: "clamp(30px, 6vw, 40px)", color: BLUE }}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={3}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
 
-            <h2 
+            <h2
               style={{
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: '40px',
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "clamp(24px, 5vw, 40px)",
                 fontWeight: 700,
-                marginBottom: '16px'
+                marginBottom: "clamp(12px, 2vw, 16px)",
               }}
             >
-              Superpower Mentors Is For You! 🚀
+              {(currentQuestion as QuizEnd).title}
             </h2>
-            <p 
-              style={{
-                fontFamily: 'DM Sans',
-                fontSize: '18px',
-                color: '#666',
-                marginBottom: '32px',
-                lineHeight: '1.6'
-              }}
-            >
-              We specialize in supporting youth with ADHD, Dyslexia, Autism, and other learning differences. Our mentors understand your unique strengths and challenges because they've been there too.
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
+              {(currentQuestion as QuizEnd).message}
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <button
-                onClick={closeModal}
+            <div className="space-y-3">
+              <Link
+                passHref={(currentQuestion as QuizEnd).href !== undefined}
+                href={(currentQuestion as QuizEnd).href ?? ""}
+                onClick={(e) => {
+                  // if no href, simply close modal, else redirect to provided link
+                  if (!(currentQuestion as QuizEnd).href) {
+                    e.preventDefault();
+                  }
+                  closeModal();
+                }}
                 style={{
-                  width: '100%',
+                  width: "100%",
                   backgroundColor: BLUE,
-                  color: '#FFFFFF',
-                  fontFamily: 'DM Sans',
+                  color: "#FFFFFF",
+                  fontFamily: "DM Sans",
                   fontWeight: 600,
-                  fontSize: '18px',
-                  padding: '16px 32px',
-                  borderRadius: '50px',
-                  border: 'none',
-                  cursor: 'pointer'
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  padding: "clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px)",
+                  borderRadius: "50px",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
-                Connect With a Mentor
-              </button>
+                {(currentQuestion as QuizEnd).buttonMessage || "Back to Page"}
+              </Link>
+              <br />
+
               <button
                 onClick={closeModal}
                 style={{
-                  width: '100%',
-                  backgroundColor: 'transparent',
-                  color: '#666',
-                  fontFamily: 'DM Sans',
+                  width: "100%",
+                  backgroundColor: "transparent",
+                  color: "#666",
+                  fontFamily: "DM Sans",
                   fontWeight: 600,
-                  fontSize: '18px',
-                  padding: '16px 32px',
-                  border: 'none',
-                  cursor: 'pointer'
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  padding: "clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px)",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
-                Learn More First
+                Back to Page
               </button>
             </div>
           </div>
