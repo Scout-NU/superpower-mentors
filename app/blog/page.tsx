@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import AnimatedSection from "@/frontend/AnimatedSection";
+import styles from "./blog.module.css";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -143,9 +144,9 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
   return (
     <Link
       href={`/blog/${article.slug}`}
-      className="flex flex-col bg-white h-full items-center pt-7 pb-6 gap-4 group"
+      className="flex flex-col bg-white h-full items-center pt-5 sm:pt-7 pb-5 sm:pb-6 gap-3 sm:gap-4 group"
     >
-      <div className="flex justify-between items-center w-4/5">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full sm:w-4/5 gap-2">
         <span className="text-xs text-zinc-400">{article.date}</span>
         <div className="flex gap-1.5 flex-wrap justify-end">
           {article.tags.map((t) => (
@@ -158,15 +159,15 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
         <img
           src={article.image}
           alt={article.title}
-          className="w-4/5 h-60 object-cover"
+          className="w-full sm:w-4/5 h-44 sm:h-52 lg:h-60 object-cover"
         />
       ) : (
-        <div className="bg-zinc-200 flex items-center justify-center w-4/5 h-40">
+        <div className="bg-zinc-200 flex items-center justify-center w-full sm:w-4/5 h-44 sm:h-52 lg:h-60">
           <span className="text-zinc-400 text-xs">IMG</span>
         </div>
       )}
 
-      <div style={{ width: "80%" }}>
+      <div className="w-full sm:w-4/5 px-4 sm:px-0">
         <p className="font-bold text-sm text-black mb-2 group-hover:text-blue-600 transition-colors">
           {article.title}
         </p>
@@ -237,30 +238,20 @@ export default function BlogPage() {
       </AnimatedSection>
 
       {/* Blog Grid */}
-      <AnimatedSection>
-        <section id="articles" className="px-6 py-8 pb-16 max-w-7xl mx-auto">
-          <div className="grid grid-cols-3">
-            {filtered.map((article, i) => {
-              const col = i % 3;
-              const row = Math.floor(i / 3);
-              return (
-                <div
-                  key={article.id}
-                  style={{
-                    minHeight: "390px",
-                    borderTop: row === 0 ? "2px solid #000" : "none",
-                    borderBottom: "2px solid #000",
-                    borderLeft: col === 0 ? "2px solid #000" : "none",
-                    borderRight: "2px solid #000",
-                  }}
-                >
-                  <ArticleCard article={article} />
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      </AnimatedSection>
+      <section id="articles" className="px-6 py-8 pb-16 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {filtered.map((article, i) => {
+            return (
+              <div
+                key={article.id}
+                className={styles.articleTile}
+              >
+                <ArticleCard article={article} />
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </main>
   );
 }

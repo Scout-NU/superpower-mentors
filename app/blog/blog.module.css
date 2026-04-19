@@ -1,0 +1,43 @@
+.articleTile {
+  border: 2px solid #000;
+  min-height: auto;
+}
+
+/* logic to remove top line for tiles not in the top row & remove left line for tiles not in the leftmost column */
+
+/* 1 column: remove top border from all except the first */
+@media (max-width: 640px) {
+  .articleTile:not(:first-child) {
+    border-top: none;
+  }
+}
+
+/* logic for 2 columns */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .articleTile {
+    border-left: none;
+  }
+
+  .articleTile:nth-child(2n+1) {
+    border-left: 2px solid #000;
+  }
+
+  .articleTile:nth-child(n+3) {
+    border-top: none;
+  }
+}
+
+/* logic for 3 columns */
+@media (min-width: 1024px) {
+  .articleTile {
+    border-left: none;
+  }
+
+  .articleTile:nth-child(3n+1) {
+    border-left: 2px solid #000;
+  }
+
+  .articleTile:nth-child(n+4) {
+    border-top: none;
+  }
+}
