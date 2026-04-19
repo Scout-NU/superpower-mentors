@@ -225,9 +225,9 @@
 
 /* Approach */
 .approachBlock {
-  width: min(calc(100% - 2rem), 1524px);
+  width: min(calc(100% - 10rem), 1524px);
   height: auto;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
 }
 
 .approachSection {
