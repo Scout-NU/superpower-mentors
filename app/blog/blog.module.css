@@ -3,16 +3,12 @@
   min-height: auto;
 }
 
-/* logic to remove top line for tiles not in the top row & remove left line for tiles not in the leftmost column */
-
-/* 1 column: remove top border from all except the first */
 @media (max-width: 640px) {
   .articleTile:not(:first-child) {
     border-top: none;
   }
 }
 
-/* logic for 2 columns */
 @media (min-width: 641px) and (max-width: 1023px) {
   .articleTile {
     border-left: none;
@@ -27,7 +23,6 @@
   }
 }
 
-/* logic for 3 columns */
 @media (min-width: 1024px) {
   .articleTile {
     border-left: none;

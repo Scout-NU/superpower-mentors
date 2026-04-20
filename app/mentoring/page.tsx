@@ -75,22 +75,6 @@ const mentors: Mentor[] = [
   },
 ];
 
-const roots: RootLogo[] = [
-  { id: 1, name: "Apple", image: "/mentor_apple_logo.png" },
-  {
-    id: 2,
-    name: "Northeastern University",
-    image: "/mentor_northeastern_logo.jpg",
-  },
-  { id: 3, name: "Harvard University", image: "/mentor_harvard_logo.png" },
-  { id: 4, name: "Hubspot", image: "/mentor_hubspot_logo.png" },
-  { id: 5, name: "NASA", image: "/mentor_nasa_logo.png" },
-  { id: 6, name: "Spotify", image: "/mentor_spotify_logo.png" },
-  { id: 7, name: "United Nations", image: "/mentor_un_logo.png" },
-  { id: 8, name: "US Figure Skating", image: "/mentor_skating_logo.png" },
-  { id: 9, name: "Duke University", image: "/mentor_duke_logo.png" },
-];
-
 const timelineSteps: TimelineStep[] = [
   {
     id: 1,
@@ -305,10 +289,6 @@ export default function MentoringPage() {
     `${styles.revealSection} ${
       visibleSections.includes(key) ? styles.revealSectionVisible : ""
     }`;
-
-  const midpoint = Math.ceil(roots.length / 2);
-  const topRowRoots = roots.slice(0, midpoint);
-  const bottomRowRoots = roots.slice(midpoint);
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

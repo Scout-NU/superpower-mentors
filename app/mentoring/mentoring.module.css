@@ -138,13 +138,6 @@
     color: var(--color-purple-dark);
   }
   
-  .programsLayout {
-    display: grid;
-    grid-template-columns: 72px minmax(0, 1fr) 72px minmax(0, 1fr) 72px;
-    align-items: start;
-    column-gap: 24px;
-  }
-  
   .programCard {
     display: flex;
     flex-direction: column;
@@ -186,22 +179,6 @@
     max-width: 95%;
   }
   
-  .circleDivider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    padding-top: 110px;
-  }
-  
-  .circleDivider span {
-    display: block;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #ffe941, #ffc92a);
-    backdrop-filter: blur(2px);
-  }
-  
   .circle1 {
     width: 20px;
     height: 20px;
@@ -240,74 +217,6 @@
   .circle8 {
     width: 18px;
     height: 18px;
-  }
-  
-  .accordionGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 4px;
-  }
-  
-  .accordionItem {
-    border-radius: 22px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-  }
-  
-  .accordionItemOpen {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  }
-  
-  .accordionTrigger {
-    width: 100%;
-    border: 0;
-    background: transparent;
-    padding: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    text-align: left;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-purple-dark);
-  }
-  
-  .accordionIcon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.22s ease;
-  }
-  
-  .accordionIcon svg {
-    width: 20px;
-    height: 20px;
-    display: block;
-  }
-  
-  .accordionIconOpen {
-    transform: rotate(180deg);
-  }
-  
-  .accordionContent {
-    padding: 0 18px 18px 18px;
-  }
-  
-  .accordionContent p {
-    margin: 0;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 500;
-    line-height: 1.55;
-    color: rgba(0, 0, 0, 0.82);
   }
   
   .programsCta {
@@ -408,78 +317,7 @@
     color: var(--color-purple-dark);
     text-transform: uppercase;
   }
-  
-  .logoCarouselStack {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  
-  .logoCarouselRow {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    padding: 8px 0;
-  }
-  
-  .logoCarouselRow::before,
-  .logoCarouselRow::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    z-index: 2;
-    width: 72px;
-    height: 100%;
-    pointer-events: none;
-  }
-  
-  .logoCarouselRow::before {
-    left: 0;
-    background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-  }
-  
-  .logoCarouselRow::after {
-    right: 0;
-    background: linear-gradient(to left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-  }
-  
-  .logoTrackLeft,
-  .logoTrackRight {
-    display: flex;
-    align-items: center;
-    width: max-content;
-  }
-  
-  .logoTrackLeft {
-    animation: scrollLeft 24s linear infinite;
-  }
-  
-  .logoTrackRight {
-    animation: scrollRight 24s linear infinite;
-  }
-  
-  .logoItemWhite {
-    flex: 0 0 auto;
-    width: 180px;
-    height: 90px;
-    margin-right: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .logoImageWhite {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    display: block;
-  }
 
-  .valuesSection {
-    background: var(--color-purple-dark);
-    padding: 80px 0px 0px;
-  }
-  
   .valuesTitle {
     margin: 0 0 72px;
     text-align: center;
@@ -488,14 +326,6 @@
     font-weight: 500;
     line-height: 1;
     color: var(--color-white);
-  }
-  
-  .valuesCardsWrap {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0px;
-    flex-wrap: wrap;
   }
   
   .valuesCardsColumn {
@@ -593,25 +423,6 @@
     height: auto;
     display: block;
   }
-
-  
-  @keyframes scrollLeft {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  
-  @keyframes scrollRight {
-    from {
-      transform: translateX(-50%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
   
   .howItWorksSection {
     background: var(--color-purple-dark);
@@ -627,82 +438,6 @@
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--color-white);
-  }
-  
-  .timeline {
-    position: relative;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  
-  .timelineRail {
-    position: absolute;
-    top: 60px;
-    bottom: 60px;
-    left: 43px;
-    width: 4px;
-    background: rgba(255, 255, 255, 0.95);
-    z-index: 0;
-  }
-  
-  .timelineRow {
-    position: relative;
-    display: grid;
-    grid-template-columns: 120px minmax(0, 1fr);
-    align-items: center;
-    column-gap: 36px;
-    margin-bottom: 26px;
-    z-index: 1;
-  }
-  
-  .timelineRow:last-child {
-    margin-bottom: 0;
-  }
-  
-  .timelineNumber {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    background: #f3f3f3;
-    border: 4px solid #111111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #000000;
-    margin-left: 0;
-  }
-  
-  .timelineCard {
-    background: #efefef;
-    border-radius: 24px;
-    padding: 32px 40px;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .timelineCardTitle {
-    margin: 0 0 8px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.6rem, 2vw, 2.1rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-purple-dark);
-  }
-  
-  .timelineCardText {
-    margin: 0;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-    line-height: 1.35;
-    color: #ffffff;
-    max-width: 980px;
   }
   
   .videoCtaSection {
@@ -1131,6 +866,7 @@
 
   .valuesSection {
     background: #ffffff;
+    padding: 80px 0px 0px;
   }
   
   .valuesHeader {
@@ -1318,12 +1054,7 @@
     .grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-  
-    .programsLayout {
-      grid-template-columns: 1fr;
-      row-gap: 36px;
-    }
-  
+
     .circleDivider {
       display: none;
     }
@@ -1356,40 +1087,6 @@
   
     .howItWorksTitle {
       margin-bottom: 44px;
-    }
-  
-    .timelineRail {
-      left: 30px;
-      top: 48px;
-      bottom: 48px;
-    }
-  
-    .timelineRow {
-      grid-template-columns: 72px minmax(0, 1fr);
-      column-gap: 20px;
-      margin-bottom: 20px;
-      align-items: start;
-    }
-  
-    .timelineNumber {
-      width: 60px;
-      height: 60px;
-      font-size: 1.8rem;
-      border-width: 3px;
-    }
-  
-    .timelineCard {
-      padding: 24px 22px;
-      min-height: auto;
-    }
-  
-    .timelineCardTitle {
-      font-size: 1.35rem;
-    }
-  
-    .timelineCardText {
-      font-size: 1rem;
-      line-height: 1.45;
     }
   
     .formSection {
@@ -1463,10 +1160,6 @@
   
     .content {
       max-width: 100%;
-    }
-  
-    .programsSection {
-      padding: 32px 20px 72px;
     }
   
     .programsTitle {

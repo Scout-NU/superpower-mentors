@@ -9,7 +9,11 @@ function HeroSection() {
       <div className={styles.heroBand}>
           <div className={styles.heroHeadingWrap}><span className={styles.heroHeading}>Safety <br/>&amp; Quality Assurance</span></div>
       </div>
-      <img className={styles.heroImage} src="placeholder.png" />
+      <img
+        className={styles.heroImage}
+        src="placeholder.png"
+        alt="Safety and quality assurance hero illustration"
+      />
     </section>
   );
 }
@@ -76,17 +80,6 @@ function ApproachSection() {
     </section>
   );
 }
-
-import { Space_Grotesk } from "next/font/google";
-import { Plus_Jakarta_Sans } from "next/font/google";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
-
 
 export default function QualityPage() {
   return (
