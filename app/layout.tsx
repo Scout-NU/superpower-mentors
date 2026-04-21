@@ -39,12 +39,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <Script
         src="https://t.contentsquare.net/uxa/586d1bfbb5898.js"
       />
       <body
-        className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} ${dmSans.variable}`}
+        className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} ${dmSans.variable} overflow-x-hidden`}
       >
         <Navbar />
         <QuizModal />
