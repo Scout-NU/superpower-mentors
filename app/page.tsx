@@ -212,19 +212,19 @@ function RealImpactSection() {
   const cards = [
     {
       title: "Neurodiversity",
-      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      back: "1:1 mentorship for neurodiverse mentees focused on confidence, self-advocacy, and independence. Each mentee is matched with a mentor who shares lived experience and can relate directly. Sessions focus on navigating school, relationships, and identity while building real-world skill.",
     },
     {
       title: "Transitions",
-      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      back: "Mentorship for mentees navigating major life transitions. Each mentee is paired with a mentor who has already gone through similar experiences and provides guidance on academics, routines, extracurriculars, and early career direction.",
     },
     {
       title: "Confidence",
-      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      back: "Personalized mentorship for mentees who want to build confidence and take ownership of their lives. Each mentee works with a mentor who has lived experience and provides guidance on decision-making, accountability, and follow-through across academics, social life, and personal goals.",
     },
     {
       title: "Direction",
-      back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      back: "For mentees who feel stuck, uncertain, or lack direction. Built around a mentor with lived experience who helps clarify goals, create structure, and build momentum through consistent action.",
     },
   ];
 
